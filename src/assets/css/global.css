@@ -1,0 +1,122 @@
+html,
+body,
+#app {
+  font-size: 16px;
+  /* filter: grayscale(100%); */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  /* 此属性可以使网页无法选中文本  */
+  /* user-select: none; */
+}
+
+html {
+  overflow-y: overlay;
+}
+
+.el-message {
+  z-index: 99999999 !important;
+}
+
+.el-dialog__body {
+  padding: 0 !important;
+}
+
+.v-md-editor-preview {
+  padding: 16px 32px 32px;
+  font-size: 1rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+
+
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.v-md-editor-preview img {
+  max-width: 100%;
+}
+
+.shadow-box {
+  box-shadow: 0 1px 20px -6px rgba(0, 0, 0, .5);
+  transition: all .3s ease;
+}
+
+img {
+  display: block;
+  margin: 0;
+}
+
+button,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
+input {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  background-color: transparent;
+
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+
+
+.iconfont {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  margin-right: 3px;
+}
+
+@media only screen and (min-device-width: 768px) {
+  #app {
+    font-size: 16px;
+  }
+
+}
+
+@media only screen and (max-device-width: 768px) {
+  #app {
+    font-size: 14px;
+  }
+}
