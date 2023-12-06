@@ -3,13 +3,13 @@ export const particles = {
   autoPlay: true,
   background: {
     color: {
-      value: '#0e2c3e'
+      value: 'rgb(243, 189, 189)'
     },
     image: '',
     position: '',
     repeat: '',
     size: '',
-    opacity: 0.26
+    opacity: 0
   },
   backgroundMask: {
     composite: 'destination-out',
@@ -17,7 +17,7 @@ export const particles = {
       color: {
         value: '#fff'
       },
-      opacity: 1
+      opacity: 0
     },
     enable: false
   },
@@ -25,7 +25,7 @@ export const particles = {
   delay: 0,
   fullScreen: {
     enable: true,
-    zIndex: -1
+    zIndex: 999
   },
   detectRetina: true,
   duration: 0,

@@ -13,13 +13,16 @@ type Response = {
   redirected?: boolean
   bodyUsed?: boolean
 }
-type ResponseData = {
-  code: number
-  msg: string
-  data: any
+
+type Options = {
+  url: string
+  method: string
+  body?: any
+  baseURL?: string
+  params?: any
 }
 
-export const getFetchData = async (options: any) => {
+export const getFetchData = async (options: Options) => {
   const router = useRouter()
   //此处是引入了pinia进行状态管理，大家可以根据自己需求进行重写
   //const store = useMainStore();
@@ -37,9 +40,8 @@ export const getFetchData = async (options: any) => {
     // headers: headers,
     //响应拦截
     onResponse({ response }: { response: Response }) {
-      console.log('response', response)
       const res = response._data
-      console.log(res)
+
       //后端返回code=0时弹出错误信息，此处采用了element-plus
       if (res.code == 0) {
         ElMessage.error(res.msg)
@@ -94,17 +96,13 @@ export const getFetchData = async (options: any) => {
       // }
     }
   }
-  let url = options.url
-  delete options.url
-  const newOptions: object = { ...defaultOptions, ...options }
+  const { url, ...opt } = options
+  const newOptions: object = { ...defaultOptions, ...opt }
 
   //采用element-plus进行请求时的加载
   //const loadingInstance = ElLoading.service({fullscreen:false});
-  console.log(newOptions)
-  console.log(url)
+
   const { data, pending, refresh } = await useFetch(url, newOptions)
-  console.log(data)
-  console.log(data.value)
 
   if (!pending.value) {
     //loadingInstance.close();

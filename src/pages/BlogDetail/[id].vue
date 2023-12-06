@@ -1,112 +1,197 @@
 <template>
-  <div ref="Area" class="DetailBox">
-    <Particles :particlesInit="particlesInit" :particlesLoaded="particlesLoaded" id="tsparticles" :options="particles" />
-
-    <div class="articleDetail">
-      <div class="articleBanner">
-        <div class="title">
-          {{ detail.Title }}
+  <NuxtLayout name="common" :titleList="titleList" :heightTitle="heightTitle">
+    <article v-if="detail" ref="Area" class="DetailBox">
+      <div class="articleDetail">
+        <!-- <div :class="`backgroundImage: url('http://localhost:5200/xiaolu/${detail.ArticleCover}')`" -->
+        <div :style="{ backgroundImage: `url(${_imgUrl}${detail.ArticleCover})` }" class="articleBanner">
+          <div class="title">
+            {{ detail.Title }}
+          </div>
         </div>
+        <!-- <v-md-preview :text="detail.Content"></v-md-preview> -->
+        <div ref="article" class="article" v-html="detail.render"></div>
       </div>
-      <v-md-preview :text="detail.Content"></v-md-preview>
-    </div>
-    <div class="CommentList" style="margin-top: 1rem">
-      <div class="ListMain">
-        <div class="ListItem" v-for="item in commentList">
-          <div class="ItemMain">
-            <div class="left">
-              <img src="@/assets/images/DefaultHeadIcon.9fa68490.jpg" alt="" />
+      <div v-if="commentList.length" class="CommentList" style="margin-top: 1rem">
+        <div class="ListMain">
+          <div class="ListItem" v-for=" item  in  commentList ">
+            <div class="ItemMain">
+              <div class="left">
+                <img :src="'/img/' + item.head + '.jpeg'" alt="" />
+              </div>
+              <div class="right">
+                <span style="display: flex; align-items: center">
+                  <span style="margin-right: 10px"> {{ item.userId }}</span>
+                  <img src="@/assets/images/position.svg" alt="" />
+                  {{ item.city }}</span>
+                <span v-html="item.content"> </span>
+                <span class="DateAnswer">
+                  <span> {{ _format('yyyy-MM-dd hh:mm:ss', parseInt(item.publishdate)) }}</span>
+                  <span @click="answer(item.userId, item._id)" class="answer">回复</span>
+                </span>
+              </div>
             </div>
-            <div class="right">
-              <span style="display: flex; align-items: center">
-                <span style="margin-right: 10px"> {{ item.userId }}</span>
-                <img src="@/assets/images/position.svg" alt="" />
-                {{ item.city }}</span>
-              <span v-html="item.content"> </span>
-              <span class="DateAnswer">
-                <span> {{ _format('yyyy-MM-dd hh:mm:ss', parseInt(item.publishdate)) }}</span>
-                <span @click="answer(item.userId, item._id)" class="answer">回复</span>
-              </span>
+          </div>
+        </div>
+      </div>
+      <div class="ArticleDetailContent" style="margin-top: 1rem">
+        <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
+          <div class="ArticleDetailCommentFirstLine">
+            <div class="UserHeadIcon">
+              <img src="@/assets/images/DefaultHeadIcon.9fa68490.jpg" />
+            </div>
+            <div class="CommentUserInfo">
+              <input placeholder="昵称（必填）" v-model="ArticleCommentNickName" />
+              <input placeholder="邮箱（可以不填哦）" v-model="ArticleCommentEmail" />
+              <input placeholder="网址（可以不填哦）" v-model="ArticleCommentUrl" />
             </div>
           </div>
+          <div class="ArticleDetailCommentContent">
+            <div v-show="tip" class="tip">
+              {{ tip }}
+              <div @click="clearComment" class="clear">×</div>
+            </div>
+            <textarea v-model="MessageText" ref="MessageTextRef" placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
+            <span class="EmotionButton" @click="OpenEmotions()">
+              <img src="@/assets/images/face.svg" alt="" />
+            </span>
+          </div>
+          <div class="CommentSubmitLine">
+            <div class="CommentSubmitButton" @click="CommentSubmit()">评论</div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="ArticleDetailContent" style="margin-top: 1rem">
-      <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
-        <div class="ArticleDetailCommentFirstLine">
-          <div class="UserHeadIcon">
-            <img src="@/assets/images/DefaultHeadIcon.9fa68490.jpg" />
-          </div>
-          <div class="CommentUserInfo">
-            <input placeholder="昵称（必填）" v-model="ArticleCommentNickName" />
-            <input placeholder="邮箱（可以不填哦）" v-model="ArticleCommentEmail" />
-            <input placeholder="网址（可以不填哦）" v-model="ArticleCommentUrl" />
-          </div>
-        </div>
-        <div class="ArticleDetailCommentContent">
-          <div v-show="tip" class="tip">
-            {{ tip }}
-            <div @click="clearComment" class="clear">×</div>
-          </div>
-          <textarea v-model="MessageText" ref="MessageTextRef" placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
-          <span class="EmotionButton" @click="OpenEmotions()">
-            <img src="@/assets/images/face.svg" alt="" />
-          </span>
-        </div>
-        <div class="CommentSubmitLine">
-          <div class="CommentSubmitButton" @click="CommentSubmit()">评论</div>
-        </div>
-      </div>
-    </div>
 
-    <Emotion @AppendInputValue="AppendMessageText"></Emotion>
-  </div>
+      <Emotion @AppendInputValue="AppendMessageText"></Emotion>
+    </article>
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 import $http from '@/api/index.ts'
-import bus from '@/bus.ts'
+
 import Emotion from '@/components/Emotion.vue'
-import { particles } from '@/config/particles-config.ts'
 import { ElMessage } from 'element-plus'
-import { loadFull } from 'tsparticles'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-const $store = useStore()
+const $store = useStore.common()
 const _format = $format
 const _emotionList = $EmotionList
+console.log($store.userMessage);
+
 
 onMounted(() => {
-  let userMessage = JSON.parse(localStorage.getItem('userMessage') as string)
+  setTimeout(() => {
+    createLog({
+      moduleType: 'menu',
+      operateType: '查看文章',
+      operateContent: (detail.value as Blog).Title
+    })
+  }, 3000);
+  let userMessage = $store.userMessage
   if (userMessage) {
-    ArticleCommentNickName.value = userMessage.email
-    ArticleCommentEmail.value = userMessage.nickName
+    ArticleCommentNickName.value = userMessage.nickName
+    ArticleCommentEmail.value = userMessage.email
     ArticleCommentUrl.value = userMessage.url
   }
+
+  // 刷新走这
+
+  getTitle()
+
+
+  window.addEventListener('scroll', () => {
+    // 再次计算位置 图片会影响scrolltop
+    getTitle()
+    let timeOut: number | null = null
+    const absList: number[] = [] // 各个h标签与当前距离绝对值
+    titleList.value.forEach((item: TitleMessage) => {
+      absList.push(item.height)
+    })
+    if (timeOut) {
+      clearTimeout(timeOut)
+    }
+    // 频繁操作，一直清空先前的定时器
+    timeOut = window.setTimeout(() => {  // 只执行最后一次事件
+      let scrollTop = window.pageYOffset
+      console.log(scrollTop);
+
+      for (let i = absList.length - 1; i >= 0; i--) {
+        if (scrollTop - 60 > absList[i]) {
+          heightTitle.value = i
+          return
+        }
+      }
+
+    }, 500)
+  })
 })
+bus.$on('jump_location', ((index: number) => {
+  titleList.value[index].dom.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+    inline: 'start'
+  })
+}))
+let article = ref()
+let titleList = ref<TitleMessage[]>([])
+// 当前目录项
+let heightTitle = ref()
+
+//获取标题列表
+async function getTitle() {
+  if (!article.value) {
+    console.log(article.value);
+    return
+  }
+  // 使用js选择器，获取对应的h标签，组合成列表
+  const anchors = article.value.querySelectorAll(
+    'h1,h2,h3,h4,h5,h6'
+  )
+  // 删除标题头尾的空格
+  const titles = Array.from(anchors).filter((title: any) => title.innerText.trim());
+  // 当文章h标签为空时，直接返回
+
+  if (!titles.length) {
+    titleList.value = [];
+    return;
+  }
+
+  // 从h标签属性中，提取相关信息
+  const hTags = Array.from(new Set(titles.map((title: any) => title.tagName))).sort();
+
+  titleList.value = titles.map((el: any) => {
+    return {
+      dom: el,
+      title: el.innerText, // 标题内容
+      indent: hTags.indexOf(el.tagName), // 标签层级
+      height: el.offsetTop, // 标签距离顶部距离
+    }
+  })
+  console.log(titleList.value);
 
 
-const particlesInit = async (engine: any) => {
-  await loadFull(engine)
 }
-const particlesLoaded = async (container: any) => {
-  console.log('Particles container loaded', container)
-}
+
 
 let route = useRoute()
-let detail = ref<any>({
-  Content: ''
-})
-let content = ref<any>('')
+
+let detail = ref<Blog | null>(null)
+
 let getBlogsDetail = async () => {
   console.log(route.params.id)
   const { data } = await $http.blogs.getBlogsDetail(route.params.id)
   console.log(data);
 
   detail.value = data.data
+
   const { data: data2 } = await $http.blogs.addLook(route.params.id)
   console.log(data2)
+
+  // 页面跳转走这
+
+  getTitle()
+
+
 }
 getBlogsDetail()
 
@@ -123,7 +208,7 @@ let OpenEmotions = function () {
   bus.$emit('showEmo')
 }
 // 表情添加到text
-bus.$on('AppendMessageText', (value: any) => {
+bus.$on('AppendMessageText', (value: string) => {
   MessageText.value += value
 })
 //表情选中后追加在input
@@ -155,15 +240,22 @@ let CommentSubmit = async function () {
     })
     return
   }
-  console.log($store.location.Address)
-
+  let head
+  if ($store.head) {
+    head = $store.head
+  } else {
+    head = 'head' + Math.floor(Math.random() * 5)
+    $store.setHead(head)
+  }
+  let location = await GetLocation()
   let body: any = {
     nickName: ArticleCommentNickName.value,
     email: ArticleCommentEmail.value,
     url: ArticleCommentUrl.value,
     text: MessageText.value,
     cid: route.params.id,
-    city: $store.location.Address.city
+    city: location.city,
+    head
   }
   if (answerCommentId.value) {
     body['parentId'] = answerCommentId.value
@@ -184,7 +276,7 @@ let CommentSubmit = async function () {
       url: ArticleCommentUrl.value
     }
     MessageText.value = ''
-    localStorage.setItem('userMessage', JSON.stringify(userMessage))
+    $store.setUserMessage(userMessage)
     getComment()
   }
 }
@@ -229,55 +321,125 @@ let getComment = async () => {
 getComment()
 
 </script>
+<style lang="less">
+input {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  background-color: transparent;
+  color: @main-fontcolor;
+
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  color: @main-fontcolor;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none;
+  background-color: transparent;
+  width: 100%;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.DetailBox {
+  .article {
+    img {
+      max-width: 100%;
+    }
+
+    pre {
+      background-color: @main-bordercolor-gray;
+      border-radius: 5px;
+      overflow: auto;
+      padding: 10px 15px;
+    }
+
+    .hljs-center {
+      p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
+</style>
 
 <style lang="less" scoped>
 .DetailBox {
-  margin-top: 4rem;
   overflow: hidden;
-
 
   .articleDetail {
     box-sizing: border-box;
-    background-color: #fff;
-    width: 1088px;
-    margin: 50px auto 20px;
+    background-color: @main-backgroundcolor;
+    width: 100%;
+
+
+
+
 
     .articleBanner {
-      height: 384px;
-      background-image: -webkit-linear-gradient(left, #1f3747, #293d31);
+      height: 24rem;
+      background: no-repeat 50%/cover;
+      // background-image: -webkit-linear-gradient(left, #1f3747, #293d31);
       display: flex;
       justify-content: center;
       align-items: center;
 
       .title {
         color: #fff;
-        font-size: 40px;
+        font-size: 2.5rem;
         background: #e32d40;
         padding: 8px 20px;
         border-radius: 5px;
       }
     }
+
+    .article {
+      padding: 16px 32px 32px;
+      font-size: 1rem;
+      line-height: 1.5;
+      // word-wrap: break-word;
+
+
+    }
   }
 
   .CommentList {
-    width: 1088px;
+
     margin: 0 auto;
-    background-color: #fff;
+    background-color: @main-backgroundcolor;
     display: flex;
 
     .ListMain {
-      border: 1px solid #e9e9e9;
+      border: 1px solid @main-bordercolor-gray;
       box-sizing: border-box;
-      width: 800px;
       margin: 50px auto;
-
       display: flex;
       flex-direction: column;
 
       .ListItem {
         display: flex;
         flex-direction: column;
-        border-bottom: 1px solid #e9e9e9;
+        border-bottom: 1px solid @main-bordercolor-gray;
         padding: 16px;
 
         .ItemMain {
@@ -285,8 +447,8 @@ getComment()
 
           .left {
             img {
-              width: 48px;
-              height: 48px;
+              width: 3rem;
+              height: 3rem;
               border-radius: 16px;
             }
 
@@ -294,21 +456,23 @@ getComment()
           }
 
           .right {
+            color: @main-fontcolor;
             line-height: 24px;
             display: flex;
             flex-direction: column;
-            font-size: 14px;
+            font-size: 0.875rem;
             flex: 1;
 
             img {
-              width: 12px;
+              width: 0.75rem;
               height: 12px;
             }
 
             .DateAnswer {
               display: flex;
               justify-content: space-between;
-              color: #0000006e;
+              // color: #0000006e;
+              color: @main-fontcolor-gray;
 
               .answer {
                 cursor: pointer;
@@ -328,20 +492,17 @@ getComment()
   }
 
   .ArticleDetailContent {
-    width: 1088px;
-    margin: 0 auto 4rem;
-    background-color: #fff;
+    background-color: @main-backgroundcolor;
 
     .ArticleDetailCommentFirstLine {
       box-sizing: border-box;
-      width: 800px;
       margin: 0 auto;
       display: flex;
 
       .UserHeadIcon {
         img {
-          width: 32px;
-          height: 32px;
+          width: 2rem;
+          height: 2rem;
         }
 
         margin-right: 20px;
@@ -351,13 +512,14 @@ getComment()
         flex: 1;
         display: flex;
         justify-content: space-between;
+        color: @main-fontcolor;
 
         input {
           box-sizing: border-box;
-          border: 1px solid #e9e9e9;
+          border: 1px solid @main-bordercolor-gray;
           height: 32px;
           padding: 0 8px;
-          width: 230px;
+          width: 32%;
 
           &:focus {
             outline: none;
@@ -368,11 +530,10 @@ getComment()
 
     .ArticleDetailCommentContent {
       margin: 10px auto 0;
-      width: 800px;
       position: relative;
 
       .tip {
-        font-size: 14px;
+        font-size: 0.875rem;
         margin-bottom: 5px;
         display: flex;
         align-items: center;
@@ -382,7 +543,7 @@ getComment()
           line-height: 14px;
           width: 14px;
           height: 14px;
-          font-size: 10px;
+          font-size: 0.625rem;
           background-color: red;
           cursor: pointer;
           color: #fff;
@@ -393,9 +554,9 @@ getComment()
 
       textarea {
         box-sizing: border-box;
-        width: 800px;
         min-height: 90px;
         padding: 10px;
+        border: 1px solid @main-bordercolor-gray;
 
         &:focus {
           outline: none;
@@ -409,15 +570,14 @@ getComment()
 
         img {
           cursor: pointer;
-          width: 26px;
-          height: 26px;
+          width: 1.6rem;
+          height: 1.6rem;
         }
       }
     }
 
     .CommentSubmitLine {
       box-sizing: border-box;
-      width: 800px;
       margin: 10px auto 0;
       display: flex;
       justify-content: flex-end;
@@ -425,11 +585,90 @@ getComment()
       .CommentSubmitButton {
         cursor: pointer;
         padding: 5px 15px;
-        border: 1px solid #01aaed;
-        text-align: center;
-        color: #01aaed;
       }
     }
+  }
+
+
+}
+
+@media screen and (max-width: 768px) {
+  .pc {
+    display: none;
+  }
+
+  .DetailBox {
+    // background-color: #17163e;
+
+    .articleDetail {
+      margin: 0 auto 1.25rem;
+    }
+
+    .CommentList {
+      padding: 0 1rem;
+
+      .ListMain {
+        width: 100%;
+      }
+    }
+  }
+
+  .ArticleDetailContent {
+    margin: 0 auto 4rem;
+    background-color: #fff;
+
+    .ArticleDetailCommentFirstLine {
+      .CommentUserInfo {
+        flex-direction: column;
+
+        input {
+          width: 100% !important;
+          margin-top: .5rem;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .DetailBox {
+    max-width: 60rem;
+
+    .articleDetail {
+      margin: 0 auto 1.25rem;
+    }
+
+    .CommentList {
+      display: flex;
+      padding: 0 1rem;
+
+
+      .ListMain {
+        flex: 1;
+        // max-width: 50rem;
+      }
+    }
+  }
+
+  .ArticleDetailContent {
+    margin: 0 auto 4rem;
+    background-color: #fff;
+    // .ArticleDetailCommentFirstLine {
+    //   width: 50rem;
+    // }
+
+    // .ArticleDetailCommentContent {
+    //   width: 50rem;
+
+    //   textarea {
+    //     width: 50rem;
+    //   }
+    // }
+
+    // .CommentSubmitLine {
+    //   width: 50rem;
+    // }
   }
 }
 </style>

@@ -5,6 +5,7 @@ export default {
   alias: {
     '@': '/src'
   },
+
   srcDir: 'src/',
   ssr: true,
   devtools: { enabled: true },
@@ -17,7 +18,6 @@ export default {
   },
   plugins: ['~/plugins/tsparticles', '~/plugins/VMDPreview'],
   // 字体图标
-
   css: [
     /**
      * 配置全局 css
@@ -26,7 +26,9 @@ export default {
     // 'wow.js/css/libs/animate.css',
     // 'animate.css',
     '~/assets/css/global.css',
-    '~/assets/iconfont/iconfont.css'
+    '~/assets/iconfont/iconfont.css',
+    '~/assets/iconfont2/iconfont.css',
+    '~/assets/iconfont/font.css'
   ],
   //mode: 'client'
   // server: true, //开启服务端渲染或者预渲染
@@ -50,17 +52,34 @@ export default {
   nitro: {
     devProxy: {
       '/api': {
-        target: 'http://localhost:5200', // 测试
+        // target: 'http://localhost:5200', // 测试
         // target: 'http://tz.tianzerc.com/api',
+        target: 'http://admin.lubowen.xyz',
         changeOrigin: true,
         prependPath: true
+      },
+      '/gd': {
+        //  测试
+        // target: 'https://restapi.amap.com/v3/',
+        // 线上
+        target: 'http://8.134.160.8:5200',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/gd/, '')
       }
     },
     // 该配置用于服务端请求转发
     routeRules: {
       '/api/**': {
         proxy: 'http://localhost:5200/**' // 测试
+        // 线上
+        // proxy: 'http://admin.lubowen.xyz/**'
+
         // proxy: 'http://tz.tianzerc.com/api/**' // 测试
+      },
+      '/gd': {
+        //  测试
+        proxy: 'https://restapi.amap.com/v3/**',
+        rewrite: (path: string) => path.replace(/^\/gd/, '')
       }
     }
   }

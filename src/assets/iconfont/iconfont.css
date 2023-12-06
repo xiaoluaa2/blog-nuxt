@@ -2,8 +2,7 @@
   font-family: "iconfont"; /* Project id 4304967 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1698394178589') format('woff2'),
-       url('iconfont.ttf?t=1698394178589') format('truetype');
+       url('iconfont.woff2?t=1701134377038') format('woff2');
 }
 
 .iconfont {
@@ -12,6 +11,138 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shouye:before {
+  content: "\e65a";
+}
+
+.icon-sousuo:before {
+  content: "\e76d";
+}
+
+.icon-gonggaoS:before {
+  content: "\e64b";
+}
+
+.icon-rili1:before {
+  content: "\e6d9";
+}
+
+.icon-guanbi:before {
+  content: "\e6ca";
+}
+
+.icon-githubb:before {
+  content: "\e63b";
+}
+
+.icon-tubiao-:before {
+  content: "\e624";
+}
+
+.icon-zhuti:before {
+  content: "\fe89";
+}
+
+.icon-huoying:before {
+  content: "\e61f";
+}
+
+.icon-feng:before {
+  content: "\e61e";
+}
+
+.icon-qing:before {
+  content: "\e601";
+}
+
+.icon-duoyun:before {
+  content: "\e603";
+}
+
+.icon-zhenyu:before {
+  content: "\e604";
+}
+
+.icon-zhenxue:before {
+  content: "\e605";
+}
+
+.icon-yin:before {
+  content: "\e607";
+}
+
+.icon-xiaoyu:before {
+  content: "\e608";
+}
+
+.icon-zhongyu:before {
+  content: "\e609";
+}
+
+.icon-dayu:before {
+  content: "\e60a";
+}
+
+.icon-dabaoyu:before {
+  content: "\e60d";
+}
+
+.icon-leizhenyu:before {
+  content: "\e60f";
+}
+
+.icon-xiaoxue:before {
+  content: "\e610";
+}
+
+.icon-zhongxue:before {
+  content: "\e611";
+}
+
+.icon-daxue:before {
+  content: "\e612";
+}
+
+.icon-baoxue:before {
+  content: "\e613";
+}
+
+.icon-yujiaxue:before {
+  content: "\e615";
+}
+
+.icon-wu:before {
+  content: "\e617";
+}
+
+.icon-mai:before {
+  content: "\e618";
+}
+
+.icon-fuchen:before {
+  content: "\e619";
+}
+
+.icon-yangsha:before {
+  content: "\e61a";
+}
+
+.icon-shachenbao:before {
+  content: "\e61b";
+}
+
+.icon-qiangshachenbao:before {
+  content: "\e61c";
+}
+
+.icon-caidan1-copy:before {
+  content: "\fe8a";
+}
+
+.icon-caidan1-copy-copy:before {
+  content: "\fe8b";
 }
 
 .icon-caidan:before {
@@ -26,20 +157,12 @@
   content: "\e71f";
 }
 
-.icon-rili:before {
-  content: "\e626";
-}
-
 .icon-pinglun:before {
   content: "\e606";
 }
 
 .icon-books:before {
   content: "\e666";
-}
-
-.icon-aixin:before {
-  content: "\e6bb";
 }
 
 .icon-shouye-icon-huore:before {

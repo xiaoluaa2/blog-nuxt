@@ -1,6 +1,8 @@
-import location from './common/index'
-export default function stores() {
-  return {
-    location: location()
-  }
+import { common } from './common/index'
+
+//模块
+const stores = {
+  common
 }
+
+export default stores

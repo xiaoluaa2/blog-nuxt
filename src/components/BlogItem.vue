@@ -1,12 +1,11 @@
 <template>
   <div @click="blogDetail(blog._id)" class="BlogItem shadow-box">
-    <div class="img">
-
+    <div v-if="index % 2 == 0" class="img">
       <img :src="'/api/xiaolu/' + blog.ArticleCover" alt="" />
     </div>
     <div class="main">
       <div class="time flex">
-        <i class="iconfont">&#xe626;</i>
+        <i class="iconfont">&#xe6d9;</i>
         <span> 发布于{{ _format('yyyy-MM-dd hh:mm:ss', Date.parse(blog.CreateDate)) }}</span>
       </div>
       <div class="title">{{ blog.Title }}</div>
@@ -19,10 +18,10 @@
           <i class="iconfont">&#xe606;</i>
           <span>{{ blog.CommentNum }}条评论</span>
         </div>
-        <div class="flex">
+        <!-- <div class="flex">
           <i class="iconfont">&#xe6bb;</i>
           <span>100%</span>
-        </div>
+        </div> -->
 
       </div>
       <div class="brief">
@@ -35,6 +34,9 @@
         </span>
       </div>
     </div>
+    <div v-if="index % 2 != 0" class="img">
+      <img :src="'/api/xiaolu/' + blog.ArticleCover" alt="" />
+    </div>
   </div>
 </template>
 
@@ -46,18 +48,11 @@ import { useRouter } from 'vue-router';
 const _format = $format
 
 let router = useRouter()
-type List = {
-  Title: string
-  order: string
-  Content: string
-  Summary: string
-  CreateDate: string
-  ArticleTag: string
-  ArticleCover: string
-  CommentNum: number
-}
+
+
 interface Props {
-  blog: any
+  blog: Blog
+  index: number
 }
 let props = defineProps<Props>()
 
@@ -87,7 +82,7 @@ let blogDetail = async (id: string) => {
 
     img:hover {
       transform: scale(1.2);
-      transition: all 0.3s ease-in-out;
+      transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
     }
 
   }
@@ -96,6 +91,7 @@ let blogDetail = async (id: string) => {
     padding: 20px 35px;
     display: flex;
     flex-direction: column;
+    color: @main-fontcolor;
 
     .icon {
       margin-right: .3rem;
@@ -103,7 +99,7 @@ let blogDetail = async (id: string) => {
 
     .time {
       font-size: 0.75rem;
-      color: #797979;
+      color: @main-fontcolor-gray;
       margin-bottom: 1rem;
     }
 
@@ -111,13 +107,15 @@ let blogDetail = async (id: string) => {
       font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 1rem;
+
     }
 
     .footer {
       display: flex;
       margin-bottom: 1rem;
-      color: #797979;
+      color: @main-fontcolor-gray;
       font-size: 0.75rem;
+
 
       div {
         margin-right: 0.9rem;
@@ -144,9 +142,9 @@ let blogDetail = async (id: string) => {
     .tag {
       .tagContent {
 
-        background-color: #eee;
+        background-color: @main-bordercolor-gray;
         border-radius: 3px;
-        color: #797979;
+        color: @main-fontcolor-gray;
         cursor: pointer;
         font-size: 14px;
         padding: 3px 10px;
@@ -158,15 +156,15 @@ let blogDetail = async (id: string) => {
 
 }
 
-@media only screen and (max-device-width: 768px) {
+@media screen and (max-width: 768px) {
   .BlogItem {
     // width: 100%;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid #e9c1c1;
-    background-color: #fff;
+    // border: 1px solid @main-bordercolor-1;
+    background-color: @main-backgroundcolor;
 
     .img {
       width: 100%;
@@ -194,7 +192,7 @@ let blogDetail = async (id: string) => {
         .tagContent {
           // background-color: #eee;
           border-radius: 3px;
-          color: #797979;
+          color: @main-fontcolor-gray;
           cursor: pointer;
           font-size: 14px;
           padding: 3px 10px;
@@ -212,7 +210,7 @@ let blogDetail = async (id: string) => {
   }
 }
 
-@media only screen and (min-device-width: 768px) {
+@media screen and (min-width: 768px) {
   .BlogItem {
     display: flex;
     margin-top: 2.5rem;
@@ -224,7 +222,7 @@ let blogDetail = async (id: string) => {
     // background-size: 0 1px, 1px 0, 0 1px, 1px 0;
     height: 18.75rem;
     overflow: hidden;
-    background-color: #fff;
+    background-color: @main-backgroundcolor;
 
     // &:hover {
     //   cursor: pointer;

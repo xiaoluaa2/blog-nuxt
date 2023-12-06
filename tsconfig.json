@@ -1,4 +1,10 @@
 {
   // https://nuxt.com/docs/guide/concepts/typescript
-  "extends": "./.nuxt/tsconfig.json"
+  "extends": "./.nuxt/tsconfig.json",
+
+  "compilerOptions": {
+    "noImplicitThis":false // this不校验类型
+    // "ignoreDeprecations": "5.0",
+    // "suppressImplicitAnyIndexErrors": true,// 消除隐式索引报错
+  }
 }

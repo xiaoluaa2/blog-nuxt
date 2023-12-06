@@ -1,5 +1,5 @@
 <template>
-  <div class="EmoticonListCover" v-if="EmotionShow" @click="OpenEmotion(false)">
+  <div class="EmoticonListCover" v-if="EmotionShow" @click="OpenEmotion()">
     <div class="EmoticonList">
       <div class="PicItem" v-for="(item, i) in EmotionList" @click.stop="ClickEmoticon(i)" :key="i">
         <img :src="'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'" />
@@ -9,10 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import bus from '@/bus.ts'
-import { getCurrentInstance, ref } from 'vue'
-const { proxy }: any = getCurrentInstance()
-const _emotionList = proxy._emotionList
+import { ref } from 'vue';
+const _emotionList = $EmotionList
 let showEmo = () => {
   EmotionShow.value = !EmotionShow.value
 }
@@ -27,13 +25,12 @@ let EmotionShow = ref(false)
 // },
 
 //选中表情
-let ClickEmoticon = function (EmoticonNo: any) {
+let ClickEmoticon = function (EmoticonNo: number) {
   bus.$emit('AppendMessageText', '[[' + EmotionList[EmoticonNo] + ']]')
   showEmo()
 }
-let OpenEmotion = function (Value: any) {
+let OpenEmotion = function () {
   showEmo()
-  // Store.commit('ChangeEmotionShow', Value)
 }
 </script>
 
@@ -69,11 +66,13 @@ let OpenEmotion = function (Value: any) {
   /*box-shadow: 3px 0px 2px 2px @BorderColor,-3px 0px 2px 2px @BorderColor,0px 3px 2px 2px @BorderColor,0px -3px 2px 2px @BorderColor*/
   overflow-y: scroll;
 }
+
 .PicItem {
   width: 34px;
   text-align: center;
   cursor: pointer;
 }
+
 .PicItem img {
   width: 24px;
   height: 24px;
@@ -84,6 +83,7 @@ let OpenEmotion = function (Value: any) {
 .fade-leave-active {
   transition: opacity 0.8s;
 }
+
 .Fade-enter,
 .fade-leave-to {
   opacity: 0;

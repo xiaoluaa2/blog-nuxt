@@ -13,6 +13,7 @@ declare module 'qrcode'
 declare module '*.js'
 declare module '*.ts'
 declare module '*.mjs'
+declare module '*'
 
 /* 
   declare module 是为了告诉 tsc 这是一个“模块”，从而不让 IDE 里因为 tsc 类型检查相关的 lint 而标红。

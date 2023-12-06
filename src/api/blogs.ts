@@ -16,13 +16,27 @@ interface getCommentInterface {
   cid: string
   parentId?: string
 }
+interface getBlogsListInterface {
+  tag?: string
+  pageNum?: number
+}
+interface pagingInterface {
+  Skip: number
+  Limit: number
+}
+interface searchBlogInterface {
+  text: string
+}
 
 const explore = {
   //文章列表
-  getBlogsList() {
+  getBlogsList(body: getBlogsListInterface) {
     return getFetchData({
       url: `/blogs/getBlogsList`,
-      method: 'post'
+      method: 'post',
+      body: {
+        body
+      }
     })
   },
   //热门文章列表
@@ -92,7 +106,7 @@ const explore = {
     })
   },
   // 留言 有层级
-  getMessageListTiert(comment: any) {
+  getMessageListTiert(comment: pagingInterface) {
     return getFetchData({
       url: `/comment/getCommentListTier`,
       method: 'post',
@@ -111,6 +125,21 @@ const explore = {
   getTypeList() {
     return getFetchData({
       url: `/types/typeListHome`,
+      method: 'post'
+    })
+  },
+  // 模糊查询
+  searchBlog(body: searchBlogInterface) {
+    return getFetchData({
+      url: `/blogs/searchBlog`,
+      method: 'post',
+      body
+    })
+  },
+  // 随机文章
+  getBlogsRandom() {
+    return getFetchData({
+      url: `/blogs/getBlogsRandom`,
       method: 'post'
     })
   }
