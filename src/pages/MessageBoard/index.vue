@@ -93,7 +93,7 @@
             <div class="mine_m">
 
               <span>小鹿</span>
-              <div class="mine_source">博客源码</div>
+              <div class="mine_source">Follow Me</div>
             </div>
           </div>
           <div v-if="watherList" class="watherMain">
@@ -145,7 +145,9 @@
       </el-dialog>
 
       <Emotion @AppendInputValue="AppendMessageText"></Emotion>
+      <Footer></Footer>
     </div>
+
   </div>
 </template>
 
