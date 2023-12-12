@@ -2,7 +2,15 @@
   <div class="messageMain">
     <div :class="isDark ? 'dark' : 'bright'" class="bg_img"></div>
     <div ref="Area" class="show pc">
-      <div class="poetry">{{ poetry }}</div>
+      <div class="poetry">
+        <div class="hitokoto">
+          {{ poetry.hitokoto }}
+        </div>
+        <div class="from">
+          {{ poetry.from }}
+        </div>
+
+      </div>
       <div class="wave-1"></div>
       <div class="wave-2"></div>
       <div class="glide">
@@ -51,7 +59,7 @@
             <div class="ListItem" v-for="item in commentList">
               <div class="ItemMain">
                 <div class="left">
-                  <img :src="'/img/' + item.head + '.jpeg'" alt="" />
+                  <img :src="'/img/' + item.head + '.jpeg'" :alt="item.userId" />
                 </div>
                 <div class="right">
                   <span style="display: flex; align-items: center">
@@ -67,7 +75,7 @@
               </div>
               <div v-for="child in item.son" class="child">
                 <div class="left">
-                  <img :src="'/img/' + item.head + '.jpeg'" alt="" />
+                  <img :src="'/img/' + item.head + '.jpeg'" :alt="item.userId" />
                 </div>
                 <div class="right">
                   <span style="display: flex; align-items: center">
@@ -93,7 +101,7 @@
             <div class="mine_m">
 
               <span>小鹿</span>
-              <div class="mine_source">Follow Me</div>
+              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">Follow Me</a>
             </div>
           </div>
           <div v-if="watherList" class="watherMain">
@@ -152,14 +160,16 @@
 </template>
 
 <script setup lang="ts">
-import $http from '@/api/index.ts'
-import { weatherMap, weekMap } from '@/tool.ts'
-import { ElMessage } from 'element-plus'
-import * as THREE from 'three'
-import BIRDS from 'vanta/src/vanta.birds'
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-const jinrishici = require('jinrishici');
+useHead({
+  title: '开心小羊|留言板',
+})
+import $http from '@/api/index.ts';
+import { weatherMap, weekMap } from '@/tool.ts';
+import { ElMessage } from 'element-plus';
+import * as THREE from 'three';
+import BIRDS from 'vanta/src/vanta.birds';
+import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 interface UserComment {
   nickName: string
   text: string
@@ -188,12 +198,11 @@ const Area = ref(null)
 let vantaEffect: any = null
 //在两个生命周期钩子内创建vantaEffect
 let userMessage = ref()
-let poetry = ref('')
+let poetry = ref({
+  hitokoto: '',
+  from: ''
+})
 onMounted(() => {
-  jinrishici.load((result: any) => {
-    console.log(result);
-    poetry.value = result.data.content
-  });
   createLog({
     moduleType: 'menu',
     operateType: '选择菜单',
@@ -487,6 +496,17 @@ let setWeathe = () => {
 
 }
 setWeathe()
+
+let yiyan = async () => {
+  const { data } = await $http.other.yiyan()
+  poetry.value = {
+    hitokoto: data.hitokoto,
+    from: data.from,
+  }
+  console.log(data.hitokoto);
+
+}
+yiyan()
 // htt
 </script>
 
@@ -599,8 +619,16 @@ input:focus {
       left: 50%;
       transform: translate(-50%, -50%);
       color: #fff;
-      font-size: 3rem;
       font-family: DaoLiTi;
+
+      .hitokoto {
+        font-size: 2rem;
+      }
+
+      .from {
+        text-align: right;
+        font-size: 1rem;
+      }
     }
 
     // background: url(@/assets/images/xueshan.jpg) no-repeat 50%/cover;

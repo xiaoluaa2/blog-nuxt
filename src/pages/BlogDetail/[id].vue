@@ -3,20 +3,35 @@
     <article v-if="detail" ref="Area" class="DetailBox">
       <div class="articleDetail">
         <!-- <div :class="`backgroundImage: url('http://localhost:5200/xiaolu/${detail.ArticleCover}')`" -->
-        <div :style="{ backgroundImage: `url(${_imgUrl}${detail.ArticleCover})` }" class="articleBanner">
+        <div :style="{ backgroundImage: `url(${_imgUrl(detail.ArticleCover)})` }" class="articleBanner">
           <div class="title">
             {{ detail.Title }}
           </div>
         </div>
         <!-- <v-md-preview :text="detail.Content"></v-md-preview> -->
         <div ref="article" class="article" v-html="detail.render"></div>
+        <div class="copyrightBox">
+          <svg class="copyrightIcon pc" viewBox="0 0 1024 1024">
+            <path
+              d="M512 16C238.066 16 16 238.066 16 512s222.066 496 496 496 496-222.066 496-496S785.934 16 512 16z m0 896c-221.064 0-400-178.902-400-400 0-221.062 178.902-400 400-400 221.064 0 400 178.902 400 400 0 221.064-178.902 400-400 400z m214.702-202.128c-19.228 19.424-91.06 82.792-208.13 82.792-164.86 0-280.968-122.85-280.968-283.134 0-158.304 120.55-278.802 279.524-278.802 111.062 0 177.476 53.24 195.186 69.558a23.93 23.93 0 0 1 3.872 30.644l-36.31 56.226c-7.682 11.9-23.932 14.564-34.998 5.842-17.19-13.552-63.628-45.076-123.416-45.076-96.606 0-155.832 70.66-155.832 160.164 0 83.178 53.776 167.384 156.554 167.384 65.314 0 113.686-38.078 131.452-54.45 10.54-9.714 27.192-8.078 35.64 3.476l39.73 54.34a23.894 23.894 0 0 1-2.304 31.036z"
+              p-id="3505"></path>
+          </svg>
+          <div class="title"> {{ detail.Title }}</div>
+          <div class="urlBox">
+            <div class="url">{{ articleOrigin }}</div>
+          </div>
+          <div class="text">本站所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"
+              class="copyrightName--Rz1SYaCDcO" rel="noreferrer">CC BY-NC-SA 4.0</a>许可协议，转载请注明来自<a
+              href="http://blog.lubowen.xyz/" target="_blank" class="copyrightName--Rz1SYaCDcO" rel="noreferrer">开心小羊</a>。
+          </div>
+        </div>
       </div>
       <div v-if="commentList.length" class="CommentList" style="margin-top: 1rem">
         <div class="ListMain">
           <div class="ListItem" v-for=" item  in  commentList ">
             <div class="ItemMain">
               <div class="left">
-                <img :src="'/img/' + item.head + '.jpeg'" alt="" />
+                <img :src="'/img/' + item.head + '.jpeg'" alt="游客头像" />
               </div>
               <div class="right">
                 <span style="display: flex; align-items: center">
@@ -67,19 +82,22 @@
 </template>
 
 <script setup lang="ts">
-import $http from '@/api/index.ts'
 
-import Emotion from '@/components/Emotion.vue'
-import { ElMessage } from 'element-plus'
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+
+import $http from '@/api/index.ts';
+
+import Emotion from '@/components/Emotion.vue';
+import { ElMessage } from 'element-plus';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 const $store = useStore.common()
 const _format = $format
 const _emotionList = $EmotionList
 console.log($store.userMessage);
 
-
+let articleOrigin = ref('')
 onMounted(() => {
+  articleOrigin.value = window.location.href
   setTimeout(() => {
     createLog({
       moduleType: 'menu',
@@ -183,7 +201,9 @@ let getBlogsDetail = async () => {
   console.log(data);
 
   detail.value = data.data
-
+  useHead({
+    title: `开心小羊|${(detail.value)!.Title}`,
+  })
   const { data: data2 } = await $http.blogs.addLook(route.params.id)
   console.log(data2)
 
@@ -391,6 +411,7 @@ textarea:focus {
     box-sizing: border-box;
     background-color: @main-backgroundcolor;
     width: 100%;
+    overflow: hidden;
 
 
 
@@ -414,12 +435,51 @@ textarea:focus {
     }
 
     .article {
-      padding: 16px 32px 32px;
+      padding: 1rem 2rem 2rem;
       font-size: 1rem;
       line-height: 1.5;
       // word-wrap: break-word;
+    }
 
 
+    .copyrightBox {
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+      padding: 14px;
+      background-color: @main-bordercolor-gray;
+      color: @main-fontcolor;
+      margin: 0 2rem 3rem;
+      line-height: 1.6rem;
+
+      ::v-deep(a) {
+        text-decoration: none;
+        color: @main-fontcolor;
+      }
+
+
+
+      .copyrightIcon {
+        height: 8rem;
+        width: 8rem;
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+
+      }
+
+      .title {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .urlBox,
+      .text {
+        color: @main-fontcolor-gray;
+      }
     }
   }
 

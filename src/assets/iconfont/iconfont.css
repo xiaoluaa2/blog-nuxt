@@ -2,7 +2,7 @@
   font-family: "iconfont"; /* Project id 4304967 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1701134377038') format('woff2');
+       url('iconfont.woff2?t=1702365139757') format('woff2');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-xiaoxi:before {
+  content: "\eff1";
 }
 
 .icon-shouye:before {
@@ -131,10 +135,6 @@
 
 .icon-shachenbao:before {
   content: "\e61b";
-}
-
-.icon-qiangshachenbao:before {
-  content: "\e61c";
 }
 
 .icon-caidan1-copy:before {

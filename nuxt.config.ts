@@ -14,10 +14,12 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }]
   },
   build: {
-    extractCSS: { allChunks: true }
+    extractCSS: { allChunks: true },
+    build: {
+      transpile: ['jinrishici']
+    }
   },
   plugins: ['~/plugins/tsparticles', '~/plugins/VMDPreview'],
-  // 字体图标
   css: [
     /**
      * 配置全局 css
@@ -31,7 +33,7 @@ export default {
     '~/assets/iconfont/font.css'
   ],
   //mode: 'client'
-  // server: true, //开启服务端渲染或者预渲染
+  server: true, //开启服务端渲染或者预渲染
   vite: {
     plugins: [viteCommonjs()],
     css: {
@@ -46,23 +48,22 @@ export default {
         // 设置文件./src路径为 @
         '@': resolve('./src')
       }
+    },
+    build: {
+      sourcemap: 'inline'
     }
   },
 
   nitro: {
     devProxy: {
       '/api': {
-        // target: 'http://localhost:5200', // 测试
-        // target: 'http://tz.tianzerc.com/api',
-        target: 'http://admin.lubowen.xyz',
+        target: 'http://localhost:5200', // 测试
+        // target: 'http://admin.lubowen.xyz',
         changeOrigin: true,
         prependPath: true
       },
       '/gd': {
-        //  测试
-        // target: 'https://restapi.amap.com/v3/',
-        // 线上
-        target: 'http://8.134.160.8:5200',
+        target: 'https://restapi.amap.com/v3/',
         changeOrigin: true,
         rewrite: (path: string) => path.replace(/^\/gd/, '')
       }
@@ -73,8 +74,6 @@ export default {
         proxy: 'http://localhost:5200/**' // 测试
         // 线上
         // proxy: 'http://admin.lubowen.xyz/**'
-
-        // proxy: 'http://tz.tianzerc.com/api/**' // 测试
       },
       '/gd': {
         //  测试

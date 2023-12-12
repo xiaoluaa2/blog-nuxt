@@ -69,3 +69,5 @@ declare interface TitleMessage {
   indent: number
   height: number
 }
+
+type themeName = 'normal' | 'black'

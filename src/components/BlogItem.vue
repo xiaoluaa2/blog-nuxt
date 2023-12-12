@@ -1,7 +1,7 @@
 <template>
   <div @click="blogDetail(blog._id)" class="BlogItem shadow-box">
     <div v-if="index % 2 == 0" class="img">
-      <img :src="'/api/xiaolu/' + blog.ArticleCover" alt="" />
+      <img :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title" />
     </div>
     <div class="main">
       <div class="time flex">
@@ -18,11 +18,6 @@
           <i class="iconfont">&#xe606;</i>
           <span>{{ blog.CommentNum }}条评论</span>
         </div>
-        <!-- <div class="flex">
-          <i class="iconfont">&#xe6bb;</i>
-          <span>100%</span>
-        </div> -->
-
       </div>
       <div class="brief">
         {{ blog.Summary }}
@@ -35,7 +30,7 @@
       </div>
     </div>
     <div v-if="index % 2 != 0" class="img">
-      <img :src="'/api/xiaolu/' + blog.ArticleCover" alt="" />
+      <img :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title" />
     </div>
   </div>
 </template>

@@ -10,11 +10,11 @@
         </button>
       </div>
       <div class="down">
-        <button class="card3">
+        <button @click="goGit" class="card3">
           <i class="iconfont">&#xe63b;</i>
         </button>
-        <button class="card4">
-          <i class="iconfont">&#xe61f;</i>
+        <button @click="goHome" class="card4">
+          <i class="iconfont">&#xeff1;</i>
         </button>
       </div>
     </div>
@@ -22,6 +22,7 @@
 </template>
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 let btnFlag = ref(false)
 let scrollTop = ref(0)
 const scrollToTop = () => {
@@ -55,7 +56,7 @@ onBeforeUnmount(() => {
 })
 
 const $store = useStore.common()
-let theme = $store.theme
+let theme: themeName = $store.theme
 //更改背景
 
 let changeTheme = () => {
@@ -64,6 +65,13 @@ let changeTheme = () => {
   bus.$emit('changeMessageBg', theme)
   $store.setTheme(theme)
   setTheme(theme)
+}
+let goGit = () => {
+  window.open('https://github.com/xiaoluaa2')
+}
+let router = useRouter()
+let goHome = () => {
+  router.push('/')
 }
 
 </script>

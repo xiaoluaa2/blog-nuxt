@@ -1,14 +1,14 @@
 <template>
   <NuxtLayout name="noside">
     <div class="linkPage">
-      <h2>『友链』[2]</h2>
+      <h2>『友链』[{{ friendList.length }}]</h2>
       <div class="flink-desc">对博客搭建有帮助的大佬以及一起玩博客的小伙伴</div>
       <div class="site-card-group">
         <div @click="goLink(item.author_link)" v-for="item in friendList" class="site-card">
           <card-2>
             <template v-slot:front>
               <div class="frot">
-                <img :src="item.author_avatar" alt="">
+                <img :src="item.author_avatar" :alt="item.author_name">
                 <div class="auth-name">{{ item.author_name }}</div>
                 <div class="auth-content"> {{ item.author_descr }}</div>
               </div>
@@ -16,7 +16,7 @@
             </template>
             <template v-slot:back>
               <div class="back">
-                <img :src="item.author_siteshot" alt="">
+                <img :src="item.author_siteshot" :alt="item.author_descr">
               </div>
 
             </template>
@@ -24,14 +24,14 @@
         </div>
       </div>
 
-      <h2>『收藏网站』[4]</h2>
+      <h2>『收藏网站』[{{ toolList.length }}]</h2>
       <div class="flink-desc">一些有趣的网站</div>
       <div class="site-card-group">
         <div @click="goLink(item.author_link)" v-for="item in toolList" class="site-card">
           <card-2>
             <template v-slot:front>
               <div class="frot">
-                <img :src="item.author_avatar" alt="">
+                <img :src="item.author_avatar" :alt="item.author_name">
                 <div class="auth-name">{{ item.author_name }}</div>
                 <div class="auth-content"> {{ item.author_descr }}</div>
               </div>
@@ -39,7 +39,7 @@
             </template>
             <template v-slot:back>
               <div class="back">
-                <img :src="item.author_siteshot" alt="">
+                <img :src="item.author_siteshot" :alt="item.author_descr">
               </div>
 
             </template>
@@ -96,6 +96,9 @@
 </template>
 
 <script setup lang='ts'>
+useHead({
+  title: '开心小羊|友链',
+})
 import $http from '@/api/index.ts';
 import { onMounted, ref } from 'vue';
 onMounted(() => {

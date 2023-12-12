@@ -42,7 +42,7 @@
           </div>
         </div>
         <div v-show="!issuspend" class="poster">
-          <img :src="nowMusic.cover" alt="">
+          <img :src="nowMusic.cover" :alt="nowMusic.name">
         </div>
 
 
@@ -103,29 +103,29 @@
 </template>
 
 <script setup lang='ts'>
-import poster9 from '@/assets/images/LASTSTARDUST.jpg';
-import poster10 from '@/assets/images/drama.jpg';
-import poster5 from '@/assets/images/交换余生.jpg';
-import poster12 from '@/assets/images/后来的我们.jpg';
-import poster6 from '@/assets/images/对等关系.jpg';
-import poster8 from '@/assets/images/曹操.jpg';
-import poster3 from '@/assets/images/生生.jpg';
-import poster4 from '@/assets/images/空虚的心.jpg';
-import poster7 from '@/assets/images/达尔文.jpg';
-import poster2 from '@/assets/images/途中.jpg';
-import poster1 from '@/assets/images/重拾快乐.jpg';
-import music11 from '@/assets/mp3/7千3百多天.mp3';
-import music9 from '@/assets/mp3/LASTSTARDUST.mp3';
-import music10 from '@/assets/mp3/drama.mp3';
-import music5 from '@/assets/mp3/交换余生.mp3';
-import music12 from '@/assets/mp3/后来的我们.mp3';
-import music6 from '@/assets/mp3/对等关系.mp3';
-import music8 from '@/assets/mp3/曹操.mp3';
-import music3 from '@/assets/mp3/生生.mp3';
-import music4 from '@/assets/mp3/空虚的心.mp3';
-import music1 from '@/assets/mp3/谢幕.mp3';
-import music7 from '@/assets/mp3/达尔文.mp3';
-import music2 from '@/assets/mp3/途中.mp3';
+// import poster9 from '@/assets/images/LASTSTARDUST.jpg';
+// import poster10 from '@/assets/images/drama.jpg';
+// import poster5 from '@/assets/images/交换余生.jpg';
+// import poster12 from '@/assets/images/后来的我们.jpg';
+// import poster6 from '@/assets/images/对等关系.jpg';
+// import poster8 from '@/assets/images/曹操.jpg';
+// import poster3 from '@/assets/images/生生.jpg';
+// import poster4 from '@/assets/images/空虚的心.jpg';
+// import poster7 from '@/assets/images/达尔文.jpg';
+// import poster2 from '@/assets/images/途中.jpg';
+// import poster1 from '@/assets/images/重拾快乐.jpg';
+// import music11 from '@/assets/mp3/7千3百多天.mp3';
+// import music9 from '@/assets/mp3/LASTSTARDUST.mp3';
+// import music10 from '@/assets/mp3/drama.mp3';
+// import music5 from '@/assets/mp3/交换余生.mp3';
+// import music12 from '@/assets/mp3/后来的我们.mp3';
+// import music6 from '@/assets/mp3/对等关系.mp3';
+// import music8 from '@/assets/mp3/曹操.mp3';
+// import music3 from '@/assets/mp3/生生.mp3';
+// import music4 from '@/assets/mp3/空虚的心.mp3';
+// import music1 from '@/assets/mp3/谢幕.mp3';
+// import music7 from '@/assets/mp3/达尔文.mp3';
+// import music2 from '@/assets/mp3/途中.mp3';
 import { nextTick, onMounted, ref } from 'vue';
 interface Music {
   id: number,
@@ -283,41 +283,40 @@ let nextMusic = () => {
 let volumeChange = (e: any) => {
   audio.value.volume = e / 100
 }
-let nowMusic = ref<Music>({ id: 1, name: '谢幕', artist: '林俊杰', lrc: '', url: music1, cover: poster1 })
+let nowMusic = ref<Music>({ id: 1, name: '为霜', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/60103.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20180330/20180330222216412111.jpg' })
 const musiclist = ref<Music[]>([
-  { id: 1, name: '谢幕', artist: '林俊杰', lrc: '', url: music1, cover: poster1 },
-  { id: 2, name: '途中', artist: '张叶蕾', lrc: '', url: music2, cover: poster2 },
-  { id: 3, name: '生生', artist: '林俊杰', lrc: '', url: music3, cover: poster3 },
-  { id: 4, name: 'カラノココロ', artist: 'Anly', lrc: '', url: music4, cover: poster4 },
-  { id: 5, name: '交换余生', artist: '林俊杰', lrc: '', url: music5, cover: poster5 },
-  { id: 6, name: '对等关系', artist: '李荣浩 / 张惠妹', lrc: '', url: music6, cover: poster6 },
-  { id: 7, name: '达尔文', artist: '林俊杰', lrc: '', url: music7, cover: poster7 },
-  { id: 8, name: '曹操', artist: '林俊杰', lrc: '', url: music8, cover: poster8 },
-  { id: 9, name: 'LASTSTARDUST', artist: 'Aimer', lrc: '', url: music9, cover: poster9 },
-  { id: 10, name: 'drama', artist: 'Hannie / HICARI / Isaiah Dreads', lrc: '', url: music10, cover: poster10 },
-  { id: 11, name: '7千3百多天', artist: '林俊杰', lrc: '', url: music11, cover: poster1 },
+  // { id: 1, name: '谢幕', artist: '林俊杰', lrc: '', url: music1, cover: poster1 },
+  // { id: 2, name: '途中', artist: '张叶蕾', lrc: '', url: music2, cover: poster2 },
+  // { id: 3, name: '生生', artist: '林俊杰', lrc: '', url: music3, cover: poster3 },
+  // { id: 4, name: 'カラノココロ', artist: 'Anly', lrc: '', url: music4, cover: poster4 },
+  // { id: 5, name: '交换余生', artist: '林俊杰', lrc: '', url: music5, cover: poster5 },
+  // { id: 6, name: '对等关系', artist: '李荣浩 / 张惠妹', lrc: '', url: music6, cover: poster6 },
+  // { id: 7, name: '达尔文', artist: '林俊杰', lrc: '', url: music7, cover: poster7 },
+  // { id: 8, name: '曹操', artist: '林俊杰', lrc: '', url: music8, cover: poster8 },
+  // { id: 9, name: 'LASTSTARDUST', artist: 'Aimer', lrc: '', url: music9, cover: poster9 },
+  // { id: 10, name: 'drama', artist: 'Hannie / HICARI / Isaiah Dreads', lrc: '', url: music10, cover: poster10 },
+  // { id: 11, name: '7千3百多天', artist: '林俊杰', lrc: '', url: music11, cover: poster1 },
+  // { id: 12, name: '后来的我们', artist: '五月天', lrc: '', url: music12, cover: poster12 },
 
-  { id: 12, name: '后来的我们', artist: '五月天', lrc: '', url: music12, cover: poster12 },
+  { id: 1, name: '为霜', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/60103.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20180330/20180330222216412111.jpg' },
+  { id: 2, name: '花火が瞬く夜に', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/54323.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170622/20170622214007481858.jpg' },
+  { id: 4, name: 'Windy Hill', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/53896.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170815/20170815070007812976.jpg' },
+  { id: 5, name: '也许是天意', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/75787.mp3', cover: 'https://imgessl.kugou.com/uploadpic/softhead/240/20201110/20201110004118192.jpg' },
+  {
+    id: 6, name: '瞬间的永恒', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/53702.mp3', cover: 'https://imgessl.kugou.com/uploadpic/softhead/240/20201110/20201110004118192.jpg',
 
-  // { id: 2, name: '为霜', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/60103.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20180330/20180330222216412111.jpg' },
-  // { id: 3, name: '花火が瞬く夜に', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/54323.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170622/20170622214007481858.jpg' },
-  // { id: 4, name: 'Windy Hill', artist: '羽肿', lrc: '', url: 'https://www.ytmp3.cn/down/53896.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170815/20170815070007812976.jpg' },
-  // { id: 5, name: '也许是天意', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/75787.mp3', cover: 'https://imgessl.kugou.com/uploadpic/softhead/240/20201110/20201110004118192.jpg' },
-  // {
-  //   id: 6, name: '瞬间的永恒', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/53702.mp3', cover: 'https://imgessl.kugou.com/uploadpic/softhead/240/20201110/20201110004118192.jpg',
-  //   theme: "rgb(127, 218, 180)"
-  // }, // 播放这首歌曲时的主题色},
-  // { id: 7, name: '夜空的寂静', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/75788.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170507/20170507115833669586.jpg' },
-  // { id: 8, name: '秋的思念', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/47097.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170507/20170507115833669586.jpg' },
-  // { id: 9, name: '红豆', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/78229.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170507/20170507115833669586.jpg' },
-  // { id: 10, name: '安静的午后', artist: '高至豪', lrc: '', url: 'https://www.ytmp3.cn/down/76204.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20190121/20190121191448339234.jpg' },
-  // { id: 11, name: 'River Flows in You', artist: '米歇尔很甜', lrc: '', url: 'https://www.ytmp3.cn/down/76694.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20210727/20210727132932390942.jpg' },
-  // { id: 12, name: '夜的钢琴曲五', artist: 'Caxey', lrc: '', url: 'https://www.ytmp3.cn/down/76887.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20211120/20211120100105497430.jpg' },
-  // { id: 13, name: '时代を超える想い2（穿越时空的思念）', artist: '和田薫', lrc: '', url: 'https://www.ytmp3.cn/down/54475.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20201111/20201111230549290345.jpg' },
-  // { id: 14, name: '鸟の诗', artist: 'TAMUSIC', lrc: '', url: 'https://www.ytmp3.cn/down/78502.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20220810/20220810060304757664.jpg' },
-  // { id: 15, name: '風の住む街', artist: '磯村由紀子', lrc: '', url: 'https://www.ytmp3.cn/down/78495.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20220628/20220628120801520056.jpg' },
-  // { id: 16, name: '卡农(钢琴)', artist: '纯音乐', lrc: '', url: 'https://www.ytmp3.cn/down/47043.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20211015/20211015211704185932.jpg' },
-  // { id: 17, name: '城南花已开', artist: '三亩地', lrc: '', url: 'https://www.ytmp3.cn/down/47675.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20181102/20181102115543498345.jpg' },
+  }, // 播放这首歌曲时的主题色},
+  { id: 7, name: '夜空的寂静', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/75788.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170507/20170507115833669586.jpg' },
+  { id: 8, name: '秋的思念', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/47097.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170507/20170507115833669586.jpg' },
+  { id: 9, name: '红豆', artist: '赵海洋', lrc: '', url: 'https://www.ytmp3.cn/down/78229.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20170507/20170507115833669586.jpg' },
+  { id: 10, name: '安静的午后', artist: '高至豪', lrc: '', url: 'https://www.ytmp3.cn/down/76204.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20190121/20190121191448339234.jpg' },
+  { id: 11, name: 'River Flows in You', artist: '米歇尔很甜', lrc: '', url: 'https://www.ytmp3.cn/down/76694.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20210727/20210727132932390942.jpg' },
+  { id: 12, name: '夜的钢琴曲五', artist: 'Caxey', lrc: '', url: 'https://www.ytmp3.cn/down/76887.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20211120/20211120100105497430.jpg' },
+  { id: 13, name: '时代を超える想い2（穿越时空的思念）', artist: '和田薫', lrc: '', url: 'https://www.ytmp3.cn/down/54475.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20201111/20201111230549290345.jpg' },
+  { id: 14, name: '鸟の诗', artist: 'TAMUSIC', lrc: '', url: 'https://www.ytmp3.cn/down/78502.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20220810/20220810060304757664.jpg' },
+  { id: 15, name: '風の住む街', artist: '磯村由紀子', lrc: '', url: 'https://www.ytmp3.cn/down/78495.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20220628/20220628120801520056.jpg' },
+  { id: 16, name: '卡农(钢琴)', artist: '纯音乐', lrc: '', url: 'https://www.ytmp3.cn/down/47043.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20211015/20211015211704185932.jpg' },
+  { id: 17, name: '城南花已开', artist: '三亩地', lrc: '', url: 'https://www.ytmp3.cn/down/47675.mp3', cover: 'https://imgessl.kugou.com/stdmusic/20181102/20181102115543498345.jpg' },
   // { id: 18, name: '斑马斑马', artist: '房东的猫', url: 'https://www.ytmp3.cn/down/38748.mp3', cover: 'http://p2.music.126.net/YHQAc3DTAD-wt2P2CTAUqg==/7893393976219952.jpg' },
   // { id: 19, name: '花海(KTV版伴奏)', artist: '周杰伦', lrc: '', url: 'https://www.ytmp3.cn/down/70577.mp3', cover: 'https://img1.kuwo.cn/star/starheads/500/8/10/2150960774.jpg' },
   // { id: 20, name: '夜曲', artist: '周杰伦', lrc: '', url: 'https://www.ytmp3.cn/down/69953.mp3', cover: 'https://img1.kuwo.cn/star/starheads/500/8/10/2150960774.jpg' },

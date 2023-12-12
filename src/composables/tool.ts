@@ -28,7 +28,16 @@ export const $format = function FormatTime(t: string, date: number) {
 }
 
 export const _baseUrl = 'http://admin.lubowen.xyz/'
-export const _imgUrl = 'http://admin.lubowen.xyz/xiaolu/'
+
+export const _imgUrl = (url: string) => {
+  // 图片
+  if (url.startsWith('http')) {
+    return url
+  } else {
+    // return 'http://admin.lubowen.xyz/xiaolu/' + url
+    return '/api/xiaolu/' + url
+  }
+}
 
 export const debounce = function (fn: Function, delay: number) {
   let timer: NodeJS.Timeout | null = null
@@ -181,14 +190,14 @@ export const GetLocation = async function () {
     return $store.location
   } else {
     let resp = await $http.other.getLocation()
-    console.log(resp)
-    // adcode
-    setLCookie('LUBlogLocation', 'xiaolu', 24 * 7) // 相隔一周同一浏览器再次访问时会重新定位
-    // localStorage.setItem('LUBlogLocation', JSON.stringify(resp.data))
-    $store.setLocation(resp.data)
-    console.log('-*-*-*-**-*-*')
-    console.log(resp.data)
-    return resp.data
+    if (resp.data) {
+      setLCookie('LUBlogLocation', 'xiaolu', 24 * 7) // 相隔一周同一浏览器再次访问时会重新定位
+      // localStorage.setItem('LUBlogLocation', JSON.stringify(resp.data))
+      $store.setLocation(resp.data)
+      console.log('-*-*-*-**-*-*')
+      console.log(resp.data)
+      return resp.data
+    }
   }
 }
 interface Log {
@@ -197,9 +206,9 @@ interface Log {
   operateContent: string
 }
 export const createLog = async function (log: Log) {
+  console.log('createLog')
   let dateString = $format('yyyy-MM-dd', Date.now())
   let LocationCityName = await GetLocation()
-
   let obj = {
     location: LocationCityName.city,
     fromUrl: document.referrer ? document.referrer : '未知',

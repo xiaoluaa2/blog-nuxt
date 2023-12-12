@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "19260693",
+      "name": "首页",
+      "font_class": "xiaoxi",
+      "unicode": "eff1",
+      "unicode_decimal": 61425
+    },
+    {
       "icon_id": "10187049",
       "name": "首页",
       "font_class": "shouye",
@@ -214,13 +221,6 @@
       "font_class": "shachenbao",
       "unicode": "e61b",
       "unicode_decimal": 58907
-    },
-    {
-      "icon_id": "26953557",
-      "name": "强沙尘暴",
-      "font_class": "qiangshachenbao",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
     },
     {
       "icon_id": "37953641",

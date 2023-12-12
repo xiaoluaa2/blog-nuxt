@@ -66,7 +66,7 @@ export let weatherMap = {
   浮尘: 'icon-fuchen',
   扬沙: 'icon-yangsha',
   沙尘暴: 'icon-shachenbao',
-  强沙尘暴: 'icon-qiangshachenbao',
+  强沙尘暴: 'icon-shachenbao',
   龙卷风: 'icon-qiangshachenbao',
   雾: 'icon-wu',
   浓雾: 'icon-wu',

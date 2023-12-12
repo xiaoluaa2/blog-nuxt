@@ -1,12 +1,12 @@
 <template>
   <div class="app">
-    <keep-alive v-if="loaded" max="10">
+    <keep-alive max="10">
       <NuxtLayout>
         <NuxtPage />
         <LuMusic></LuMusic>
       </NuxtLayout>
     </keep-alive>
-    <div class="load_main" v-else>
+    <div class="load_main" v-if="!loaded">
       <div class="spinner-container">
         <div class="spinner">
           <div class="spinner">
@@ -27,6 +27,16 @@
   </div>
 </template>
 <script setup lang="ts">
+useHead({
+  title: '开心小羊',
+  meta: [
+    { hid: 'keywords', name: 'keywords', content: '小鹿的个人博客,lubowen,个人网站,个人博客,开源博客' },
+    { hid: 'description', name: 'description', content: '小鹿的个人博客-独立开源、全栈开发、多端自适应、nuxt3+nestjs+vue3、功能完善' },
+  ],
+  bodyAttrs: {
+    class: 'test'
+  },
+})
 import { onMounted } from 'vue';
 let loaded = ref(false)
 onMounted(() => {
@@ -39,16 +49,12 @@ onMounted(() => {
     loaded.value = true
   }
 })
-
-
-
-
-
 // import Header from '@/components/Header.vue';
 </script>
 <style lang="less" scoped>
 .app {
   position: relative;
+
 
 }
 </style>

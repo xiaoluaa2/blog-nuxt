@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="tags_box">
-          <el-scrollbar>
+          <el-scrollbar v-if="tagsList.length">
             <div class="tags_box_inner">
               <div class="icon"> <i class="iconfont">&#xe60b;</i></div>
               <div class="tags_list">
@@ -40,12 +40,22 @@
 </template>
 
 <script setup lang="ts">
+
 import $http from '@/api/index.ts';
 import BlogsItem from '@/components/BlogItem.vue';
 import { particles } from '@/config/particles-config2.ts';
 import { loadFull } from 'tsparticles';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+// useSeoMeta({
+//   title: '我的神奇网站',
+//   ogTitle: '我的神奇网站',
+//   description: '这是我的神奇网站，让我来告诉你关于它的一切。',
+//   ogDescription: '这是我的神奇网站，让我来告诉你关于它的一切。',
+//   ogImage: 'https://example.com/image.png',
+//   twitterCard: 'summary_large_image',
+// })
 let router = useRouter()
 
 let initParticles = ref(false)
@@ -236,7 +246,21 @@ getTypeList()
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 1245px) {
+  .blogs {
+
+    .blogMain {
+      min-height: 0 !important;
+    }
+  }
+
+
+}
+
+
+
+@media screen and (min-width: 1245px) {
+
   .blogs {
     .blogMain {
       // max-width: 60rem;

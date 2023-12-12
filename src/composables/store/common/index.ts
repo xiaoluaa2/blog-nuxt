@@ -10,7 +10,7 @@ export const common = defineStore('common', {
         url: ''
       },
       head: '',
-      theme: 'normal',
+      theme: 'normal' as themeName,
       menu: '1'
     }
   },

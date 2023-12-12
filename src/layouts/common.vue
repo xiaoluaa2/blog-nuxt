@@ -32,11 +32,11 @@
           <div class="mine shadow-box">
             <div class="mine_bg"></div>
             <div class="mine_head">
-              <img src="@/assets/images/head.jpg" alt="" />
+              <img src="@/assets/images/head.jpg" alt="小鹿" />
             </div>
-            <div class="mine_m ">
+            <div class="mine_m">
               <span>小鹿</span>
-              <div class="mine_source">Follow Me</div>
+              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">Follow Me</a>
             </div>
             <div class="mine_footer">
               <div class="mine_footer_item">
@@ -117,7 +117,7 @@
               </div>
               <div @click="blogDetail(item._id)" class="hot_item" v-for="( item, index ) in  hotList " :key="item._id">
                 <div class="article__image">
-                  <img :src="'/api/xiaolu/' + item.ArticleCover" alt="">
+                  <img :src="_imgUrl(item.ArticleCover)" :alt="item.title">
                 </div>
                 <div class="article__title">
                   {{ item.title }}
@@ -149,7 +149,7 @@
               </div>
               <div @click="blogDetail(item._id)" class="hot_item" v-for="( item, index ) in  hotList " :key="item._id">
                 <div class="article__image">
-                  <img :src="'/api/xiaolu/' + item.ArticleCover" alt="">
+                  <img :src="_imgUrl(item.ArticleCover)" :alt="item.title">
                 </div>
                 <div class="article__title">
                   {{ item.title }}
@@ -181,11 +181,11 @@
           <div class="mine shadow-box">
             <div class="mine_bg"></div>
             <div class="mine_head">
-              <img src="@/assets/images/head.jpg" alt="" />
+              <img src="@/assets/images/head.jpg" alt="小鹿" />
             </div>
             <div class="mine_m ">
               <span>小鹿</span>
-              <div class="mine_source">Follow Me</div>
+              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">Follow Me</a>
             </div>
             <div class="mine_footer">
               <div class="mine_footer_item">
@@ -245,7 +245,7 @@
               </div>
               <div @click="blogDetail(item._id)" class="hot_item" v-for="( item, index ) in  hotList " :key="item._id">
                 <div class="article__image">
-                  <img :src="'/api/xiaolu/' + item.ArticleCover" alt="">
+                  <img :src="_imgUrl(item.ArticleCover)" :alt="item.title">
                 </div>
                 <div class="article__title">
                   {{ item.title }}

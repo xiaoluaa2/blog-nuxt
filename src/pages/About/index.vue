@@ -328,6 +328,9 @@
 </template>
 
 <script setup lang='ts'>
+useHead({
+  title: '开心小羊|关于',
+})
 import $http from '@/api/index.ts';
 import { onMounted, ref } from 'vue';
 let mask = ref()
@@ -822,19 +825,19 @@ showStatistics()
 
 
           &:nth-child(3) {
-            background: url(@/assets/images/hy3.png) no-repeat 80%/cover !important;
+            background: url(@/assets/images/hy3.jpg) no-repeat 80%/cover !important;
           }
 
           &:nth-child(4) {
-            background: url(@/assets/images/hy4.png) no-repeat 90%/cover !important;
+            background: url(@/assets/images/hy4.jpg) no-repeat 90%/cover !important;
           }
 
           &:nth-child(5) {
-            background: url(@/assets/images/hy5.png) no-repeat 65%/cover !important;
+            background: url(@/assets/images/hy5.jpg) no-repeat 65%/cover !important;
           }
 
           &:nth-child(6) {
-            background: url(@/assets/images/hy6.png) no-repeat 80%/cover !important;
+            background: url(@/assets/images/hy6.jpg) no-repeat 80%/cover !important;
           }
 
         }
@@ -886,31 +889,31 @@ showStatistics()
           }
 
           &:nth-child(1) {
-            background: url(@/assets/images/hy1.png) no-repeat 50%/cover;
+            background: url(@/assets/images/hy1.jpg) no-repeat 50%/cover;
           }
 
           &:nth-child(2) {
-            background: url(@/assets/images/hy2.png) no-repeat 60%/cover;
+            background: url(@/assets/images/hy2.jpg) no-repeat 60%/cover;
           }
 
           &:nth-child(3) {
-            background: url(@/assets/images/hy3.png) no-repeat 50%/cover;
+            background: url(@/assets/images/hy3.jpg) no-repeat 50%/cover;
           }
 
           &:nth-child(4) {
-            background: url(@/assets/images/hy4.png) no-repeat 59%/cover;
+            background: url(@/assets/images/hy4.jpg) no-repeat 59%/cover;
           }
 
           &:nth-child(5) {
-            background: url(@/assets/images/hy5.png) no-repeat 42%/cover;
+            background: url(@/assets/images/hy5.jpg) no-repeat 42%/cover;
           }
 
           &:nth-child(6) {
-            background: url(@/assets/images/hy6.png) no-repeat 52%/cover;
+            background: url(@/assets/images/hy6.jpg) no-repeat 52%/cover;
           }
 
           &:nth-child(7) {
-            background: url(@/assets/images/hy7.png) no-repeat 50%/cover;
+            background: url(@/assets/images/hy7.jpg) no-repeat 50%/cover;
           }
         }
       }
@@ -959,7 +962,6 @@ showStatistics()
       color: #fff;
       border: 1px;
       width: 56%;
-      background: url(https://cdn.qcqx.cn/img/end.webp) no-repeat top;
       background-size: cover;
       min-height: 300px;
       overflow: hidden;

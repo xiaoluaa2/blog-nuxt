@@ -170,11 +170,14 @@ getHotList()
   color: @main-fontcolor;
   min-height: 100vh !important;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
 
 
 
 
   .mine {
+
     background-color: @main-backgroundcolor;
     border-radius: 10px;
     overflow: hidden;
@@ -280,7 +283,8 @@ getHotList()
 @media screen and (min-width: 768px) {
   .main {
     position: relative;
-    margin: 0 auto;
+    flex: 1;
+    // margin: 0 auto;
     display: flex;
     justify-content: center;
     padding: 0 1rem;

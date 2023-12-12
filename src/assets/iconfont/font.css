@@ -1,6 +1,7 @@
 @font-face {
   font-family: DaoLiTi;
-  src: url(./AlimamaDaoLiTi.ttf);
+  src: url(./AlimamaDaoLiTi.woff2) format('woff2'),
+    url(./AlimamaDaoLiTi.woff) format('woff');
   font-weight: normal;
   font-style: normal;
 }

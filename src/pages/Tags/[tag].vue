@@ -3,7 +3,7 @@
   <NuxtLayout name="common">
     <div class="tags_page">
       <div class="tags">
-        <el-scrollbar>
+        <el-scrollbar v-if="tagsList.length">
           <div class="tags_box">
             <div class="icon"> <i class="iconfont">&#xe60b;</i></div>
             <div class="tags_list">
@@ -26,7 +26,7 @@
               <div @click="blogDetail(blog._id)" v-for="blog in item.blogs" class="blog">
 
                 <div class="banner">
-                  <img :src="'/api/xiaolu/' + blog.ArticleCover" alt="">
+                  <img :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title">
                 </div>
                 <div class="right">
                   <div class="number">{{ blog.number }}</div>
@@ -48,6 +48,9 @@
 </template>
 
 <script setup lang='ts'>
+useHead({
+  title: `开心小羊|分类`,
+})
 import $http from '@/api/index.ts';
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -62,7 +65,7 @@ let pageNum = ref(1)
 let total = ref(0)
 const format = $format
 //标签分类
-let tagsList = ref<Array<BlogTag>>()
+let tagsList = ref<Array<BlogTag>>([])
 let getTypeList = async () => {
   const { data } = await $http.blogs.getTypeList()
   tagsList.value = data.data
