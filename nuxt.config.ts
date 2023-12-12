@@ -57,8 +57,8 @@ export default {
   nitro: {
     devProxy: {
       '/api': {
-        target: 'http://localhost:5200', // 测试
-        // target: 'http://admin.lubowen.xyz',
+        // target: 'http://localhost:5200', // 测试
+        target: 'http://admin.lubowen.xyz',
         changeOrigin: true,
         prependPath: true
       },
@@ -71,9 +71,9 @@ export default {
     // 该配置用于服务端请求转发
     routeRules: {
       '/api/**': {
-        proxy: 'http://localhost:5200/**' // 测试
+        // proxy: 'http://localhost:5200/**' // 测试
         // 线上
-        // proxy: 'http://admin.lubowen.xyz/**'
+        proxy: 'http://admin.lubowen.xyz/**'
       },
       '/gd': {
         //  测试
