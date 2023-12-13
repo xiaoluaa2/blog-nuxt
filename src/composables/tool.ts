@@ -186,7 +186,7 @@ export const GetLocation = async function () {
   const $store = useStore.common()
   let locationCookie = getLCookie('LUBlogLocation')
   // 如果用户多次访问，一周内不会重复请求定位接口
-  if (locationCookie) {
+  if (locationCookie && $store.location.city) {
     return $store.location
   } else {
     let resp = await $http.other.getLocation()
