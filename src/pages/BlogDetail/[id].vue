@@ -22,7 +22,7 @@
           </div>
           <div class="text">本站所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"
               class="copyrightName--Rz1SYaCDcO" rel="noreferrer">CC BY-NC-SA 4.0</a>许可协议，转载请注明来自<a
-              href="http://blog.lubowen.xyz/" target="_blank" class="copyrightName--Rz1SYaCDcO" rel="noreferrer">开心小羊</a>。
+              href="http://blog.lubowen.xyz/" target="_blank" class="copyrightName--Rz1SYaCDcO" rel="noreferrer">小鹿</a>。
           </div>
         </div>
       </div>
@@ -202,7 +202,7 @@ let getBlogsDetail = async () => {
 
   detail.value = data.data
   useHead({
-    title: `开心小羊|${(detail.value)!.Title}`,
+    title: `小鹿|${(detail.value)!.Title}`,
   })
   const { data: data2 } = await $http.blogs.addLook(route.params.id)
   console.log(data2)
@@ -340,6 +340,13 @@ let getComment = async () => {
 }
 getComment()
 
+/**
+ * 核心实现
+ */
+
+
+
+
 </script>
 <style lang="less">
 input {
@@ -382,6 +389,25 @@ textarea:focus {
   .article {
     img {
       max-width: 100%;
+    }
+
+    blockquote {
+      padding: 1px 23px;
+      margin: 22px 0;
+      border-left: 4px solid #cbcbcb;
+      background-color: @main-bordercolor-gray;
+    }
+
+    h2 {
+
+      padding-bottom: .75rem;
+      border-bottom: 1px solid @main-bordercolor-gray;
+    }
+
+    h2,
+    h3,
+    h4 {
+      margin-top: 1.5rem;
     }
 
     pre {

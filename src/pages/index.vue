@@ -126,6 +126,15 @@ let getTypeList = async () => {
 }
 getTypeList()
 // 博文，评论，点击总数
+
+
+type Shift<T extends unknown[], U extends unknown[] = []> = [] extends T
+  ? U
+  : T extends [infer L, ...infer R]
+  ? Shift<R, [L, ...U]>
+  : U;
+
+type I8 = Shift<['a', 2, 3, 'da']>; // J
 </script>
 
 <style lang="less" scoped>

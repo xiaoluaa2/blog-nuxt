@@ -103,29 +103,6 @@
 </template>
 
 <script setup lang='ts'>
-// import poster9 from '@/assets/images/LASTSTARDUST.jpg';
-// import poster10 from '@/assets/images/drama.jpg';
-// import poster5 from '@/assets/images/交换余生.jpg';
-// import poster12 from '@/assets/images/后来的我们.jpg';
-// import poster6 from '@/assets/images/对等关系.jpg';
-// import poster8 from '@/assets/images/曹操.jpg';
-// import poster3 from '@/assets/images/生生.jpg';
-// import poster4 from '@/assets/images/空虚的心.jpg';
-// import poster7 from '@/assets/images/达尔文.jpg';
-// import poster2 from '@/assets/images/途中.jpg';
-// import poster1 from '@/assets/images/重拾快乐.jpg';
-// import music11 from '@/assets/mp3/7千3百多天.mp3';
-// import music9 from '@/assets/mp3/LASTSTARDUST.mp3';
-// import music10 from '@/assets/mp3/drama.mp3';
-// import music5 from '@/assets/mp3/交换余生.mp3';
-// import music12 from '@/assets/mp3/后来的我们.mp3';
-// import music6 from '@/assets/mp3/对等关系.mp3';
-// import music8 from '@/assets/mp3/曹操.mp3';
-// import music3 from '@/assets/mp3/生生.mp3';
-// import music4 from '@/assets/mp3/空虚的心.mp3';
-// import music1 from '@/assets/mp3/谢幕.mp3';
-// import music7 from '@/assets/mp3/达尔文.mp3';
-// import music2 from '@/assets/mp3/途中.mp3';
 import { nextTick, onMounted, ref } from 'vue';
 interface Music {
   id: number,

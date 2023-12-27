@@ -28,7 +28,7 @@
 </template>
 <script setup lang="ts">
 useHead({
-  title: '开心小羊',
+  title: '小鹿',
   meta: [
     { hid: 'keywords', name: 'keywords', content: '小鹿的个人博客,lubowen,个人网站,个人博客,开源博客' },
     { hid: 'description', name: 'description', content: '小鹿的个人博客-独立开源、全栈开发、多端自适应、nuxt3+nestjs+vue3、功能完善' },

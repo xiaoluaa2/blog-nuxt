@@ -101,7 +101,7 @@
             <div class="mine_m">
 
               <span>小鹿</span>
-              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">Follow Me</a>
+              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">GitHub</a>
             </div>
           </div>
           <div v-if="watherList" class="watherMain">
@@ -161,14 +161,12 @@
 
 <script setup lang="ts">
 useHead({
-  title: '开心小羊|留言板',
+  title: '小鹿|留言板',
 })
 import $http from '@/api/index.ts';
 import { weatherMap, weekMap } from '@/tool.ts';
 import { ElMessage } from 'element-plus';
-import * as THREE from 'three';
-import BIRDS from 'vanta/src/vanta.birds';
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { nextTick, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 interface UserComment {
   nickName: string
@@ -213,24 +211,24 @@ onMounted(() => {
   console.log(userMessage.value);
 
   window.addEventListener('scroll', handleScroll)
-  vantaEffect = BIRDS({
-    el: Area.value,
-    THREE: THREE,
-    //如果需要改变样式，要写在这里
-    //因为这里vantaEffect是没有setOptions这个方法的
-    color1: 0x4985e1,
-    color2: 0xb5ded8,
-    backgroundAlpha: 0.1
-  })
+  // vantaEffect = BIRDS({
+  //   el: Area.value,
+  //   THREE: THREE,
+  //   //如果需要改变样式，要写在这里
+  //   //因为这里vantaEffect是没有setOptions这个方法的
+  //   color1: 0x4985e1,
+  //   color2: 0xb5ded8,
+  //   backgroundAlpha: 0.1
+  // })
   initList()
 })
 
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', handleScroll, true)
-  if (vantaEffect) {
-    vantaEffect.destroy()
-  }
-})
+// onBeforeUnmount(() => {
+//   window.removeEventListener('scroll', handleScroll, true)
+//   if (vantaEffect) {
+//     vantaEffect.destroy()
+//   }
+// })
 
 
 const handleScroll = () => {

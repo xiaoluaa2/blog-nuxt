@@ -14,10 +14,15 @@
         <div class="theme">
           <theme-swith />
         </div>
-        <div @click="checkMenu(item)" v-for="item in menuList" :key="item.id" class="menu_item">
-          <div class="button-borders">
+        <div v-for="item in menuList" :key="item.id" class="menu_item">
+          <div @click="checkMenu(item)" class="button-borders">
             <div class="inner">
               {{ item.title }}
+            </div>
+          </div>
+          <div @v-if="item.child" class="child-list">
+            <div @click="checkMenu(child)" v-for="child in item.child" class="child-item">
+              {{ child.title }}
             </div>
           </div>
         </div>
@@ -101,14 +106,20 @@ import { useRouter } from 'vue-router';
 type Menu = {
   title: string
   id: string
-  route: string
+  route?: string
+  child?: Menu[]
 }
 let router = useRouter()
 let menuList = ref<Menu[]>([
   { title: '博客', id: '1', route: '/' },
   { title: '留言', id: '2', route: '/MessageBoard' },
   { title: '关于', id: '3', route: '/about' },
-  { title: '友链', id: '4', route: '/link' }
+  { title: '友链', id: '4', route: '/link' },
+  {
+    title: '其他', id: '5', child: [
+      { title: '汽车', id: '51', route: '/other/car' },
+    ]
+  }
 ])
 const $store = useStore.common()
 let menu_checked = ref($store.menu)
@@ -446,6 +457,8 @@ let goHome = () => {
           /* opacity: 0.3; */
           z-index: 0;
         }
+
+
 
         .shape {
           fill: #0E1822;
@@ -926,6 +939,33 @@ let goHome = () => {
   .menu_item {
     cursor: pointer;
     margin-right: 3rem;
+    position: relative;
+    padding: .5rem 0;
+
+    &:hover {
+      .child-list {
+        display: flex !important;
+      }
+    }
+  }
+
+  .child-list {
+    display: none;
+    position: absolute;
+    background-color: @main-backgroundcolor;
+    color: @main-fontcolor;
+    border-radius: .5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    // display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    top: 100%;
+
+    .child-item {
+      padding: .5rem 1rem;
+    }
   }
 
   .active {

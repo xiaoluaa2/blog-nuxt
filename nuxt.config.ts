@@ -1,6 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import { resolve } from 'path'
+let plugins = []
+// if (process.env.NODE_ENV === 'production') {
+plugins.push('transform-remove-console')
+// }
 export default {
   alias: {
     '@': '/src'
@@ -17,6 +21,9 @@ export default {
     extractCSS: { allChunks: true },
     build: {
       transpile: ['jinrishici']
+    },
+    babel: {
+      plugins
     }
   },
   plugins: ['~/plugins/tsparticles', '~/plugins/VMDPreview'],
@@ -50,15 +57,22 @@ export default {
       }
     },
     build: {
-      sourcemap: 'inline'
+      sourcemap: 'inline',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
+      }
     }
   },
 
   nitro: {
     devProxy: {
       '/api': {
-        // target: 'http://localhost:5200', // 测试
-        target: 'http://admin.lubowen.xyz',
+        target: 'http://localhost:5200', // 测试
+        // target: 'http://admin.lubowen.xyz',
         changeOrigin: true,
         prependPath: true
       },
@@ -71,9 +85,9 @@ export default {
     // 该配置用于服务端请求转发
     routeRules: {
       '/api/**': {
-        // proxy: 'http://localhost:5200/**' // 测试
+        proxy: 'http://localhost:5200/**' // 测试
         // 线上
-        proxy: 'http://admin.lubowen.xyz/**'
+        // proxy: 'http://admin.lubowen.xyz/**'
       },
       '/gd': {
         //  测试

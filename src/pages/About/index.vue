@@ -135,18 +135,15 @@
         <div class="author-content-item maxim">
           <div class="author-content-item-tips">个性签名</div>
           <span class="maxim-title">
-            <span style="opacity:.6;margin-bottom:8px">如果要飞得高，</span>
-            <span>
-              就该把地平线忘掉。
-            </span>
+            <span style="opacity:.6;margin-bottom:8px">旺仔牛奶旺旺</span>
           </span>
         </div>
         <div class="author-content-item myphoto">
           <div class="author-content-item-tips">特长</div>
           <span class="maxim-title">
-            <span style="opacity:.6;margin-bottom:8px">随时随地睡觉</span>
+            <span style="opacity:.6;margin-bottom:8px">CV工程师</span>
             <span>
-              偶尔灵魂出窍
+              BUG制造者
             </span>
           </span>
         </div>
@@ -329,7 +326,7 @@
 
 <script setup lang='ts'>
 useHead({
-  title: '开心小羊|关于',
+  title: '小鹿|关于',
 })
 import $http from '@/api/index.ts';
 import { onMounted, ref } from 'vue';

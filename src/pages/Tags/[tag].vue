@@ -49,7 +49,7 @@
 
 <script setup lang='ts'>
 useHead({
-  title: `开心小羊|分类`,
+  title: `小鹿|分类`,
 })
 import $http from '@/api/index.ts';
 import { ref } from 'vue';

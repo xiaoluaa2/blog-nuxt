@@ -97,7 +97,7 @@
 
 <script setup lang='ts'>
 useHead({
-  title: '开心小羊|友链',
+  title: '小鹿|友链',
 })
 import $http from '@/api/index.ts';
 import { onMounted, ref } from 'vue';

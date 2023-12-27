@@ -16,8 +16,8 @@
                 {{ item.title }}
               </div>
             </div>
-            <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" v-else
-              class="catalogue_content">
+            <div v-if="item.indent == 2" @click="jump_location(index)"
+              :class="heightTitle == index ? 'active_catalogue' : ''" class="catalogue_content">
               {{ item.title }}
             </div>
           </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="mine_m">
               <span>小鹿</span>
-              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">Follow Me</a>
+              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">GitHub</a>
             </div>
             <div class="mine_footer">
               <div class="mine_footer_item">
@@ -96,7 +96,13 @@
               </div>
 
               <div class="catalogue_item" v-for="( item, index ) in  titleList " :key="item.indent">
-                <div v-if="item.indent == 1" class="two_catalogue">
+                <div v-if="item.indent == 2" class="three_catalogue">
+                  <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''"
+                    class="three_catalogue_inner">
+                    {{ item.title }}
+                  </div>
+                </div>
+                <div v-else-if="item.indent == 1" class="two_catalogue">
                   <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''"
                     class="two_catalogue_inner">
                     {{ item.title }}
@@ -113,7 +119,7 @@
             <div class="hot shadow-box">
               <div class="hot_title">
                 <i class="iconfont">&#xe666;</i>
-                热门文章
+                推荐文章
               </div>
               <div @click="blogDetail(item._id)" class="hot_item" v-for="( item, index ) in  hotList " :key="item._id">
                 <div class="article__image">
@@ -145,7 +151,7 @@
             <div class="hot shadow-box">
               <div class="hot_title">
                 <i class="iconfont">&#xe666;</i>
-                热门文章
+                推荐文章
               </div>
               <div @click="blogDetail(item._id)" class="hot_item" v-for="( item, index ) in  hotList " :key="item._id">
                 <div class="article__image">
@@ -185,7 +191,7 @@
             </div>
             <div class="mine_m ">
               <span>小鹿</span>
-              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">Follow Me</a>
+              <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source"> GitHub</a>
             </div>
             <div class="mine_footer">
               <div class="mine_footer_item">
@@ -241,7 +247,7 @@
             <div class="hot shadow-box">
               <div class="hot_title">
                 <i class="iconfont">&#xe666;</i>
-                热门文章
+                推荐文章
               </div>
               <div @click="blogDetail(item._id)" class="hot_item" v-for="( item, index ) in  hotList " :key="item._id">
                 <div class="article__image">
@@ -1311,6 +1317,18 @@ let jump_location = (index: number) => {
         }
       }
 
+      .three_catalogue {
+
+        border-left: 1px solid @main-bordercolor;
+        margin-left: 10px;
+        padding-left: 10px;
+
+        .three_catalogue_inner {
+          font-size: .8rem;
+          padding: .4rem 1.5rem;
+          border-radius: 8px;
+        }
+      }
     }
 
   }
@@ -1511,6 +1529,15 @@ let jump_location = (index: number) => {
 
       .two_catalogue {
         .two_catalogue_inner {
+          &:hover {
+            color: #fff;
+            background-color: #2abeeb7e;
+          }
+        }
+      }
+
+      .three_catalogue {
+        .three_catalogue_inner {
           &:hover {
             color: #fff;
             background-color: #2abeeb7e;
