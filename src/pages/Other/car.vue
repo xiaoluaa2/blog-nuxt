@@ -71,12 +71,18 @@
 </template>
 
 <script setup lang='ts'>
+
+// import texture from '/texture/floor/Wood067_1K-JPG_Color.jpg';
+// import doorHeightTexture from '@/public/texture/floor/Wood067_1K-JPG_Displacement.jpg';
+// import normalMap from '@/public/texture/floor/Wood067_1K-JPG_NormalDX.jpg';
+// import roughnessTexture from '@/public/texture/floor/Wood067_1K-JPG_Roughness.jpg';
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as TWEEN from 'three/examples/jsm/libs/tween.module.js';
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { onMounted, ref } from "vue";
+
 let controls: any;
 let scene: any, camera: any, renderer: any
 let canvasDom = ref()
@@ -678,15 +684,16 @@ onMounted(() => {
 
 
   let textureLoader = new THREE.TextureLoader
-  let texture = textureLoader.load('../../public/texture/floor/Wood067_1K-JPG_Color.jpg')
+  let texture = textureLoader.load('/texture/floor/Wood067_1K-JPG_Color.jpg')
   // 法向贴图 
-  var normalMap = textureLoader.load('../../public/texture/floor/Wood067_1K-JPG_NormalDX.jpg');
+  var normalMap = textureLoader.load('/texture/floor/Wood067_1K-JPG_NormalDX.jpg');
   // 粗糙度纹理
-  const roughnessTexture = textureLoader.load('../../public/texture/floor/Wood067_1K-JPG_Roughness.jpg')
+  const roughnessTexture = textureLoader.load('/texture/floor/Wood067_1K-JPG_Roughness.jpg')
   // 导入置换贴图
-  const doorHeightTexture = textureLoader.load('../../public/texture/floor/Wood067_1K-JPG_Displacement.jpg')
+  const doorHeightTexture = textureLoader.load('/texture/floor/Wood067_1K-JPG_Displacement.jpg')
   // 透明度贴图
-  // let alphaMap = textureLoader.load("../../public/texture/floor2/SurfaceImperfections020_1K-JPG_Opacity.jpg");
+  let alphaMap = textureLoader.load("/texture/floor2/SurfaceImperfections020_1K-JPG_Opacity.jpg");
+
   const material = new THREE.MeshPhysicalMaterial(
     {
       map: texture,
@@ -706,6 +713,7 @@ onMounted(() => {
       // alphaMap: alphaMap,
     }
   )
+  // const material = new THREE.MeshBasicMaterial()
   const planeGeometry = new THREE.PlaneGeometry(25, 8)
 
 
