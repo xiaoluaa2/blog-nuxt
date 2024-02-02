@@ -691,8 +691,7 @@ onMounted(() => {
   const roughnessTexture = textureLoader.load('/texture/floor/Wood067_1K-JPG_Roughness.jpg')
   // 导入置换贴图
   const doorHeightTexture = textureLoader.load('/texture/floor/Wood067_1K-JPG_Displacement.jpg')
-  // 透明度贴图
-  let alphaMap = textureLoader.load("/texture/floor2/SurfaceImperfections020_1K-JPG_Opacity.jpg");
+
 
   const material = new THREE.MeshPhysicalMaterial(
     {

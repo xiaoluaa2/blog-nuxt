@@ -5,18 +5,14 @@
         <Particles v-if="initParticles" :particlesInit="particlesInit" id="tsparticles" :options="particles" />
       </div>
       <div class="blogMain">
-        <div class="notice">
-          愿你一生有山可靠，有树可栖。与心爱之人，春赏花，夏纳凉。秋登山，冬扫雪。
-        </div>
+        <div class="notice">愿你一生有山可靠，有树可栖。与心爱之人，春赏花，夏纳凉。秋登山，冬扫雪。</div>
         <div class="random_box">
-          <div @click="getBlogsRandom" class="random">
-            随机文章
-          </div>
+          <div @click="getBlogsRandom" class="random">随机文章</div>
         </div>
         <div class="tags_box">
           <el-scrollbar v-if="tagsList.length">
             <div class="tags_box_inner">
-              <div class="icon"> <i class="iconfont">&#xe60b;</i></div>
+              <div class="icon"><i class="iconfont">&#xe60b;</i></div>
               <div class="tags_list">
                 <div @click="changeTag(item.TagName)" v-for="item in tagsList" class="tags_item">
                   {{ item.TagName }}
@@ -25,14 +21,11 @@
               </div>
             </div>
           </el-scrollbar>
-
         </div>
-
 
         <div class="blogsList">
           <BlogsItem v-for="(item, index) in blogsList" :blog="item" :index="index" :key="item._id"></BlogsItem>
-          <el-pagination :hide-on-single-page="true" @current-change="pageChange" :current-page="pageNum" :page-size="6"
-            background layout="prev, pager, next" :total="total" />
+          <el-pagination :hide-on-single-page="true" @current-change="pageChange" :current-page="pageNum" :page-size="6" background layout="prev, pager, next" :total="total" />
         </div>
       </div>
     </div>
@@ -40,13 +33,12 @@
 </template>
 
 <script setup lang="ts">
-
-import $http from '@/api/index.ts';
-import BlogsItem from '@/components/BlogItem.vue';
-import { particles } from '@/config/particles-config2.ts';
-import { loadFull } from 'tsparticles';
-import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import $http from '@/api/index.ts'
+import BlogsItem from '@/components/BlogItem.vue'
+import { particles } from '@/config/particles-config2.ts'
+import { loadFull } from 'tsparticles'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 // useSeoMeta({
 //   title: '我的神奇网站',
@@ -68,12 +60,11 @@ onMounted(() => {
   })
   setTimeout(() => {
     initParticles.value = true
-  }, 600);
+  }, 600)
 })
 // const GetLocation = proxy.GetLocation
 const $store = useStore.common()
-console.log($store);
-
+console.log($store)
 
 const particlesInit = async (engine: any) => {
   await loadFull(engine)
@@ -104,7 +95,7 @@ let getBlogsList = async () => {
   const { data } = await $http.blogs.getBlogsList({
     pageNum: pageNum.value
   })
-  console.log(data.data.list);
+  console.log(data)
   blogsList.value = data.data.list
   total.value = data.data.total
 }
@@ -127,14 +118,9 @@ let getTypeList = async () => {
 getTypeList()
 // 博文，评论，点击总数
 
+type Shift<T extends unknown[], U extends unknown[] = []> = [] extends T ? U : T extends [infer L, ...infer R] ? Shift<R, [L, ...U]> : U
 
-type Shift<T extends unknown[], U extends unknown[] = []> = [] extends T
-  ? U
-  : T extends [infer L, ...infer R]
-  ? Shift<R, [L, ...U]>
-  : U;
-
-type I8 = Shift<['a', 2, 3, 'da']>; // J
+type I8 = Shift<['a', 2, 3, 'da']> // J
 </script>
 
 <style lang="less" scoped>
@@ -158,7 +144,7 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
     }
 
     .random_box {
-      background: url(@/assets/images/bg23.jpg) no-repeat 50%/cover;
+      background: url(@/assets/images/bg23.jpg) no-repeat 50% / cover;
       height: 10rem;
       border-radius: 0.625rem;
       margin-bottom: 2rem;
@@ -175,9 +161,9 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
         display: none;
         width: 100%;
         height: 100%;
-        background-color: #0084FF;
-        transition: .5s;
-        opacity: .7;
+        background-color: #0084ff;
+        transition: 0.5s;
+        opacity: 0.7;
         color: #fff;
         padding: 3rem 0 0 3rem;
         font-size: 2rem;
@@ -187,18 +173,17 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
     .tags_box {
       width: 100%;
       box-sizing: border-box;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
       background-color: @main-backgroundcolor;
       border: 1px solid @main-bordercolor-gray;
-      padding: .4rem .8rem;
+      padding: 0.4rem 0.8rem;
 
       .tags_box_inner {
-
         display: flex;
         align-items: center;
 
         .icon {
-          margin-right: .5rem;
+          margin-right: 0.5rem;
           display: flex;
         }
 
@@ -206,7 +191,7 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
           flex: 1;
           height: 100%;
           display: flex;
-          font-size: .875rem;
+          font-size: 0.875rem;
           justify-content: space-around;
 
           .active {
@@ -221,7 +206,7 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
             cursor: pointer;
 
             .tag_mark {
-              font-size: .6563rem;
+              font-size: 0.6563rem;
               position: relative;
               top: -0.3rem;
             }
@@ -232,7 +217,6 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
       }
     }
   }
-
 }
 
 @media screen and (max-width: 768px) {
@@ -243,8 +227,6 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
   .blogs {
     padding-top: 3rem;
   }
-
-
 }
 
 @media screen and (max-width: 600px) {
@@ -257,19 +239,13 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
 
 @media screen and (max-width: 1245px) {
   .blogs {
-
     .blogMain {
       min-height: 0 !important;
     }
   }
-
-
 }
 
-
-
 @media screen and (min-width: 1245px) {
-
   .blogs {
     .blogMain {
       // max-width: 60rem;
@@ -279,6 +255,5 @@ type I8 = Shift<['a', 2, 3, 'da']>; // J
       min-height: 52rem;
     }
   }
-
 }
 </style>

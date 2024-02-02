@@ -16,19 +16,24 @@
               d="M512 16C238.066 16 16 238.066 16 512s222.066 496 496 496 496-222.066 496-496S785.934 16 512 16z m0 896c-221.064 0-400-178.902-400-400 0-221.062 178.902-400 400-400 221.064 0 400 178.902 400 400 0 221.064-178.902 400-400 400z m214.702-202.128c-19.228 19.424-91.06 82.792-208.13 82.792-164.86 0-280.968-122.85-280.968-283.134 0-158.304 120.55-278.802 279.524-278.802 111.062 0 177.476 53.24 195.186 69.558a23.93 23.93 0 0 1 3.872 30.644l-36.31 56.226c-7.682 11.9-23.932 14.564-34.998 5.842-17.19-13.552-63.628-45.076-123.416-45.076-96.606 0-155.832 70.66-155.832 160.164 0 83.178 53.776 167.384 156.554 167.384 65.314 0 113.686-38.078 131.452-54.45 10.54-9.714 27.192-8.078 35.64 3.476l39.73 54.34a23.894 23.894 0 0 1-2.304 31.036z"
               p-id="3505"></path>
           </svg>
-          <div class="title"> {{ detail.Title }}</div>
+          <div class="title">{{ detail.Title }}</div>
           <div class="urlBox">
             <div class="url">{{ articleOrigin }}</div>
           </div>
-          <div class="text">本站所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"
-              class="copyrightName--Rz1SYaCDcO" rel="noreferrer">CC BY-NC-SA 4.0</a>许可协议，转载请注明来自<a
-              href="http://blog.lubowen.xyz/" target="_blank" class="copyrightName--Rz1SYaCDcO" rel="noreferrer">小鹿</a>。
+          <div class="text">
+            本站所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="copyrightName--Rz1SYaCDcO" rel="noreferrer">CC BY-NC-SA 4.0</a>许可协议，转载请注明来自<a
+              href="http://blog.lubowen.xyz/"
+              target="_blank"
+              class="copyrightName--Rz1SYaCDcO"
+              rel="noreferrer"
+              >小鹿</a
+            >。
           </div>
         </div>
       </div>
       <div v-if="commentList.length" class="CommentList" style="margin-top: 1rem">
         <div class="ListMain">
-          <div class="ListItem" v-for=" item  in  commentList ">
+          <div class="ListItem" v-for="item in commentList">
             <div class="ItemMain">
               <div class="left">
                 <img :src="'/img/' + item.head + '.jpeg'" alt="游客头像" />
@@ -37,7 +42,8 @@
                 <span style="display: flex; align-items: center">
                   <span style="margin-right: 10px"> {{ item.userId }}</span>
                   <img src="@/assets/images/position.svg" alt="" />
-                  {{ item.city }}</span>
+                  {{ item.city }}</span
+                >
                 <span v-html="item.content"> </span>
                 <span class="DateAnswer">
                   <span> {{ _format('yyyy-MM-dd hh:mm:ss', parseInt(item.publishdate)) }}</span>
@@ -82,18 +88,16 @@
 </template>
 
 <script setup lang="ts">
+import $http from '@/api/index.ts'
 
-
-import $http from '@/api/index.ts';
-
-import Emotion from '@/components/Emotion.vue';
-import { ElMessage } from 'element-plus';
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import Emotion from '@/components/Emotion.vue'
+import { ElMessage } from 'element-plus'
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 const $store = useStore.common()
 const _format = $format
 const _emotionList = $EmotionList
-console.log($store.userMessage);
+console.log($store.userMessage)
 
 let articleOrigin = ref('')
 onMounted(() => {
@@ -104,7 +108,7 @@ onMounted(() => {
       operateType: '查看文章',
       operateContent: (detail.value as Blog).Title
     })
-  }, 3000);
+  }, 3000)
   let userMessage = $store.userMessage
   if (userMessage) {
     ArticleCommentNickName.value = userMessage.nickName
@@ -115,7 +119,6 @@ onMounted(() => {
   // 刷新走这
 
   getTitle()
-
 
   window.addEventListener('scroll', () => {
     // 再次计算位置 图片会影响scrolltop
@@ -129,9 +132,10 @@ onMounted(() => {
       clearTimeout(timeOut)
     }
     // 频繁操作，一直清空先前的定时器
-    timeOut = window.setTimeout(() => {  // 只执行最后一次事件
+    timeOut = window.setTimeout(() => {
+      // 只执行最后一次事件
       let scrollTop = window.pageYOffset
-      console.log(scrollTop);
+      console.log(scrollTop)
 
       for (let i = absList.length - 1; i >= 0; i--) {
         if (scrollTop - 60 > absList[i]) {
@@ -139,17 +143,16 @@ onMounted(() => {
           return
         }
       }
-
     }, 500)
   })
 })
-bus.$on('jump_location', ((index: number) => {
+bus.$on('jump_location', (index: number) => {
   titleList.value[index].dom.scrollIntoView({
     behavior: 'smooth',
     block: 'start',
     inline: 'start'
   })
-}))
+})
 let article = ref()
 let titleList = ref<TitleMessage[]>([])
 // 当前目录项
@@ -158,38 +161,33 @@ let heightTitle = ref()
 //获取标题列表
 async function getTitle() {
   if (!article.value) {
-    console.log(article.value);
+    console.log(article.value)
     return
   }
   // 使用js选择器，获取对应的h标签，组合成列表
-  const anchors = article.value.querySelectorAll(
-    'h1,h2,h3,h4,h5,h6'
-  )
+  const anchors = article.value.querySelectorAll('h1,h2,h3,h4,h5,h6')
   // 删除标题头尾的空格
-  const titles = Array.from(anchors).filter((title: any) => title.innerText.trim());
+  const titles = Array.from(anchors).filter((title: any) => title.innerText.trim())
   // 当文章h标签为空时，直接返回
 
   if (!titles.length) {
-    titleList.value = [];
-    return;
+    titleList.value = []
+    return
   }
 
   // 从h标签属性中，提取相关信息
-  const hTags = Array.from(new Set(titles.map((title: any) => title.tagName))).sort();
+  const hTags = Array.from(new Set(titles.map((title: any) => title.tagName))).sort()
 
   titleList.value = titles.map((el: any) => {
     return {
       dom: el,
       title: el.innerText, // 标题内容
       indent: hTags.indexOf(el.tagName), // 标签层级
-      height: el.offsetTop, // 标签距离顶部距离
+      height: el.offsetTop // 标签距离顶部距离
     }
   })
-  console.log(titleList.value);
-
-
+  console.log(titleList.value)
 }
-
 
 let route = useRoute()
 
@@ -198,11 +196,11 @@ let detail = ref<Blog | null>(null)
 let getBlogsDetail = async () => {
   console.log(route.params.id)
   const { data } = await $http.blogs.getBlogsDetail(route.params.id)
-  console.log(data);
+  console.log(data)
 
   detail.value = data.data
   useHead({
-    title: `小鹿|${(detail.value)!.Title}`,
+    title: `小鹿|${detail.value!.Title}`
   })
   const { data: data2 } = await $http.blogs.addLook(route.params.id)
   console.log(data2)
@@ -210,8 +208,6 @@ let getBlogsDetail = async () => {
   // 页面跳转走这
 
   getTitle()
-
-
 }
 getBlogsDetail()
 
@@ -343,10 +339,6 @@ getComment()
 /**
  * 核心实现
  */
-
-
-
-
 </script>
 <style lang="less">
 input {
@@ -360,7 +352,6 @@ input {
   background-image: none;
   background-color: transparent;
   color: @main-fontcolor;
-
 }
 
 input:focus {
@@ -399,8 +390,7 @@ textarea:focus {
     }
 
     h2 {
-
-      padding-bottom: .75rem;
+      padding-bottom: 0.75rem;
       border-bottom: 1px solid @main-bordercolor-gray;
     }
 
@@ -439,13 +429,9 @@ textarea:focus {
     width: 100%;
     overflow: hidden;
 
-
-
-
-
     .articleBanner {
       height: 24rem;
-      background: no-repeat 50%/cover;
+      background: no-repeat 50% / cover;
       // background-image: -webkit-linear-gradient(left, #1f3747, #293d31);
       display: flex;
       justify-content: center;
@@ -467,7 +453,6 @@ textarea:focus {
       // word-wrap: break-word;
     }
 
-
     .copyrightBox {
       border-radius: 5px;
       overflow: hidden;
@@ -483,8 +468,6 @@ textarea:focus {
         color: @main-fontcolor;
       }
 
-
-
       .copyrightIcon {
         height: 8rem;
         width: 8rem;
@@ -494,7 +477,6 @@ textarea:focus {
         -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
-
       }
 
       .title {
@@ -510,7 +492,6 @@ textarea:focus {
   }
 
   .CommentList {
-
     margin: 0 auto;
     background-color: @main-backgroundcolor;
     display: flex;
@@ -674,8 +655,6 @@ textarea:focus {
       }
     }
   }
-
-
 }
 
 @media screen and (max-width: 768px) {
@@ -709,13 +688,12 @@ textarea:focus {
 
         input {
           width: 100% !important;
-          margin-top: .5rem;
+          margin-top: 0.5rem;
         }
       }
     }
   }
 }
-
 
 @media screen and (min-width: 768px) {
   .DetailBox {
@@ -728,7 +706,6 @@ textarea:focus {
     .CommentList {
       display: flex;
       padding: 0 1rem;
-
 
       .ListMain {
         flex: 1;
