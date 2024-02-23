@@ -6,7 +6,7 @@
     <div class="main">
       <div class="time flex">
         <i class="iconfont">&#xe6d9;</i>
-        <span> 发布于{{ _format('yyyy-MM-dd hh:mm:ss', Date.parse(blog.CreateDate)) }}</span>
+        <span> 发布于{{ _format('yyyy-MM-dd', Date.parse(blog.CreateDate)) }}</span>
       </div>
       <div class="title">{{ blog.Title }}</div>
       <div class="footer">
@@ -36,14 +36,11 @@
 </template>
 
 <script setup lang="ts">
-
-
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 const _format = $format
 
 let router = useRouter()
-
 
 interface Props {
   blog: Blog
@@ -72,14 +69,13 @@ let blogDetail = async (id: string) => {
       height: 100%;
       width: 100%;
       object-fit: cover;
-      transition: all .5s ease;
+      transition: all 0.5s ease;
     }
 
     img:hover {
       transform: scale(1.2);
       transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
     }
-
   }
 
   .main {
@@ -89,7 +85,7 @@ let blogDetail = async (id: string) => {
     color: @main-fontcolor;
 
     .icon {
-      margin-right: .3rem;
+      margin-right: 0.3rem;
     }
 
     .time {
@@ -102,7 +98,6 @@ let blogDetail = async (id: string) => {
       font-size: 1.2rem;
       font-weight: 700;
       margin-bottom: 1rem;
-
     }
 
     .footer {
@@ -110,7 +105,6 @@ let blogDetail = async (id: string) => {
       margin-bottom: 1rem;
       color: @main-fontcolor-gray;
       font-size: 0.75rem;
-
 
       div {
         margin-right: 0.9rem;
@@ -136,7 +130,6 @@ let blogDetail = async (id: string) => {
 
     .tag {
       .tagContent {
-
         background-color: @main-bordercolor-gray;
         border-radius: 3px;
         color: @main-fontcolor-gray;
@@ -145,10 +138,7 @@ let blogDetail = async (id: string) => {
         padding: 3px 10px;
       }
     }
-
   }
-
-
 }
 
 @media screen and (max-width: 768px) {
@@ -193,7 +183,6 @@ let blogDetail = async (id: string) => {
           padding: 3px 10px;
         }
       }
-
     }
   }
 
@@ -226,14 +215,11 @@ let blogDetail = async (id: string) => {
 
     .img {
       width: 50%;
-
     }
 
     .main {
       width: 50%;
     }
-
-
   }
 }
 </style>

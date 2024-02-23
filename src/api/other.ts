@@ -59,6 +59,13 @@ const explore = {
       method: 'post'
     })
   },
+  // 歌曲
+  getMusicList() {
+    return getFetchData({
+      url: `/music/musicList`,
+      method: 'post'
+    })
+  },
   // 一言
   // 参数	  说明
   // a	    动画

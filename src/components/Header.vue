@@ -1,10 +1,9 @@
 <template>
   <transition name="head">
-    <div :class="(scrollTop > 84 && showHead) || OpenMobileMenu ? 'header_common_white' : ''"
-      v-show="showHead || OpenMobileMenu" class="header">
+    <div :class="(scrollTop > 84 && showHead) || OpenMobileMenu ? 'header_common_white' : ''" v-show="showHead || OpenMobileMenu" class="header">
       <div class="menu">
         <span @click="goHome" class="logo">
-          <div class="xioalu"> 小鹿</div>
+          <div class="xioalu">小鹿</div>
           <i class="iconfont">&#xe65a;</i>
         </span>
         <div class="flex-grow" />
@@ -38,10 +37,8 @@
           <i @click="showMenu" v-else class="iconfont">&#xfe8b;</i>
         </div>
       </div>
-
     </div>
   </transition>
-
 
   <div v-if="OpenMobileMenu" class="mobile_menu_box">
     <div class="dialog-box">
@@ -50,9 +47,7 @@
           <i @click="OpenMobileMenu = false" class="iconfont">&#xe6ca;</i>
         </div>
         <div class="menu_list">
-
-          <div @click="checkMenu(item)" :class="menu_checked == item.id ? 'active' : ''" v-for="item in menuList"
-            :key="item.id" class="menu_item">
+          <div @click="checkMenu(item)" :class="menu_checked == item.id ? 'active' : ''" v-for="item in menuList" :key="item.id" class="menu_item">
             <div class="button-borders">
               <div class="inner">
                 {{ item.title }}
@@ -64,7 +59,6 @@
     </div>
   </div>
 
-
   <transition name="search">
     <div v-if="searchBox" class="searchDialog">
       <div class="search-box">
@@ -74,8 +68,7 @@
               <div class="close">
                 <i @click="closeSearchDialog" class="iconfont">&#xe6ca;</i>
               </div>
-              <input autocomplete="off" v-model="searchText" @input="select" type="text" placeholder="搜索文章" name="text"
-                class="input">
+              <input autocomplete="off" v-model="searchText" @input="select" type="text" placeholder="搜索文章" name="text" class="input" />
             </div>
 
             <div class="blog-list">
@@ -89,20 +82,17 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
-      <div class="search-mask">
-      </div>
-
+      <div class="search-mask"></div>
     </div>
   </transition>
 </template>
 
 <script setup lang="ts">
-import $http from '@/api/index.ts';
-import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import $http from '@/api/index.ts'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 type Menu = {
   title: string
   id: string
@@ -116,19 +106,19 @@ let menuList = ref<Menu[]>([
   { title: '关于', id: '3', route: '/about' },
   { title: '友链', id: '4', route: '/link' },
   {
-    title: '其他', id: '5', child: [
-      { title: '汽车', id: '51', route: '/other/car' },
-    ]
+    title: '其他',
+    id: '5',
+    child: [{ title: 'ThreeDemo', id: '51', route: '/other/car' }]
   }
 ])
 const $store = useStore.common()
 let menu_checked = ref($store.menu)
 onMounted(() => {
-  //给页面绑定滑轮滚动事件  
-  if (document.addEventListener) {//firefox  
-    document.addEventListener('scroll', scrollFunc, false);
+  //给页面绑定滑轮滚动事件
+  if (document.addEventListener) {
+    //firefox
+    document.addEventListener('scroll', scrollFunc, false)
   }
-
 })
 
 // 移动端导航
@@ -146,58 +136,52 @@ let checkMenu = (item: Menu) => {
   OpenMobileMenu.value = false
 }
 
-
-
-
-
 let showHead = ref(true)
 let scrollTop = ref(0)
 let scrollFunc = function () {
-  var aftertop = document.documentElement ? document.documentElement.scrollTop : document.body.scrollTop;//兼容
+  var aftertop = document.documentElement ? document.documentElement.scrollTop : document.body.scrollTop //兼容
   if (aftertop - scrollTop.value > 0) {
     showHead.value = false
   } else {
     showHead.value = true
   }
-  scrollTop.value = aftertop;
-
+  scrollTop.value = aftertop
 }
 
 // 搜索框
 let searchBox = ref(false)
 
-let documentTop = 0;
+let documentTop = 0
 let showDialog = () => {
-  documentTop = (document.scrollingElement)!.scrollTop;
+  documentTop = document.scrollingElement!.scrollTop
   searchBox.value = true
-  document.body.style.position = "fixed"
-  document.body.style.top = -documentTop + "px";
+  document.body.style.position = 'fixed'
+  document.body.style.top = -documentTop + 'px'
   document.body.style.left = '0'
   document.body.style.right = '0'
 }
 let closeSearchDialog = () => {
   searchBox.value = false
-  document.body.style.position = "static";
-  document.body.style.top = "auto";
-  (document.scrollingElement)!.scrollTop = documentTop;
+  document.body.style.position = 'static'
+  document.body.style.top = 'auto'
+  document.scrollingElement!.scrollTop = documentTop
 }
 
 // 搜索
 let searchText = ref('')
-let blogList = ref<Blog[]>([
-])
+let blogList = ref<Blog[]>([])
 let select = async () => {
-  console.log(searchText.value);
+  console.log(searchText.value)
   const { data } = await $http.blogs.searchBlog({
-    text: searchText.value,
+    text: searchText.value
   })
-  console.log(data.data);
-  const regex = new RegExp(`${searchText.value}`, 'g');
+  console.log(data.data)
+  const regex = new RegExp(`${searchText.value}`, 'g')
   blogList.value = data.data.map((item: Blog) => {
     return {
-      'Title': item.Title.replace(regex, '<strong>' + searchText.value + '</strong>'),
-      'Summary': item.Summary.replace(regex, '<strong>' + searchText.value + '</strong>'),
-      '_id': item._id
+      Title: item.Title.replace(regex, '<strong>' + searchText.value + '</strong>'),
+      Summary: item.Summary.replace(regex, '<strong>' + searchText.value + '</strong>'),
+      _id: item._id
     }
   })
 }
@@ -214,12 +198,9 @@ let goHome = () => {
     path: '/'
   })
 }
-
-
 </script>
 <style lang="less">
 .header {
-
   .el-menu--horizontal .el-menu-item:not(.is-disabled):focus,
   .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
     background-color: #ffffff00 !important;
@@ -227,16 +208,15 @@ let goHome = () => {
 
   .el-menu--horizontal {
     border: none;
-
   }
 
   .el-menu-item {
     font-size: 1.06rem;
   }
 
-  .el-menu--horizontal>.el-menu-item.is-active {
+  .el-menu--horizontal > .el-menu-item.is-active {
     color: orange !important;
-    border: none
+    border: none;
   }
 }
 
@@ -280,7 +260,6 @@ let goHome = () => {
       .logo {
         color: #fff;
         margin-left: 20px;
-
       }
 
       svg {
@@ -318,7 +297,6 @@ let goHome = () => {
       align-items: center;
       padding: 1rem;
 
-
       .close {
         width: 100%;
         text-align: end;
@@ -342,12 +320,7 @@ let goHome = () => {
           top: 1.5rem;
         }
 
-
-
-
         .menu_item {
-
-
           .inner {
             width: 100%;
             font-family: 'Ropa Sans', sans-serif;
@@ -359,9 +332,9 @@ let goHome = () => {
             font-size: 13px;
             font-weight: bold;
             letter-spacing: 0.05rem;
-            border: 1px solid #0E1822;
+            border: 1px solid #0e1822;
             padding: 0.8rem 2.1rem;
-            background-color: #0E1822;
+            background-color: #0e1822;
             background-size: 200%;
             background-position: 200%;
             background-repeat: no-repeat;
@@ -382,31 +355,30 @@ let goHome = () => {
           .iconfont {
             margin-left: 5px;
           }
-
         }
 
         .active {
-          border: 1px solid #FF4655;
+          border: 1px solid #ff4655;
           color: white;
           background-position: 40%;
 
           .inner {
-            background-color: #FF4655;
+            background-color: #ff4655;
 
             &:after {
-              content: "";
+              content: '';
               background-color: #fff;
             }
 
             &:before {
-              content: "";
+              content: '';
               background-color: #fff;
             }
           }
         }
 
         .inner:before {
-          content: "";
+          content: '';
           position: absolute;
 
           width: 0.2rem;
@@ -417,9 +389,9 @@ let goHome = () => {
         }
 
         .inner:after {
-          content: "";
+          content: '';
           position: absolute;
-          background-color: #FF4655;
+          background-color: #ff4655;
           width: 0.3rem;
           height: 0.3rem;
           bottom: -1px;
@@ -434,43 +406,36 @@ let goHome = () => {
         }
 
         .button-borders:before {
-          content: "";
+          content: '';
           position: absolute;
           width: calc(100% + 0.5em);
           height: 50%;
           left: -0.3em;
           top: -0.3em;
-          border: 1px solid #0E1822;
+          border: 1px solid #0e1822;
           border-bottom: 0px;
           /* opacity: 0.3; */
         }
 
         .button-borders:after {
-          content: "";
+          content: '';
           position: absolute;
           width: calc(100% + 0.5em);
           height: 50%;
           left: -0.3em;
           bottom: -0.3em;
-          border: 1px solid #0E1822;
+          border: 1px solid #0e1822;
           border-top: 0px;
           /* opacity: 0.3; */
           z-index: 0;
         }
 
-
-
         .shape {
-          fill: #0E1822;
+          fill: #0e1822;
         }
-
       }
-
     }
-
   }
-
-
 
   .searchDialog {
     position: fixed;
@@ -483,7 +448,6 @@ let goHome = () => {
     // background: @main-backgroundcolor;
 
     .search-box {
-
       animation: change 0.5s;
       color: @main-fontcolor;
       position: fixed;
@@ -493,15 +457,13 @@ let goHome = () => {
       bottom: 0;
       border-radius: 18px;
 
-
       .search-main {
-        padding: .5rem;
+        padding: 0.5rem;
         overflow: scroll;
         box-sizing: border-box;
         z-index: 999999;
         // width: 100%;
         height: 100%;
-
 
         .close {
           text-align: right;
@@ -513,7 +475,7 @@ let goHome = () => {
           box-sizing: border-box;
           width: 100%;
           border-radius: 10px;
-          outline: 2px solid #FEBF00;
+          outline: 2px solid #febf00;
           border: 0;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
           background-color: @main-bordercolor-gray;
@@ -533,13 +495,10 @@ let goHome = () => {
           font-size: 0.875rem;
           color: @main-fontcolor;
 
-
-
           .blog-item {
             display: flex;
             margin-top: 1rem;
             align-items: center;
-
 
             .blog-main {
               display: flex;
@@ -547,14 +506,13 @@ let goHome = () => {
               margin-left: 1rem;
 
               .title {
-                margin-bottom: .5rem;
+                margin-bottom: 0.5rem;
                 font-weight: 700;
               }
 
               .summary {
                 font-size: 0.75rem;
               }
-
             }
 
             button {
@@ -572,7 +530,7 @@ let goHome = () => {
               font-weight: 600;
               color: #382b22;
               text-transform: uppercase;
-              padding: .5rem;
+              padding: 0.5rem;
               background: #fff0f0;
               border: 2px solid #b18597;
               border-radius: 0.75em;
@@ -629,11 +587,7 @@ let goHome = () => {
         }
       }
     }
-
-
   }
-
-
 }
 
 @media screen and (min-width: 768px) {
@@ -641,8 +595,6 @@ let goHome = () => {
     .MobileMenuSwitch {
       display: none;
     }
-
-
   }
 
   .search-enter-from,
@@ -657,9 +609,8 @@ let goHome = () => {
 
   .search-enter-active,
   .search-leave-active {
-    transition: opacity .5s ease;
+    transition: opacity 0.5s ease;
   }
-
 
   .searchDialog {
     position: fixed;
@@ -668,7 +619,7 @@ let goHome = () => {
     bottom: 0;
     left: 0;
     z-index: 99999;
-    background: rgba(0, 0, 0, .9);
+    background: rgba(0, 0, 0, 0.9);
 
     .search-box {
       animation: change 0.5s;
@@ -679,8 +630,6 @@ let goHome = () => {
       transform: translateX(-50%);
       border-radius: 18px;
       width: 37.5rem;
-
-
 
       .search-main {
         padding: 1rem;
@@ -697,7 +646,6 @@ let goHome = () => {
         width: 100%;
         height: 100%;
 
-
         .close {
           text-align: right;
           cursor: pointer;
@@ -708,7 +656,7 @@ let goHome = () => {
           box-sizing: border-box;
           width: 100%;
           border-radius: 10px;
-          outline: 2px solid #FEBF00;
+          outline: 2px solid #febf00;
           border: 0;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
           background-color: @main-bordercolor-gray;
@@ -728,13 +676,10 @@ let goHome = () => {
           font-size: 0.875rem;
           color: @main-fontcolor;
 
-
-
           .blog-item {
             display: flex;
             margin-top: 1rem;
             align-items: center;
-
 
             .blog-main {
               display: flex;
@@ -742,14 +687,13 @@ let goHome = () => {
               margin-left: 1rem;
 
               .title {
-                margin-bottom: .5rem;
+                margin-bottom: 0.5rem;
                 font-weight: 700;
               }
 
               .summary {
                 font-size: 0.75rem;
               }
-
             }
 
             button {
@@ -767,7 +711,7 @@ let goHome = () => {
               font-weight: 600;
               color: #382b22;
               text-transform: uppercase;
-              padding: .5rem;
+              padding: 0.5rem;
               background: #fff0f0;
               border: 2px solid #b18597;
               border-radius: 0.75em;
@@ -824,10 +768,7 @@ let goHome = () => {
         }
       }
     }
-
-
   }
-
 }
 
 .header {
@@ -855,7 +796,7 @@ let goHome = () => {
     font-size: 1.2rem;
     font-family: DaoLiTi;
     width: 5rem;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     height: 2rem;
     display: flex;
     justify-content: center;
@@ -867,14 +808,12 @@ let goHome = () => {
       animation-duration: 1s;
       font-size: 1.5rem;
       display: none;
-
     }
 
     @keyframes example {
       0% {
         opacity: 0;
       }
-
 
       100% {
         opacity: 1;
@@ -889,10 +828,8 @@ let goHome = () => {
       }
 
       .iconfont {
-
         display: block;
       }
-
     }
   }
 
@@ -935,12 +872,11 @@ let goHome = () => {
   margin: 0 auto;
   display: flex;
 
-
   .menu_item {
     cursor: pointer;
     margin-right: 3rem;
     position: relative;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 
     &:hover {
       .child-list {
@@ -954,7 +890,7 @@ let goHome = () => {
     position: absolute;
     background-color: @main-backgroundcolor;
     color: @main-fontcolor;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
     width: max-content;
@@ -964,14 +900,13 @@ let goHome = () => {
     top: 100%;
 
     .child-item {
-      padding: .5rem 1rem;
+      padding: 0.5rem 1rem;
     }
   }
 
   .active {
     color: #ebbf47;
   }
-
 }
 
 .header_common_white {
@@ -981,7 +916,6 @@ let goHome = () => {
   .logo {
     color: #333 !important;
   }
-
 
   .menu {
     background-color: #ffffff00;
@@ -1001,11 +935,11 @@ let goHome = () => {
 }
 
 .head-enter-active {
-  animation: bound-in .5s;
+  animation: bound-in 0.5s;
 }
 
 .head-leave-active {
-  animation: bound-out .5s;
+  animation: bound-out 0.5s;
 }
 
 @keyframes bound-in {
@@ -1035,7 +969,6 @@ let goHome = () => {
     opacity: 0;
   }
 }
-
 
 .dialog-box {
   padding: 1rem;
@@ -1076,14 +1009,13 @@ let goHome = () => {
   right: 0;
   top: 0;
   bottom: 0;
-  margin: .2rem;
+  margin: 0.2rem;
   background: @main-backgroundcolor-2;
   // inset: 5px;
   border-radius: 15px;
 }
 
 .searchDialog {
-
   .search-main {
     padding-top: 5.5rem !important;
 
@@ -1100,10 +1032,6 @@ let goHome = () => {
       box-sizing: border-box;
       padding-bottom: 1.5rem;
     }
-
-
   }
-
-
 }
 </style>
