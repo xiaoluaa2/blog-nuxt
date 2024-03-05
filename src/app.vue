@@ -21,9 +21,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </template>
 <script setup lang="ts">
@@ -31,31 +28,27 @@ useHead({
   title: '小鹿',
   meta: [
     { hid: 'keywords', name: 'keywords', content: '小鹿的个人博客,lubowen,个人网站,个人博客,开源博客' },
-    { hid: 'description', name: 'description', content: '小鹿的个人博客-独立开源、全栈开发、多端自适应、nuxt3+nestjs+vue3、功能完善' },
+    { hid: 'description', name: 'description', content: '小鹿的个人博客-独立开源、全栈开发、多端自适应、nuxt3+nestjs+vue3、功能完善' }
   ],
   bodyAttrs: {
     class: 'test'
-  },
+  }
 })
-import { onMounted } from 'vue';
+import { onMounted } from 'vue'
 let loaded = ref(false)
 onMounted(() => {
   const $store = useStore.common()
   let theme = $store.theme
   if (theme) {
     initTheme(theme)
-    loaded.value = true
-  } else {
-    loaded.value = true
   }
+  loaded.value = true
 })
 // import Header from '@/components/Header.vue';
 </script>
 <style lang="less" scoped>
 .app {
   position: relative;
-
-
 }
 </style>
 <style lang="less">
@@ -65,7 +58,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url(@/assets/images/bg13.jpg) no-repeat 100%/cover;
+  background: url(@/assets/images/bg13.jpg) no-repeat 100% / cover;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -15,10 +15,9 @@
           <div class="loader"><i></i></div> -->
           <div class="spinner"></div>
           <div class="author-img">
-            <img src="@/assets/images/head.jpg" alt="" />
+            <!-- <img src="@/assets/images/head.jpg" alt="" /> -->
+            <img src="@/assets/images/xiaolu.jpg" alt="小鹿" />
           </div>
-
-
         </div>
         <div class="author-tag-right pc">
           <span class="author-tag">五谷不分 💤</span>
@@ -42,20 +41,18 @@
                 <div class="circle"></div>
               </div>
             </div>
-
           </div>
           <div class="title3">社畜一枚,摸头村村长,唱跳rap打篮球</div>
-          <div class="title4">
-            <img src="../../assets/images/motou.webp" alt="">
+          <div class="pc title4">
+            <img src="../../assets/images/motou.webp" alt="" />
           </div>
         </div>
         <div class="author-content-item aboutsiteTips">
           <div class="author-content-item-tips">追求</div>
           <h2>
             源于
-            <br>
+            <br />
             热爱而去学习
-
 
             <div ref="mask" class="mask">
               <transition name="mask">
@@ -71,10 +68,7 @@
                 <span v-show="showIndex == 3">学习</span>
               </transition>
             </div>
-
-
           </h2>
-
         </div>
       </div>
       <div class="author-content">
@@ -107,26 +101,24 @@
               <span class="num">{{ statistics.alldayVisit }}</span>
             </div>
           </div>
-
-
         </div>
 
         <div class="author-content-item-group mapAndInfo">
-          <div class="author-content-item map single"><span class="map-title">我现在住在 <b>中国，河北省</b></span>
+          <div class="author-content-item map single">
+            <span class="map-title">我现在住在 <b>中国，河北省</b></span>
           </div>
           <div class="author-content-item selfInfo single">
             <div>
               <span class="selfInfo-title">生于</span>
-              <span class="selfInfo-content" style="color:#43a6c6;font-family:'Microsoft YaHei';">2000
-              </span>
+              <span class="selfInfo-content" style="color: #43a6c6; font-family: 'Microsoft YaHei'">2000 </span>
             </div>
             <div>
               <span class="selfInfo-title">专业</span>
-              <span class="selfInfo-content" style="color:#c69043">软件工程</span>
+              <span class="selfInfo-content" style="color: #c69043">软件工程</span>
             </div>
             <div>
               <span class="selfInfo-title">现职业</span>
-              <span class="selfInfo-content" style="color:#b04fe6">前端开发工程师</span>
+              <span class="selfInfo-content" style="color: #b04fe6">前端开发工程师</span>
             </div>
           </div>
         </div>
@@ -135,16 +127,14 @@
         <div class="author-content-item maxim">
           <div class="author-content-item-tips">个性签名</div>
           <span class="maxim-title">
-            <span style="opacity:.6;margin-bottom:8px">旺仔牛奶旺旺</span>
+            <span style="opacity: 0.6; margin-bottom: 8px">旺仔牛奶旺旺</span>
           </span>
         </div>
         <div class="author-content-item myphoto">
           <div class="author-content-item-tips">特长</div>
           <span class="maxim-title">
-            <span style="opacity:.6;margin-bottom:8px">CV工程师</span>
-            <span>
-              BUG制造者
-            </span>
+            <span style="opacity: 0.6; margin-bottom: 8px">CV工程师</span>
+            <span> BUG制造者 </span>
           </span>
         </div>
       </div>
@@ -158,9 +148,8 @@
                   <div class="tit">植物人</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
-
               </div>
             </div>
             <div @click="changeImage(2)" class="item" :class="activeHY == 2 ? 'active' : ''">
@@ -170,7 +159,7 @@
                   <div class="tit">陆地战神</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
               </div>
             </div>
@@ -181,7 +170,7 @@
                   <div class="tit">虚化√</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
               </div>
             </div>
@@ -192,7 +181,7 @@
                   <div class="tit">杨戬</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
               </div>
             </div>
@@ -203,7 +192,7 @@
                   <div class="tit">创立班</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
               </div>
             </div>
@@ -214,7 +203,7 @@
                   <div class="tit">黄猿</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
               </div>
             </div>
@@ -225,22 +214,22 @@
                   <div class="tit">sakura</div>
                 </div>
                 <div v-else class="logo">
-                  <img src="@/assets/images/hy_logo.webp" alt="">
+                  <img src="@/assets/images/hy_logo.webp" alt="" />
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
       <div class="author-content">
         <div class="author-content-item game-lol">
           <div class="card-content">
-            <div class="author-content-item-tips">爱好游戏</div><span class="author-content-item-title">英雄联盟</span>
+            <div class="author-content-item-tips">爱好游戏</div>
+            <span class="author-content-item-title">英雄联盟</span>
             <div class="content-bottom">
               <div class="icon-group">
-                <img src="@/assets/images/top.png" alt="">
-                <img src="@/assets/images/sup.png" alt="">
+                <img src="@/assets/images/top.png" alt="" />
+                <img src="@/assets/images/sup.png" alt="" />
               </div>
               <div class="tips">扭曲丛林</div>
             </div>
@@ -253,69 +242,62 @@
             <div class="card-box">
               <card-1>
                 <template v-slot:front>
-                  <img src="@/assets/images/astt1.jpg" alt="">
+                  <img src="@/assets/images/astt1.jpg" alt="" />
                 </template>
                 <template v-slot:back>
-                  <img src="@/assets/images/astt6.jpg" alt="">
+                  <img src="@/assets/images/astt6.jpg" alt="" />
                 </template>
               </card-1>
               <card-1>
                 <template v-slot:front>
-                  <img src="@/assets/images/astt3.jpg" alt="">
+                  <img src="@/assets/images/astt3.jpg" alt="" />
                 </template>
                 <template v-slot:back>
-                  <img src="@/assets/images/astt4.jpg" alt="">
+                  <img src="@/assets/images/astt4.jpg" alt="" />
                 </template>
               </card-1>
               <card-1>
                 <template v-slot:front>
-                  <img src="@/assets/images/astt7.jpg" alt="">
+                  <img src="@/assets/images/astt7.jpg" alt="" />
                 </template>
                 <template v-slot:back>
-                  <img src="@/assets/images/astt8.jpg" alt="">
+                  <img src="@/assets/images/astt8.jpg" alt="" />
                 </template>
               </card-1>
               <card-1>
                 <template v-slot:front>
-                  <img src="@/assets/images/astt2.jpg" alt="">
+                  <img src="@/assets/images/astt2.jpg" alt="" />
                 </template>
                 <template v-slot:back>
-                  <img src="@/assets/images/astt5.jpg" alt="">
+                  <img src="@/assets/images/astt5.jpg" alt="" />
                 </template>
               </card-1>
             </div>
           </div>
         </div>
-
       </div>
       <div class="author-content">
-        <div class="create-site-post author-content-item ">
+        <div class="create-site-post author-content-item">
           <span class="author-content-item-title">建站原因</span>
           <p>大学时尝试过搭自己的网站,功能比较简单。服务器到期后也没有续费，最近一段时间利用空闲时间重构了一下以前的网站并新增了一些功能，由于本人审美有限，页面样式参考了许多小伙伴的，后边会贴出地址。</p>
-          <p>
-            为什么喜欢前端？因为所见所得，相较于后端更能欣赏自己的成果，为其美化，因为想要大家看到更美好的东西。当然也离不开后端的支持，目标成为全栈工程师！
-          </p>
+          <p>为什么喜欢前端？因为所见所得，相较于后端更能欣赏自己的成果，为其美化，因为想要大家看到更美好的东西。当然也离不开后端的支持，目标成为全栈工程师！</p>
           <div class="footer">
             <div class="technology">
               <p>本博客纯手工编写，未使用第三方建站或流量统计工具。本博客已具备各种父子组件、数据缓存、防抖节流、用户轨迹、首屏优化、访问数据分析等功能</p>
               <p>本博客搭建的技术栈</p>
               <p>前端</p>
               <div class="box">
-                主要技术栈为<span class="link">Nuxt3</span>+<span class="link">TS</span><br>
-                <span class="link">
-                  Pinia
-                </span>状态管理<br>
-                <span class="link">Mitt</span>通信<br>
-                <span class="link"> ThreeJS</span>， <span class="link">Nprogress</span>， <span
-                  class="link">v-md-editor</span>等其他工具库<br>
+                主要技术栈为<span class="link">Nuxt3</span>+<span class="link">TS</span><br />
+                <span class="link"> Pinia </span>状态管理<br />
+                <span class="link">Mitt</span>通信<br />
+                <span class="link"> ThreeJS</span>， <span class="link">Nprogress</span>， <span class="link">v-md-editor</span>等其他工具库<br />
               </div>
               <p>后端</p>
               <div class="box">
-                主要技术栈为<span class="link">Nest.js</span><br>
-                数据库使用<span class="link">Mongoose</span><br>
+                主要技术栈为<span class="link">Nest.js</span><br />
+                数据库使用<span class="link">Mongoose</span><br />
                 部署在阿里云服务器
               </div>
-
             </div>
           </div>
         </div>
@@ -324,12 +306,12 @@
   </NuxtLayout>
 </template>
 
-<script setup lang='ts'>
+<script setup lang="ts">
 useHead({
-  title: '小鹿|关于',
+  title: '小鹿|关于'
 })
-import $http from '@/api/index.ts';
-import { onMounted, ref } from 'vue';
+import $http from '@/api/index.ts'
+import { onMounted, ref } from 'vue'
 let mask = ref()
 // 乐趣来源
 let showIndex = ref(0)
@@ -339,7 +321,7 @@ setInterval(() => {
   } else {
     showIndex.value += 1
   }
-}, 2000);
+}, 2000)
 onMounted(() => {
   createLog({
     moduleType: 'menu',
@@ -347,7 +329,7 @@ onMounted(() => {
     operateContent: '关于'
   })
 })
-// 
+//
 let activeHY = ref(1)
 let changeImage = (index: number) => {
   activeHY.value = index
@@ -366,7 +348,7 @@ let showStatistics = async () => {
 }
 showStatistics()
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .aboutPage {
   text-align: center;
   margin-bottom: 10rem;
@@ -400,7 +382,6 @@ showStatistics()
           height: 100%;
         }
       }
-
     }
 
     .author-tag-left,
@@ -420,7 +401,7 @@ showStatistics()
         margin-top: 6px;
         font-size: 0.875rem;
         font-weight: 700;
-        box-shadow: 0 5px 12px -5px rgba(102, 68, 68, 0.00);
+        box-shadow: 0 5px 12px -5px rgba(102, 68, 68, 0);
         animation: 6s ease-in-out 0s infinite normal none running floating;
       }
     }
@@ -437,8 +418,6 @@ showStatistics()
       100% {
         transform: translateY(-4px);
       }
-
-
     }
 
     .author-tag-right {
@@ -455,7 +434,7 @@ showStatistics()
       }
 
       :nth-child(3) {
-        margin-left: .5rem;
+        margin-left: 0.5rem;
         animation-delay: 1.2s;
       }
 
@@ -479,7 +458,7 @@ showStatistics()
       }
 
       :nth-child(3) {
-        margin-right: .5rem;
+        margin-right: 0.5rem;
         animation-delay: 1.2s;
       }
 
@@ -488,13 +467,12 @@ showStatistics()
         animation-delay: 1.8s;
       }
     }
-
   }
 
   .author-title {
     font-size: 2.7rem;
     font-weight: 700;
-    margin: .5rem;
+    margin: 0.5rem;
     letter-spacing: 6px;
     -webkit-background-clip: text;
     background-color: #333;
@@ -534,8 +512,8 @@ showStatistics()
     }
 
     .author-content-item-tips {
-      font-size: .625rem;
-      margin-bottom: .5rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
     }
 
     .author-content-item-title {
@@ -563,7 +541,7 @@ showStatistics()
         position: relative;
         font-size: 36px;
         text-align: left;
-        padding: .3rem 0;
+        padding: 0.3rem 0;
       }
 
       .title3 {
@@ -592,8 +570,6 @@ showStatistics()
       width: 39%;
       text-align: left;
 
-
-
       .mask {
         display: flex;
         flex-direction: column;
@@ -621,7 +597,7 @@ showStatistics()
         }
 
         .mask-enter-active {
-          animation: bound-in .5s;
+          animation: bound-in 0.5s;
         }
 
         @keyframes bound-in {
@@ -665,7 +641,7 @@ showStatistics()
           flex-direction: column;
           width: 50%;
           margin-bottom: 0.5rem;
-          font-size: .6rem;
+          font-size: 0.6rem;
 
           .num {
             font-size: 2.125rem;
@@ -706,7 +682,7 @@ showStatistics()
         left: 0;
         width: 100%;
         background: @main-backgroundcolor;
-        opacity: .6;
+        opacity: 0.6;
         padding: 0.5rem 2rem;
         backdrop-filter: saturate(180%) blur(2px);
         -webkit-backdrop-filter: blur(20px);
@@ -744,11 +720,10 @@ showStatistics()
         text-align: left;
 
         .selfInfo-title {
-          font-size: .6rem;
+          font-size: 0.6rem;
         }
 
         .selfInfo-content {
-
           font-size: 2.125rem;
         }
       }
@@ -768,7 +743,6 @@ showStatistics()
       width: 53%;
 
       .maxim-title {
-
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -806,7 +780,7 @@ showStatistics()
       width: 100%;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(circle at top center, #29323cd0, #1C1C1Cd4);
+      background: radial-gradient(circle at top center, #29323cd0, #1c1c1cd4);
 
       .container {
         display: flex;
@@ -820,23 +794,21 @@ showStatistics()
           margin: 0;
           border-radius: 40px;
 
-
           &:nth-child(3) {
-            background: url(@/assets/images/hy3.jpg) no-repeat 80%/cover !important;
+            background: url(@/assets/images/hy3.jpg) no-repeat 80% / cover !important;
           }
 
           &:nth-child(4) {
-            background: url(@/assets/images/hy4.jpg) no-repeat 90%/cover !important;
+            background: url(@/assets/images/hy4.jpg) no-repeat 90% / cover !important;
           }
 
           &:nth-child(5) {
-            background: url(@/assets/images/hy5.jpg) no-repeat 65%/cover !important;
+            background: url(@/assets/images/hy5.jpg) no-repeat 65% / cover !important;
           }
 
           &:nth-child(6) {
-            background: url(@/assets/images/hy6.jpg) no-repeat 80%/cover !important;
+            background: url(@/assets/images/hy6.jpg) no-repeat 80% / cover !important;
           }
-
         }
 
         .item {
@@ -886,31 +858,31 @@ showStatistics()
           }
 
           &:nth-child(1) {
-            background: url(@/assets/images/hy1.jpg) no-repeat 50%/cover;
+            background: url(@/assets/images/hy1.jpg) no-repeat 50% / cover;
           }
 
           &:nth-child(2) {
-            background: url(@/assets/images/hy2.jpg) no-repeat 60%/cover;
+            background: url(@/assets/images/hy2.jpg) no-repeat 60% / cover;
           }
 
           &:nth-child(3) {
-            background: url(@/assets/images/hy3.jpg) no-repeat 50%/cover;
+            background: url(@/assets/images/hy3.jpg) no-repeat 50% / cover;
           }
 
           &:nth-child(4) {
-            background: url(@/assets/images/hy4.jpg) no-repeat 59%/cover;
+            background: url(@/assets/images/hy4.jpg) no-repeat 59% / cover;
           }
 
           &:nth-child(5) {
-            background: url(@/assets/images/hy5.jpg) no-repeat 42%/cover;
+            background: url(@/assets/images/hy5.jpg) no-repeat 42% / cover;
           }
 
           &:nth-child(6) {
-            background: url(@/assets/images/hy6.jpg) no-repeat 52%/cover;
+            background: url(@/assets/images/hy6.jpg) no-repeat 52% / cover;
           }
 
           &:nth-child(7) {
-            background: url(@/assets/images/hy7.jpg) no-repeat 50%/cover;
+            background: url(@/assets/images/hy7.jpg) no-repeat 50% / cover;
           }
         }
       }
@@ -936,10 +908,9 @@ showStatistics()
           img {
             width: 22px;
             height: 22px;
-            margin-right: .5rem;
+            margin-right: 0.5rem;
           }
         }
-
       }
     }
 
@@ -951,8 +922,6 @@ showStatistics()
       width: 42%;
       border: 1px;
       color: #fff;
-
-
     }
 
     .game-wolf {
@@ -971,7 +940,7 @@ showStatistics()
         width: 100%;
 
         img {
-          border-radius: .5rem;
+          border-radius: 0.5rem;
           width: 100%;
           height: 100%;
         }
@@ -993,8 +962,8 @@ showStatistics()
           }
 
           .link {
-            border-radius: .2rem;
-            padding: .2rem;
+            border-radius: 0.2rem;
+            padding: 0.2rem;
             background: linear-gradient(320deg, rgba(0, 140, 255, 0.678), rgba(128, 0, 128, 0.308));
           }
         }
@@ -1002,12 +971,9 @@ showStatistics()
     }
   }
 
-
-
-
   // 写轮眼
   .sharingon {
-    scale: .15;
+    scale: 0.15;
     position: absolute;
     top: -76px;
     width: 6em;
@@ -1019,7 +985,7 @@ showStatistics()
 
   .ring {
     position: absolute;
-    content: "";
+    content: '';
     left: 50%;
     top: 50%;
     width: 3.5em;
@@ -1038,7 +1004,7 @@ showStatistics()
   .to,
   .circle {
     position: absolute;
-    content: "";
+    content: '';
     width: 0.9em;
     height: 0.9em;
     background-color: black;
@@ -1051,7 +1017,7 @@ showStatistics()
   }
 
   .to::before {
-    content: "";
+    content: '';
     position: absolute;
     top: -0.5em;
     right: -0.2em;
@@ -1093,7 +1059,6 @@ showStatistics()
     }
   }
 
-
   .container {
     position: relative;
     height: 200px;
@@ -1116,7 +1081,7 @@ showStatistics()
 
   .spinner::before,
   .spinner::after {
-    content: "";
+    content: '';
     grid-area: 1/1;
     margin: 2.2px;
     border: inherit;
@@ -1208,7 +1173,6 @@ showStatistics()
   //   border-radius: 50%;
   //   z-index: 1;
   // }
-
 }
 
 @media screen and (max-width: 768px) {

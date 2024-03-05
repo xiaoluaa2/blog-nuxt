@@ -29,9 +29,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import $http from '@/api/index.ts';
-import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import $http from '@/api/index.ts'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 const router = useRouter()
 const format = $format
 let ArticleNum = ref(0)
@@ -41,7 +41,7 @@ let loaded = ref(false)
 onMounted(() => {
   setTimeout(() => {
     loaded.value = true
-  }, 500);
+  }, 500)
 })
 let blogsSum = async () => {
   const { data } = await $http.blogs.blogsSum()
@@ -64,9 +64,8 @@ let goTagPage = (tag: string) => {
 const $store = useStore.common()
 let isDark = ref($store.theme == 'black')
 bus.$on('changeTheme', (theme: string) => {
-  isDark.value = (theme == 'black')
-}
-)
+  isDark.value = theme == 'black'
+})
 
 let init = async () => {
   await blogsSum()
@@ -77,16 +76,15 @@ let init = async () => {
   ArticleNum.value = 0
   CommentNum.value = 0
   LeaveMessageNum.value = 0
-  let timeA = (3000 / ArticleNum2) < 10 ? 10 : (3000 / ArticleNum2)
-  let numA = (3000 / ArticleNum2) < 10 ? ArticleNum2 / 300 + 1 : 1
-  let timeC = (3000 / CommentNum2) < 10 ? 10 : (3000 / CommentNum2)
-  let numC = (3000 / CommentNum2) < 10 ? CommentNum2 / 300 + 1 : 1
-  let timeL = (3000 / LeaveMessageNum2) < 10 ? 10 : (3000 / LeaveMessageNum2)
-  let numL = (3000 / LeaveMessageNum2) < 10 ? LeaveMessageNum2 / 300 + 1 : 1
-  console.log(numA);
-  console.log(numC);
-  console.log(numL);
-
+  let timeA = 3000 / ArticleNum2 < 10 ? 10 : 3000 / ArticleNum2
+  let numA = 3000 / ArticleNum2 < 10 ? ArticleNum2 / 300 + 1 : 1
+  let timeC = 3000 / CommentNum2 < 10 ? 10 : 3000 / CommentNum2
+  let numC = 3000 / CommentNum2 < 10 ? CommentNum2 / 300 + 1 : 1
+  let timeL = 3000 / LeaveMessageNum2 < 10 ? 10 : 3000 / LeaveMessageNum2
+  let numL = 3000 / LeaveMessageNum2 < 10 ? LeaveMessageNum2 / 300 + 1 : 1
+  console.log(numA)
+  console.log(numC)
+  console.log(numL)
 
   var NumInterval1 = window.setInterval(function () {
     ArticleNum.value += Math.trunc(numA)
@@ -117,9 +115,7 @@ type hotList = {
   ArticleCover: string
   CreateDate: string
 }
-let hotList = ref<hotList[]>([
-
-])
+let hotList = ref<hotList[]>([])
 //标签分类
 let typeList = ref<Array<any>>([1])
 let getTypeList = async () => {
@@ -139,17 +135,15 @@ getHotList()
 </script>
 <style lang="less" scoped>
 .bright {
-  background: url(@/assets/images/bg3.jpg) no-repeat 100%/cover;
+  background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover;
 }
 
 .dark {
-  background: url(@/assets/images/bg10.jpg) no-repeat 100%/cover;
+  background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover;
 }
 
-
-
 .common-enter-active {
-  animation: bound-in .5s backwards;
+  animation: bound-in 0.5s backwards;
 }
 
 @keyframes bound-in {
@@ -164,25 +158,18 @@ getHotList()
   }
 }
 
-
 .common {
-
   color: @main-fontcolor;
   min-height: 100vh !important;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
 
-
-
-
   .mine {
-
     background-color: @main-backgroundcolor;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-
 
     .mine_bg {
       height: 8rem;
@@ -248,7 +235,6 @@ getHotList()
       display: flex;
       justify-content: space-around;
 
-
       .mine_footer_item {
         display: flex;
         flex-direction: column;
@@ -260,13 +246,11 @@ getHotList()
         }
       }
     }
-
-
   }
 
-
   .placeholder {
-    height: 10rem;
+    // height: 10rem;
+    height: 6rem;
   }
 }
 
@@ -278,7 +262,6 @@ getHotList()
     flex-direction: column;
   }
 }
-
 
 @media screen and (min-width: 768px) {
   .main {
@@ -296,7 +279,6 @@ getHotList()
     }
   }
 }
-
 
 .go-top {
   position: fixed;

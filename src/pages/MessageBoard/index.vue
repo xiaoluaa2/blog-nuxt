@@ -9,7 +9,6 @@
         <div class="from">
           {{ poetry.from }}
         </div>
-
       </div>
       <div class="wave-1"></div>
       <div class="wave-2"></div>
@@ -18,7 +17,6 @@
       </div>
     </div>
     <div class="show h5">
-
       <div class="wave-1"></div>
       <div class="wave-2"></div>
     </div>
@@ -65,7 +63,8 @@
                   <span style="display: flex; align-items: center">
                     <span style="margin-right: 10px"> {{ item.userId }}</span>
                     <img src="@/assets/images/position.svg" alt="" />
-                    {{ item.city }}</span>
+                    {{ item.city }}</span
+                  >
                   <span v-html="item.content"> </span>
                   <span class="DateAnswer">
                     <span> {{ _format('yyyy-MM-dd hh:mm:ss', parseInt(item.publishdate)) }}</span>
@@ -81,7 +80,8 @@
                   <span style="display: flex; align-items: center">
                     <span style="margin-right: 10px"> {{ child.userId }}</span>
                     <img src="@/assets/images/position.svg" alt="" />
-                    {{ child.city }}</span>
+                    {{ child.city }}</span
+                  >
                   <span v-html="child.content"> </span>
                   <span class="DateAnswer">
                     <span> {{ _format('yyyy-MM-dd hh:mm:ss', parseInt(child.publishdate)) }}</span>
@@ -96,17 +96,18 @@
         <div class="rightBox pc">
           <div class="xiaoluInf shadow-box">
             <div class="mine_head">
-              <img src="@/assets/images/head.jpg" alt="" />
+              <!-- <img src="@/assets/images/head.jpg" alt="" /> -->
+              <img src="@/assets/images/xiaolu.jpg" alt="小鹿" />
             </div>
             <div class="mine_m">
-
               <span>小鹿</span>
               <a target="_blank" href="https://github.com/xiaoluaa2" class="mine_source">GitHub</a>
             </div>
           </div>
           <div v-if="watherList" class="watherMain">
             <div class="TitleFontLine weathTitle">
-              <span class="citySpan">{{ watherList.city }}</span>天气
+              <span class="citySpan">{{ watherList.city }}</span
+              >天气
             </div>
             <div class="BlogStatistic">
               <div class="BlogStatisticItem borderRight" v-for="(item, i) in watherList.casts" v-bind:key="i">
@@ -155,19 +156,18 @@
       <Emotion @AppendInputValue="AppendMessageText"></Emotion>
       <Footer></Footer>
     </div>
-
   </div>
 </template>
 
 <script setup lang="ts">
 useHead({
-  title: '小鹿|留言板',
+  title: '小鹿|留言板'
 })
-import $http from '@/api/index.ts';
-import { weatherMap, weekMap } from '@/tool.ts';
-import { ElMessage } from 'element-plus';
-import { nextTick, onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import $http from '@/api/index.ts'
+import { weatherMap, weekMap } from '@/tool.ts'
+import { ElMessage } from 'element-plus'
+import { nextTick, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 interface UserComment {
   nickName: string
   text: string
@@ -176,9 +176,7 @@ interface UserComment {
   parentId?: string
 }
 
-
 const $store = useStore.common()
-
 
 const _format = $format
 const _emotionList = $EmotionList
@@ -208,7 +206,7 @@ onMounted(() => {
   })
   userMessage.value = $store.userMessage
 
-  console.log(userMessage.value);
+  console.log(userMessage.value)
 
   window.addEventListener('scroll', handleScroll)
   // vantaEffect = BIRDS({
@@ -230,14 +228,13 @@ onMounted(() => {
 //   }
 // })
 
-
 const handleScroll = () => {
   const innerHeight = window.innerHeight // 可视窗口高度
   const scrollTop = document.documentElement.scrollTop // 滚动高度
   const scrollHeight = document.documentElement.scrollHeight // 页面总高度
-  console.log(innerHeight);
-  console.log(scrollTop);
-  console.log(scrollHeight);
+  console.log(innerHeight)
+  console.log(scrollTop)
+  console.log(scrollHeight)
   if (scrollTop + innerHeight >= scrollHeight - 50) {
     if (end.value) {
       return
@@ -249,9 +246,8 @@ const handleScroll = () => {
 
 let isDark = ref($store.theme == 'black')
 bus.$on('changeTheme', (theme: string) => {
-  isDark.value = (theme == 'black')
-}
-)
+  isDark.value = theme == 'black'
+})
 
 let divToHide = ref()
 let handleClickOutside = (event: MouseEvent) => {
@@ -334,7 +330,6 @@ let answer = (userId: string, _id: string) => {
  * 4.再将用户昵称存在浏览器
  */
 
-
 let CommentSubmit = async function () {
   console.log(MessageText.value)
   if (!MessageText.value) {
@@ -364,7 +359,6 @@ let CommentSubmit = async function () {
     head
   }
 
-
   if (answerCommentId.value) {
     body['parentId'] = answerCommentId.value
     body.text = tip.value + '：' + body.text
@@ -392,11 +386,10 @@ let CommentSubmit = async function () {
     commentList.value = []
     end.value = false
     // getComment()
-    console.log('djwaiodjiwoajdioawjdoi');
+    console.log('djwaiodjiwoajdioawjdoi')
     getComment()
   }
 }
-
 
 let initList = () => {
   nextTick(() => {
@@ -412,20 +405,16 @@ let initList = () => {
 let Skip = ref(0)
 let Limit = ref(8)
 
-
-
 // 获取留言列表
 let end = ref(false)
 let getComment = async () => {
   // const { data } = await $http.blogs.getMessageList()
-  console.log(Skip.value);
+  console.log(Skip.value)
 
-  const { data } = await $http.blogs.getMessageListTiert(
-    {
-      Skip: Skip.value,
-      Limit: Limit.value
-    }
-  )
+  const { data } = await $http.blogs.getMessageListTiert({
+    Skip: Skip.value,
+    Limit: Limit.value
+  })
   console.log(data)
   Skip.value += Limit.value
   const pattern = /\[\[([\u4E00-\u9FA5\w]+)\]\]/g
@@ -459,7 +448,6 @@ let getComment = async () => {
   console.log('-------------------')
   console.log(commentList.value)
 
-
   //
 }
 // getComment()
@@ -473,7 +461,7 @@ let setWeathe = () => {
       console.log(JSON.parse(locationCookie))
       watherList.value = JSON.parse(locationCookie)
     } else {
-      console.log('esle');
+      console.log('esle')
       const { data } = await $http.other.getWather(130110)
       console.log(data)
       setLCookie('LBlogWeather', JSON.stringify(data.forecasts[0]), 3)
@@ -482,16 +470,13 @@ let setWeathe = () => {
     if (watherList.value) {
       watherList.value.casts = watherList.value.casts.slice(0, 3)
       watherList.value.casts.forEach((item: any) => {
-        console.log(item);
+        console.log(item)
         item.week = weekMap[item.week]
         item.dayweatherIcon = weatherMap[item.dayweather]
         item.date = item.date.split('-')[1] + '月' + item.date.split('-')[2] + '日'
       })
     }
-
   })
-
-
 }
 setWeathe()
 
@@ -499,10 +484,9 @@ let yiyan = async () => {
   const { data } = await $http.other.yiyan()
   poetry.value = {
     hitokoto: data.hitokoto,
-    from: data.from,
+    from: data.from
   }
-  console.log(data.hitokoto);
-
+  console.log(data.hitokoto)
 }
 yiyan()
 // htt
@@ -525,23 +509,20 @@ yiyan()
   }
 }
 
-
 .box,
 input,
 textarea {
-
   // background-color: #eee;
   background-color: @main-bordercolor-gray;
   border: none;
   padding: 1rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   width: 13em;
   border-radius: 1rem;
   box-shadow: 0 0.4rem #dfd9d9;
   color: @main-fontcolor;
   cursor: pointer;
 }
-
 
 textarea {
   width: 100%;
@@ -558,10 +539,9 @@ input:focus {
   outline-color: lightcoral;
 }
 
-
 .CommentSubmitButton {
   cursor: pointer;
-  background: #FBCA1F;
+  background: #fbca1f;
   font-family: inherit;
   padding: 0.6em 1.3em;
   font-weight: 900;
@@ -700,7 +680,6 @@ input:focus {
     display: flex;
     overflow: hidden;
 
-
     .ArticleDetailContentTab {
       background-color: @main-backgroundcolor;
       border: 1px solid @main-bordercolor-gray;
@@ -708,7 +687,7 @@ input:focus {
       padding: 1rem;
 
       .UserHeadIcon {
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
 
         img {
           width: 2.5rem;
@@ -719,12 +698,10 @@ input:focus {
         margin-right: 1rem;
       }
 
-
       .ArticleMain {
         flex: 1;
 
         .ArticleDetailCommentContent {
-
           position: relative;
 
           // textarea {
@@ -790,7 +767,6 @@ input:focus {
     padding-top: 5rem;
 
     .ContentBox {
-
       height: 15rem;
 
       .unactiveArticleDetailContent {
@@ -814,7 +790,6 @@ input:focus {
           }
 
           .box {
-
             display: flex;
             align-items: center;
             width: 100%;
@@ -827,10 +802,6 @@ input:focus {
         }
       }
     }
-
-
-
-
 
     .main {
       display: flex;
@@ -852,7 +823,6 @@ input:focus {
         // overflow: hidden;
         // width: 49rem;
         background-color: @main-backgroundcolor;
-
 
         .ListMain {
           border: 1px solid @main-bordercolor-gray;
@@ -897,7 +867,6 @@ input:focus {
                 span {
                   display: flex;
                   flex-wrap: wrap;
-
                 }
 
                 img {
@@ -929,11 +898,9 @@ input:focus {
 
       .rightBox {
         position: sticky;
-        top: .5rem;
+        top: 0.5rem;
         height: 100%;
         width: 16.5rem;
-
-
 
         .watherMain {
           text-align: center;
@@ -953,7 +920,6 @@ input:focus {
           &:hover {
             transform: scale(1.05);
           }
-
 
           .BlogStatistic {
             display: flex;
@@ -998,7 +964,6 @@ input:focus {
         }
 
         .xiaoluInf {
-
           // width: 18.75rem;
           height: 20rem;
           align-items: center;
@@ -1066,8 +1031,6 @@ input:focus {
       }
     }
   }
-
-
 }
 
 @media screen and (max-width: 1245px) {
@@ -1108,13 +1071,10 @@ input:focus {
             .ArticleMain {
               flex: 1;
               margin-right: 1rem;
-
             }
           }
         }
       }
-
-
 
       .main {
         margin: 0 1rem;
@@ -1129,14 +1089,10 @@ input:focus {
             width: 100%;
           }
         }
-
       }
     }
-
-
   }
 }
-
 
 // @media screen and (max-width: 1245px) {}
 
@@ -1151,13 +1107,10 @@ input:focus {
     }
   }
 
-
-
   .messageMain {
     .h5 {
       display: none;
     }
-
 
     .mainBox {
       .ContentBox {
@@ -1203,8 +1156,6 @@ input:focus {
             margin-right: 1.25rem;
           }
         }
-
-
       }
 
       .main {
@@ -1226,13 +1177,10 @@ input:focus {
           }
         }
 
-        .rightBox {}
+        .rightBox {
+        }
       }
-
-
     }
-
-
   }
 }
 </style>

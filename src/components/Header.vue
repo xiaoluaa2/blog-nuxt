@@ -13,7 +13,7 @@
         <div class="theme">
           <theme-swith />
         </div>
-        <div v-for="item in menuList" :key="item.id" class="menu_item">
+        <div v-for="item in menuListPC" :key="item.id" class="menu_item">
           <div @click="checkMenu(item)" class="button-borders">
             <div class="inner">
               {{ item.title }}
@@ -47,7 +47,7 @@
           <i @click="OpenMobileMenu = false" class="iconfont">&#xe6ca;</i>
         </div>
         <div class="menu_list">
-          <div @click="checkMenu(item)" :class="menu_checked == item.id ? 'active' : ''" v-for="item in menuList" :key="item.id" class="menu_item">
+          <div @click="checkMenu(item)" :class="menu_checked == item.id ? 'active' : ''" v-for="item in menuListH5" :key="item.id" class="menu_item">
             <div class="button-borders">
               <div class="inner">
                 {{ item.title }}
@@ -90,9 +90,9 @@
 </template>
 
 <script setup lang="ts">
-import $http from '@/api/index.ts'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import $http from '@/api/index.ts';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 type Menu = {
   title: string
   id: string
@@ -100,7 +100,7 @@ type Menu = {
   child?: Menu[]
 }
 let router = useRouter()
-let menuList = ref<Menu[]>([
+let menuListPC = ref<Menu[]>([
   { title: '博客', id: '1', route: '/' },
   { title: '留言', id: '2', route: '/MessageBoard' },
   { title: '关于', id: '3', route: '/about' },
@@ -110,6 +110,12 @@ let menuList = ref<Menu[]>([
     id: '5',
     child: [{ title: 'ThreeDemo', id: '51', route: '/other/car' }]
   }
+])
+let menuListH5 = ref<Menu[]>([
+  { title: '博客', id: '1', route: '/' },
+  { title: '留言', id: '2', route: '/MessageBoard' },
+  { title: '关于', id: '3', route: '/about' },
+  { title: '友链', id: '4', route: '/link' }
 ])
 const $store = useStore.common()
 let menu_checked = ref($store.menu)
@@ -311,7 +317,7 @@ let goHome = () => {
         margin-top: 15%;
 
         padding: 4rem 2rem;
-        background-color: #fff;
+        background-color: @main-backgroundcolor-2;
         position: relative;
 
         i {
@@ -327,14 +333,15 @@ let goHome = () => {
             display: flex;
             align-items: center;
             /* font-family: 'Valorant', sans-serif; */
-            color: white;
+            color: @main-backgroundcolor-2;
             cursor: pointer;
             font-size: 13px;
             font-weight: bold;
             letter-spacing: 0.05rem;
             border: 1px solid #0e1822;
             padding: 0.8rem 2.1rem;
-            background-color: #0e1822;
+            // background-color: #0e1822;
+            background-color: @main-bordercolor;
             background-size: 200%;
             background-position: 200%;
             background-repeat: no-repeat;
@@ -346,7 +353,7 @@ let goHome = () => {
           z-index: 1;
           display: flex;
           align-items: center;
-          margin-bottom: 4rem;
+          margin-bottom: 3rem;
 
           &:last-child {
             margin-bottom: 0;
@@ -412,7 +419,8 @@ let goHome = () => {
           height: 50%;
           left: -0.3em;
           top: -0.3em;
-          border: 1px solid #0e1822;
+          // border: 1px solid #0e1822;
+          border: 1px solid @main-bordercolor;
           border-bottom: 0px;
           /* opacity: 0.3; */
         }
@@ -424,7 +432,8 @@ let goHome = () => {
           height: 50%;
           left: -0.3em;
           bottom: -0.3em;
-          border: 1px solid #0e1822;
+          // border: 1px solid #0e1822;
+          border: 1px solid @main-bordercolor;
           border-top: 0px;
           /* opacity: 0.3; */
           z-index: 0;
@@ -1011,6 +1020,7 @@ let goHome = () => {
   bottom: 0;
   margin: 0.2rem;
   background: @main-backgroundcolor-2;
+  // background: #fff;
   // inset: 5px;
   border-radius: 15px;
 }
