@@ -1,13 +1,14 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "prepare": "husky install",
+    "commit": "git-cz"
   },
   "dependencies": {
     "@arms/js-sdk": "^1.8.36-beta.4",
@@ -31,13 +32,27 @@
     "vue3-particles": "^2.9.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.0.3",
+    "@commitlint/config-conventional": "^19.0.3",
+    "@commitlint/cz-commitlint": "^19.0.3",
     "@element-plus/nuxt": "^1.0.5",
     "@nuxt/devtools": "latest",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "commitizen": "^4.3.0",
+    "commitlint": "^19.0.3",
+    "commitlint-config-cz": "^0.13.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^7.0.0",
+    "husky": "^8.0.3",   
     "less": "^4.2.0",
     "nuxt": "^3.8.0",
     "terser": "^5.26.0",
     "vue": "^3.3.7",
     "vue-router": "^4.2.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
   }
 }
