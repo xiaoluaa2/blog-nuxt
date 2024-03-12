@@ -5,7 +5,7 @@
         <Particles v-if="initParticles" :particlesInit="particlesInit" id="tsparticles" :options="particles" />
       </div>
       <div class="blogMain">
-        <div class="notice">愿你一生有山可靠，有树可栖。与心爱之人，春赏花，夏纳凉。秋登山，冬扫雪。test4</div>
+        <div class="notice">愿你一生有山可靠，有树可栖。与心爱之人，春赏花，夏纳凉。秋登山，冬扫雪。test5</div>
         <div class="random_box">
           <div @click="getBlogsRandom" class="random">随机文章</div>
         </div>
