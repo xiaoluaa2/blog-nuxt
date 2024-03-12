@@ -85,9 +85,9 @@ export default {
     // 该配置用于服务端请求转发
     routeRules: {
       '/api/**': {
-        proxy: 'http://localhost:5200/**' // 测试
+        // proxy: 'http://localhost:5200/**' // 测试
         // 线上
-        // proxy: 'http://admin.lubowen.xyz/**'
+        proxy: 'http://admin.lubowen.xyz/**'
       },
       '/gd': {
         //  测试
