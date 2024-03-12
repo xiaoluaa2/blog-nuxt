@@ -26,6 +26,10 @@ export default {
       plugins
     }
   },
+  buildModules: [
+    // 添加 @nuxt/analyze 模块
+    '@nuxt/analyze'
+  ],
   plugins: ['~/plugins/tsparticles', '~/plugins/VMDPreview'],
   css: [
     /**
