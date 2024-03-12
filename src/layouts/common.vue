@@ -1489,7 +1489,7 @@ let jump_location = (index: number) => {
 
       .two_catalogue {
         .two_catalogue_inner {
-          111111111111111111111111111111111111111111111111 &:hover {
+          &:hover {
             color: #fff;
             background-color: #2abeeb7e;
           }
