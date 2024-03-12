@@ -68,6 +68,9 @@ export default {
           drop_console: true,
           drop_debugger: true
         }
+      },
+      analyze: {
+        analyzerMode: 'static'
       }
     }
   },
