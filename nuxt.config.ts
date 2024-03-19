@@ -18,6 +18,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }]
   },
   build: {
+    analyze: {
+      analyzerMode: 'static'
+    },
     extractCSS: { allChunks: true },
     build: {
       transpile: ['jinrishici']
@@ -58,6 +61,7 @@ export default {
     },
     build: {
       sourcemap: 'inline',
+
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -71,8 +75,8 @@ export default {
   nitro: {
     devProxy: {
       '/api': {
-        target: 'http://localhost:5200', // 测试
-        // target: 'http://admin.lubowen.xyz',
+        // target: 'http://localhost:5200', // 测试
+        target: 'http://admin.lubowen.xyz',
         changeOrigin: true,
         prependPath: true
       },

@@ -1,14 +1,6 @@
 <template>
   <transition name="head">
-    <div
-      :class="
-        (scrollTop > 84 && showHead) || OpenMobileMenu
-          ? 'header_common_white'
-          : ''
-      "
-      v-show="showHead || OpenMobileMenu"
-      class="header"
-    >
+    <div :class="(scrollTop > 84 && showHead) || OpenMobileMenu ? 'header_common_white' : ''" v-show="showHead || OpenMobileMenu" class="header">
       <div class="menu">
         <span @click="goHome" class="logo">
           <div class="xioalu">小鹿</div>
@@ -28,11 +20,7 @@
             </div>
           </div>
           <div @v-if="item.child" class="child-list">
-            <div
-              @click="checkMenu(child)"
-              v-for="child in item.child"
-              class="child-item"
-            >
+            <div @click="checkMenu(child)" v-for="child in item.child" class="child-item">
               {{ child.title }}
             </div>
           </div>
@@ -45,9 +33,7 @@
             <i class="iconfont">&#xe76d;</i>
           </div>
           <theme-swith />
-          <i @click="showMenu" v-if="scrollTop > 84" class="iconfont"
-            >&#xfe8a;</i
-          >
+          <i @click="showMenu" v-if="scrollTop > 84" class="iconfont">&#xfe8a;</i>
           <i @click="showMenu" v-else class="iconfont">&#xfe8b;</i>
         </div>
       </div>
@@ -61,13 +47,7 @@
           <i @click="OpenMobileMenu = false" class="iconfont">&#xe6ca;</i>
         </div>
         <div class="menu_list">
-          <div
-            @click="checkMenu(item)"
-            :class="menu_checked == item.id ? 'active' : ''"
-            v-for="item in menuListH5"
-            :key="item.id"
-            class="menu_item"
-          >
+          <div @click="checkMenu(item)" :class="menu_checked == item.id ? 'active' : ''" v-for="item in menuListH5" :key="item.id" class="menu_item">
             <div class="button-borders">
               <div class="inner">
                 {{ item.title }}
@@ -88,15 +68,7 @@
               <div class="close">
                 <i @click="closeSearchDialog" class="iconfont">&#xe6ca;</i>
               </div>
-              <input
-                autocomplete="off"
-                v-model="searchText"
-                @input="select"
-                type="text"
-                placeholder="搜索文章"
-                name="text"
-                class="input"
-              />
+              <input autocomplete="off" v-model="searchText" @input="select" type="text" placeholder="搜索文章" name="text" class="input" />
             </div>
 
             <div class="blog-list">
@@ -139,14 +111,15 @@ let menuListPC = ref<Menu[]>([
     child: [
       { title: 'ThreeDemo', id: '51', route: '/other/car' },
       { title: '不想吃饭了', id: '52', route: '/other/eat' },
-    ],
-  },
+      { title: '压缩jpg', id: '53', route: '/other/compress' }
+    ]
+  }
 ])
 let menuListH5 = ref<Menu[]>([
   { title: '博客', id: '1', route: '/' },
   { title: '留言', id: '2', route: '/MessageBoard' },
   { title: '关于', id: '3', route: '/about' },
-  { title: '友链', id: '4', route: '/link' },
+  { title: '友链', id: '4', route: '/link' }
 ])
 const $store = useStore.common()
 let menu_checked = ref($store.menu)
@@ -176,9 +149,7 @@ let checkMenu = (item: Menu) => {
 let showHead = ref(true)
 let scrollTop = ref(0)
 let scrollFunc = function () {
-  var aftertop = document.documentElement
-    ? document.documentElement.scrollTop
-    : document.body.scrollTop //兼容
+  var aftertop = document.documentElement ? document.documentElement.scrollTop : document.body.scrollTop //兼容
   if (aftertop - scrollTop.value > 0) {
     showHead.value = false
   } else {
@@ -212,35 +183,29 @@ let blogList = ref<Blog[]>([])
 let select = async () => {
   console.log(searchText.value)
   const { data } = await $http.blogs.searchBlog({
-    text: searchText.value,
+    text: searchText.value
   })
   console.log(data.data)
   const regex = new RegExp(`${searchText.value}`, 'g')
   blogList.value = data.data.map((item: Blog) => {
     return {
-      Title: item.Title.replace(
-        regex,
-        '<strong>' + searchText.value + '</strong>'
-      ),
-      Summary: item.Summary.replace(
-        regex,
-        '<strong>' + searchText.value + '</strong>'
-      ),
-      _id: item._id,
+      Title: item.Title.replace(regex, '<strong>' + searchText.value + '</strong>'),
+      Summary: item.Summary.replace(regex, '<strong>' + searchText.value + '</strong>'),
+      _id: item._id
     }
   })
 }
 let goBlog = (id: string) => {
   searchBox.value = false
   router.push({
-    path: `/BlogDetail/${id}`,
+    path: `/BlogDetail/${id}`
   })
 }
 
 // 首页
 let goHome = () => {
   router.push({
-    path: '/',
+    path: '/'
   })
 }
 </script>
@@ -525,8 +490,7 @@ let goHome = () => {
           border-radius: 10px;
           outline: 2px solid #febf00;
           border: 0;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
           background-color: @main-bordercolor-gray;
           color: @main-fontcolor;
           outline-offset: 3px;
@@ -585,11 +549,8 @@ let goHome = () => {
               border-radius: 0.75em;
               -webkit-transform-style: preserve-3d;
               transform-style: preserve-3d;
-              -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
-              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
-                background 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+              -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
             }
 
             button.learn-more::before {
@@ -607,10 +568,7 @@ let goHome = () => {
               box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
               -webkit-transform: translate3d(0, 0.75em, -1em);
               transform: translate3d(0, 0.75em, -1em);
-              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
-                box-shadow 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
             }
 
             button.learn-more:hover {
@@ -713,8 +671,7 @@ let goHome = () => {
           border-radius: 10px;
           outline: 2px solid #febf00;
           border: 0;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
           background-color: @main-bordercolor-gray;
           color: @main-fontcolor;
           outline-offset: 3px;
@@ -773,11 +730,8 @@ let goHome = () => {
               border-radius: 0.75em;
               -webkit-transform-style: preserve-3d;
               transform-style: preserve-3d;
-              -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
-              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
-                background 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+              -webkit-transition: background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
+              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
             }
 
             button.learn-more::before {
@@ -795,10 +749,7 @@ let goHome = () => {
               box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
               -webkit-transform: translate3d(0, 0.75em, -1em);
               transform: translate3d(0, 0.75em, -1em);
-              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1),
-                box-shadow 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1),
-                -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+              transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
             }
 
             button.learn-more:hover {

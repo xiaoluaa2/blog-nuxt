@@ -1,11 +1,5 @@
 <template>
   <div class="app">
-    <keep-alive max="10">
-      <NuxtLayout>
-        <NuxtPage />
-        <LuMusic></LuMusic>
-      </NuxtLayout>
-    </keep-alive>
     <div class="load_main" v-if="!loaded">
       <div class="spinner-container">
         <div class="spinner">
@@ -21,6 +15,12 @@
         </div>
       </div>
     </div>
+    <keep-alive v-show="loaded" max="10">
+      <NuxtLayout>
+        <NuxtPage />
+        <LuMusic></LuMusic>
+      </NuxtLayout>
+    </keep-alive>
   </div>
 </template>
 <script setup lang="ts">

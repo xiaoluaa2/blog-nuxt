@@ -300,3 +300,24 @@ export const browerType = function () {
   if (ua.indexOf('chrome') > -1 && window.chrome) return 'chrome浏览器'
   return '其他浏览器'
 }
+
+export function downloadBase64Image(base64String: string, fileName: string) {
+  // 创建一个 <a> 标签
+  const link = document.createElement('a')
+  link.style.display = 'none'
+
+  // 设置 Base64 图片数据为 href 属性
+  link.href = base64String
+
+  // 设置下载文件的名称
+  link.download = fileName
+
+  // 将 <a> 标签添加到文档中
+  document.body.appendChild(link)
+
+  // 模拟点击 <a> 标签，开始下载
+  link.click()
+
+  // 清理文档中的 <a> 标签
+  document.body.removeChild(link)
+}
