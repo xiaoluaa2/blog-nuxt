@@ -18,9 +18,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }]
   },
   build: {
-    analyze: {
-      analyzerMode: 'static'
-    },
+    // analyze: {
+    //   analyzerMode: 'static'
+    // },
     extractCSS: { allChunks: true },
     build: {
       transpile: ['jinrishici']
