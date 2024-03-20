@@ -25,3 +25,12 @@ jobs:
           REMOTE_HOST: '47.116.126.150'
           REMOTE_USER: root
           TARGET: /www/blog/blog-nuxt
+      - name: SSH into server and restart PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: '47.116.126.150'
+          username: root
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /www/blog/blog-nuxt
+            pm2 restart all
