@@ -10,20 +10,44 @@
           <div @click="getBlogsRandom" class="random">随机文章</div>
         </div>
         <div class="tags_box">
-          <el-scrollbar v-if="tagsList.length">
-            <div class="tags_box_inner">
-              <div class="icon"><i class="iconfont">&#xe60b;</i></div>
-              <div class="tags_list">
-                <div @click="changeTag(item.TagName)" v-for="item in tagsList" class="tags_item">
-                  {{ item.TagName }}
-                  <span class="tag_mark">{{ item.blogs }}</span>
+          <el-skeleton style="width: 100%" :loading="tagsList.length ? false : true" animated :count="1">
+            <template #template>
+              <div class="tags_box_inner">
+                <div class="icon"><i class="iconfont">&#xe60b;</i></div>
+                <div class="tags_list">
+                  <el-skeleton-item class="tags_item" v-for="itme in 4" variant="text" style="width: 15%" />
                 </div>
               </div>
-            </div>
-          </el-scrollbar>
+            </template>
+
+            <template #default>
+              <el-scrollbar style="width: 100%">
+                <div class="tags_box_inner">
+                  <div class="icon"><i class="iconfont">&#xe60b;</i></div>
+                  <div class="tags_list">
+                    <div @click="changeTag(item.TagName)" v-for="item in tagsList" class="tags_item">
+                      {{ item.TagName }}
+                      <span class="tag_mark">{{ item.blogs }}</span>
+                    </div>
+                  </div>
+                </div>
+              </el-scrollbar>
+            </template>
+          </el-skeleton>
         </div>
 
         <div class="blogsList">
+          <!-- <el-skeleton style="width: 100%" :loading="blogsList.length ? true : true" animated :count="1">
+            <template #template>
+              <el-skeleton-item class="tags_item" v-for="itme in 3" variant="text" style="width: 100%; height: 18.75rem" />
+            </template>
+
+            <template #default>
+              <el-scrollbar style="width: 100%">
+                <BlogsItem v-for="(item, index) in blogsList" :blog="item" :index="index" :key="item._id"></BlogsItem>
+              </el-scrollbar>
+            </template>
+          </el-skeleton> -->
           <BlogsItem v-for="(item, index) in blogsList" :blog="item" :index="index" :key="item._id"></BlogsItem>
           <el-pagination :hide-on-single-page="true" @current-change="pageChange" :current-page="pageNum" :page-size="6" background layout="prev, pager, next" :total="total" />
         </div>
@@ -79,7 +103,7 @@ let getBlogsRandom = async () => {
 // https://particles.js.org/samples/index.html#imageMask 背景粒子库
 // 博客
 
-let blogsList = ref<Blog[]>()
+let blogsList = ref<Blog[]>([])
 
 let pageNum = ref(1)
 // 分页
@@ -171,6 +195,9 @@ type I8 = Shift<['a', 2, 3, 'da']> // J
     }
 
     .tags_box {
+      height: 2.7rem;
+      display: flex;
+      align-items: center;
       width: 100%;
       box-sizing: border-box;
       border-radius: 0.5rem;

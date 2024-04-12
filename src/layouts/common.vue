@@ -85,51 +85,90 @@
                 <i class="iconfont icon-mulu"></i>
                 目录
               </div>
+              <el-skeleton style="width: 100%" :loading="titleList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div style="display: flex; flex-direction: column" v-for="itme in 3">
+                    <el-skeleton-item variant="text" style="width: 35%; margin-top: 10px" />
+                    <el-skeleton-item variant="text" style="width: 60%; margin-top: 10px" />
+                    <el-skeleton-item variant="text" style="width: 60%; margin-top: 10px" />
+                  </div>
+                  <el-skeleton-item variant="text" style="width: 35%; margin-top: 10px" />
+                </template>
 
-              <div class="catalogue_item" v-for="(item, index) in titleList" :key="item.indent">
-                <div v-if="item.indent == 2" class="three_catalogue">
-                  <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" class="three_catalogue_inner">
-                    {{ item.title }}
+                <template #default>
+                  <div class="catalogue_item" v-for="(item, index) in titleList" :key="item.indent">
+                    <div v-if="item.indent == 2" class="three_catalogue">
+                      <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" class="three_catalogue_inner">
+                        {{ item.title }}
+                      </div>
+                    </div>
+                    <div v-else-if="item.indent == 1" class="two_catalogue">
+                      <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" class="two_catalogue_inner">
+                        {{ item.title }}
+                      </div>
+                    </div>
+                    <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" v-else class="catalogue_content">
+                      {{ item.title }}
+                    </div>
                   </div>
-                </div>
-                <div v-else-if="item.indent == 1" class="two_catalogue">
-                  <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" class="two_catalogue_inner">
-                    {{ item.title }}
-                  </div>
-                </div>
-                <div @click="jump_location(index)" :class="heightTitle == index ? 'active_catalogue' : ''" v-else class="catalogue_content">
-                  {{ item.title }}
-                </div>
-              </div>
+                </template>
+              </el-skeleton>
             </div>
             <div class="hot shadow-box">
               <div class="hot_title">
                 <i class="iconfont">&#xe666;</i>
                 推荐文章
               </div>
-              <div @click="blogDetail(item._id)" class="hot_item" v-for="(item, index) in hotList" :key="item._id">
-                <div class="article__image">
-                  <img :src="_imgUrl(item.ArticleCover)" :alt="item.title" />
-                </div>
-                <div class="article__title">
-                  {{ item.title }}
-                </div>
-                <div class="article__date">
-                  <i class="iconfont">&#xe6d9;</i>
-                  {{ format('yyyy-MM-dd', Date.parse(item.CreateDate)) }}
-                </div>
-              </div>
+              <el-skeleton style="width: 100%" :loading="hotList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div v-for="itme in 3">
+                    <div style="display: flex; margin: 10px 0">
+                      <el-skeleton-item class="tags_item" variant="text" style="height: 3.75rem; width: 6rem" />
+                      <el-skeleton-item class="tags_item" variant="text" style="margin-left: 1rem; margin-top: 5px; flex: 1" />
+                    </div>
+                    <el-skeleton-item class="tags_item" variant="text" style="width: 35%" />
+                  </div>
+                </template>
+
+                <template #default>
+                  <div @click="blogDetail(item._id)" class="hot_item" v-for="(item, index) in hotList" :key="item._id">
+                    <div class="article__image">
+                      <img :src="_imgUrl(item.ArticleCover)" :alt="item.title" />
+                    </div>
+                    <div class="article__title">
+                      {{ item.title }}
+                    </div>
+                    <div class="article__date">
+                      <i class="iconfont">&#xe6d9;</i>
+                      {{ format('yyyy-MM-dd', Date.parse(item.CreateDate)) }}
+                    </div>
+                  </div>
+                </template>
+              </el-skeleton>
             </div>
             <div class="tag shadow-box">
               <div class="tag_title">
                 <i class="iconfont">&#xe60b;</i>
                 标签分类
               </div>
-              <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
-                <div @click="goTagPage(item.TagName)" class="tag_item">
-                  <div class="text">{{ item.TagName }} ({{ item.blogs }}篇)</div>
-                </div>
-              </div>
+
+              <el-skeleton style="width: 100%" :loading="hotList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div v-for="itme in 6">
+                    <div style="display: flex; margin: 10px 0">
+                      <el-skeleton-item variant="text" style="width: 35%; margin-top: 20px" />
+                    </div>
+                  </div>
+                </template>
+
+                <template #default>
+                  <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
+                    <div @click="goTagPage(item.TagName)" class="tag_item">
+                      <div class="text">{{ item.TagName }} ({{ item.blogs }}篇)</div>
+                    </div>
+                  </div>
+                </template>
+              </el-skeleton>
             </div>
           </div>
           <div v-else class="stick_box">
@@ -138,29 +177,60 @@
                 <i class="iconfont">&#xe666;</i>
                 推荐文章
               </div>
-              <div @click="blogDetail(item._id)" class="hot_item" v-for="(item, index) in hotList" :key="item._id">
-                <div class="article__image">
-                  <img :src="_imgUrl(item.ArticleCover)" :alt="item.title" />
-                </div>
-                <div class="article__title">
-                  {{ item.title }}
-                </div>
-                <div class="article__date">
-                  <i class="iconfont">&#xe6d9;</i>
-                  {{ format('yyyy-MM-dd', Date.parse(item.CreateDate)) }}
-                </div>
-              </div>
+              <el-skeleton style="width: 100%" :loading="hotList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div v-for="itme in 3">
+                    <div style="display: flex; margin: 10px 0">
+                      <el-skeleton-item class="tags_item" variant="text" style="height: 3.75rem; width: 6rem" />
+                      <el-skeleton-item class="tags_item" variant="text" style="margin-left: 1rem; margin-top: 5px; flex: 1" />
+                    </div>
+                    <el-skeleton-item class="tags_item" variant="text" style="width: 35%" />
+                  </div>
+                </template>
+
+                <template #default>
+                  <div @click="blogDetail(item._id)" class="hot_item" v-for="(item, index) in hotList" :key="item._id">
+                    <div class="article__image">
+                      <img :src="_imgUrl(item.ArticleCover)" :alt="item.title" />
+                    </div>
+                    <div class="article__title">
+                      {{ item.title }}
+                    </div>
+                    <div class="article__date">
+                      <i class="iconfont">&#xe6d9;</i>
+                      {{ format('yyyy-MM-dd', Date.parse(item.CreateDate)) }}
+                    </div>
+                  </div>
+                </template>
+              </el-skeleton>
             </div>
             <div class="tag shadow-box">
               <div class="tag_title">
                 <i class="iconfont">&#xe60b;</i>
                 标签分类
               </div>
-              <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
+              <!-- <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
                 <div @click="goTagPage(item.TagName)" class="tag_item">
                   <div class="text">{{ item.TagName }} ({{ item.blogs }}篇)</div>
                 </div>
-              </div>
+              </div> -->
+              <el-skeleton style="width: 100%" :loading="hotList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div v-for="itme in 6">
+                    <div style="display: flex; margin: 10px 0">
+                      <el-skeleton-item variant="text" style="width: 35%; margin-top: 20px" />
+                    </div>
+                  </div>
+                </template>
+
+                <template #default>
+                  <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
+                    <div @click="goTagPage(item.TagName)" class="tag_item">
+                      <div class="text">{{ item.TagName }} ({{ item.blogs }}篇)</div>
+                    </div>
+                  </div>
+                </template>
+              </el-skeleton>
             </div>
           </div>
         </div>
@@ -226,29 +296,60 @@
                 <i class="iconfont">&#xe666;</i>
                 推荐文章
               </div>
-              <div @click="blogDetail(item._id)" class="hot_item" v-for="(item, index) in hotList" :key="item._id">
-                <div class="article__image">
-                  <img :src="_imgUrl(item.ArticleCover)" :alt="item.title" />
-                </div>
-                <div class="article__title">
-                  {{ item.title }}
-                </div>
-                <div class="article__date">
-                  <i class="iconfont">&#xe6d9;</i>
-                  {{ format('yyyy-MM-dd', Date.parse(item.CreateDate)) }}
-                </div>
-              </div>
+              <el-skeleton style="width: 100%" :loading="hotList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div v-for="itme in 3">
+                    <div style="display: flex; margin: 10px 0">
+                      <el-skeleton-item class="tags_item" variant="text" style="height: 3.75rem; width: 6rem" />
+                      <el-skeleton-item class="tags_item" variant="text" style="margin-left: 1rem; margin-top: 5px; flex: 1" />
+                    </div>
+                    <el-skeleton-item class="tags_item" variant="text" style="width: 35%" />
+                  </div>
+                </template>
+
+                <template #default>
+                  <div @click="blogDetail(item._id)" class="hot_item" v-for="(item, index) in hotList" :key="item._id">
+                    <div class="article__image">
+                      <img :src="_imgUrl(item.ArticleCover)" :alt="item.title" />
+                    </div>
+                    <div class="article__title">
+                      {{ item.title }}
+                    </div>
+                    <div class="article__date">
+                      <i class="iconfont">&#xe6d9;</i>
+                      {{ format('yyyy-MM-dd', Date.parse(item.CreateDate)) }}
+                    </div>
+                  </div>
+                </template>
+              </el-skeleton>
             </div>
             <div class="tag shadow-box">
               <div class="tag_title">
                 <i class="iconfont">&#xe60b;</i>
                 标签分类
               </div>
-              <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
+              <!-- <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
                 <div @click="goTagPage(item.TagName)" class="tag_item">
                   <div class="text">{{ item.TagName }} ({{ item.blogs }}篇)</div>
                 </div>
-              </div>
+              </div> -->
+              <el-skeleton style="width: 100%" :loading="hotList.length ? false : true" animated :count="1">
+                <template #template>
+                  <div v-for="itme in 6">
+                    <div style="display: flex; margin: 10px 0">
+                      <el-skeleton-item variant="text" style="width: 35%; margin-top: 20px" />
+                    </div>
+                  </div>
+                </template>
+
+                <template #default>
+                  <div class="hot_item" v-for="(item, index) in typeList" :key="item._id">
+                    <div @click="goTagPage(item.TagName)" class="tag_item">
+                      <div class="text">{{ item.TagName }} ({{ item.blogs }}篇)</div>
+                    </div>
+                  </div>
+                </template>
+              </el-skeleton>
             </div>
           </div>
         </div>
@@ -256,6 +357,21 @@
     </transition>
     <Footer></Footer>
     <Menu></Menu>
+  </div>
+  <div class="load_main" v-if="!loaded">
+    <div class="spinner-container">
+      <div class="spinner">
+        <div class="spinner">
+          <div class="spinner">
+            <div class="spinner">
+              <div class="spinner">
+                <div class="spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -273,11 +389,9 @@ interface Props {
   heightTitle: number
 }
 let props = defineProps<Props>()
-
+let loaded = ref(false)
 onMounted(() => {
-  // setTimeout(() => {
-  //   loaded.value = true
-  // }, 500);
+  loaded.value = true
 })
 // 移动端目录
 let showCatalogue = ref(false)

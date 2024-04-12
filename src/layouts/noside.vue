@@ -2,7 +2,7 @@
   <div :class="isDark ? 'dark' : 'bright'" class="common">
     <div class="placeholder"></div>
     <transition name="common">
-      <div v-show="loaded" class="main">
+      <div class="main">
         <div class="slot_box">
           <slot />
         </div>
@@ -30,18 +30,15 @@
 </template>
 <script setup lang="ts">
 import $http from '@/api/index.ts'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const format = $format
 let ArticleNum = ref(0)
 let CommentNum = ref(0)
 let LeaveMessageNum = ref(0)
 let loaded = ref(false)
 onMounted(() => {
-  setTimeout(() => {
-    loaded.value = true
-  }, 500)
+  loaded.value = true
 })
 let blogsSum = async () => {
   const { data } = await $http.blogs.blogsSum()

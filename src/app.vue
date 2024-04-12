@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <div class="load_main" v-if="!loaded">
+    <!-- <div class="load_main" v-if="!loaded">
       <div class="spinner-container">
         <div class="spinner">
           <div class="spinner">
@@ -14,8 +14,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <keep-alive v-show="loaded" max="10">
+    </div> -->
+    <keep-alive max="10">
       <NuxtLayout>
         <NuxtPage />
         <LuMusic></LuMusic>
@@ -58,11 +58,13 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url(@/assets/images/bg13.jpg) no-repeat 100% / cover;
+  // background: url(@/assets/images/bg13.jpg) no-repeat 100% / cover;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999999;
+  background: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(8px);
 
   .spinner-container {
     width: 150px;

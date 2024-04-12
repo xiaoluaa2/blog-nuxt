@@ -12,9 +12,9 @@ body,
 
 }
 
-body {
+/* body {
   background: url(@/assets/images/bg13.jpg) no-repeat 100%/cover;
-}
+} */
 
 div {
   box-sizing: border-box;

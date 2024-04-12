@@ -1,7 +1,7 @@
 <template>
   <div @click="blogDetail(blog._id)" class="BlogItem shadow-box">
     <div v-if="index % 2 == 0" class="img">
-      <img :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title" />
+      <img loading="lazy" v-if="blog.ArticleCover" :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title" />
     </div>
     <div class="main">
       <div class="time flex">
@@ -29,9 +29,7 @@
         </span>
       </div>
     </div>
-    <div v-if="index % 2 != 0" class="img">
-      <img :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title" />
-    </div>
+    <div v-if="index % 2 != 0" class="img"><img v-if="blog.ArticleCover" loading="lazy" :src="_imgUrl(blog.ArticleCover)" :alt="blog.Title" /></div>
   </div>
 </template>
 

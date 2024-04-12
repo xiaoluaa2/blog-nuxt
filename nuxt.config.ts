@@ -18,9 +18,9 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: 'favicon.ico' }]
   },
   build: {
-    // analyze: {
-    //   analyzerMode: 'static'
-    // },
+    analyze: {
+      analyzerMode: 'static'
+    },
     extractCSS: { allChunks: true },
     build: {
       transpile: ['jinrishici']
@@ -28,6 +28,12 @@ export default {
     babel: {
       plugins
     }
+  },
+  elementPlus: {
+    components: [
+      'ElInput'
+      // 在此添加其他需要的组件
+    ]
   },
   plugins: ['~/plugins/tsparticles', '~/plugins/VMDPreview'],
   css: [
