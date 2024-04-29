@@ -18,31 +18,45 @@
       </label>
       <p>质量：范围0-1(默认压缩质量是0.92)</p>
 
-      <table v-if="compressed">
+      <table v-if="compressed_jpg && compressed_webp">
         <thead>
           <tr>
             <th>原图</th>
-            <th>压缩后 <span id="download">下载</span></th>
+            <th>压缩后(jpg) <span id="download">下载</span></th>
+            <th>压缩后(webp) <span id="download">下载</span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><img v-if="origin" :src="origin" alt="原图" /></td>
-            <td><img v-if="compressed" :src="compressed" alt="压缩后图片" /></td>
+            <td><img v-if="compressed_jpg" :src="compressed_jpg" alt="压缩后图片" /></td>
+            <td><img v-if="compressed_webp" :src="compressed_webp" alt="压缩后图片" /></td>
           </tr>
           <tr>
             <td v-if="originWidth" id="origin-size">{{ originWidth }}M</td>
-            <td v-if="compressedWidth" id="compressed-size" style="color: green">{{ compressedWidth }}M</td>
+            <td v-if="compressedWidth_jpg" id="compressed-size" style="color: green">
+              {{ compressedWidth_jpg }}M
+              <span>
+                体积减少：<span id="compression-percentage">{{ (1 - compressedWidth_jpg / originWidth).toFixed(2) }}</span
+                >%
+              </span>
+            </td>
+            <td v-if="compressedWidth_webp" id="compressed-size" style="color: green">
+              {{ compressedWidth_webp }}M
+              <span>
+                体积减少：<span id="compression-percentage">{{ (1 - compressedWidth_webp / originWidth).toFixed(2) }}</span
+                >%
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
-      <div v-if="compressed" class="info">
+      <div v-if="compressed_jpg && compressed_webp" class="info">
         <div class="refresh">
           <span style="margin-right: 20px" @click="refresh">刷新</span>
-          <span @click="download">下载</span>
+          <span style="margin-right: 20px" @click="download">下载png</span>
+          <span @click="download2"> 下载webp</span>
         </div>
-        体积减少：<span id="compression-percentage">{{ (1 - compressedWidth / originWidth).toFixed(2) }}</span
-        >%
       </div>
     </div>
   </NuxtLayout>
@@ -54,9 +68,11 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 let inp = ref()
 let drop = ref()
 let origin = ref('')
-let compressed = ref('')
+let compressed_jpg = ref('')
+let compressed_webp = ref('')
 let originWidth = ref()
-let compressedWidth = ref()
+let compressedWidth_jpg = ref()
+let compressedWidth_webp = ref()
 let quality = ref(0.92)
 let subtract = (num: number) => {
   let res = _.round(quality.value - num, 2)
@@ -107,10 +123,14 @@ let refresh = () => {
 }
 // 下载
 let download = () => {
-  downloadBase64Image(base64_cache, file_name)
+  downloadBase64Image(base64_cache_jpg, file_name)
+}
+let download2 = () => {
+  downloadBase64Image(base64_cache_webp, file_name.replace('.jpg', '.webp'))
 }
 let file_name = '',
-  base64_cache = ''
+  base64_cache_jpg = '',
+  base64_cache_webp = ''
 function compress(file: File) {
   file_name = file.name
   originWidth.value = toMB(file.size)
@@ -129,11 +149,17 @@ function compress(file: File) {
       canvas.width = img.width
       canvas.height = img.height
       drawer!.drawImage(img, 0, 0, img.width, img.height)
-      const base64 = canvas.toDataURL(file.type, quality.value)
-      compressed.value = base64
-      base64_cache = base64
-      let blob = getBase64ImageSize(base64)
-      compressedWidth.value = toMB(blob.size)
+      const base64_jpg = canvas.toDataURL(file.type, quality.value)
+      base64_cache_jpg = base64_jpg
+      compressed_jpg.value = base64_jpg
+      const base64_webp = canvas.toDataURL('image/webp', quality.value)
+      base64_cache_webp = base64_webp
+      compressed_webp.value = base64_webp
+
+      let blob_jpg = getBase64ImageSize(base64_jpg)
+      let blob_webp = getBase64ImageSize(base64_webp)
+      compressedWidth_jpg.value = toMB(blob_jpg.size)
+      compressedWidth_webp.value = toMB(blob_webp.size)
     }
   }
 }
@@ -242,10 +268,11 @@ td {
 }
 th,
 td {
-  width: 49%;
+  width: 32%;
   text-align: center;
 }
 .info {
+  margin-top: 2rem;
   text-align: center;
   .refresh {
     cursor: pointer;

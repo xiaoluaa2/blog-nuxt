@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
 import { resolve } from 'path'
+
 let plugins = []
 // if (process.env.NODE_ENV === 'production') {
 plugins.push('transform-remove-console')
