@@ -321,3 +321,18 @@ export function downloadBase64Image(base64String: string, fileName: string) {
   // 清理文档中的 <a> 标签
   document.body.removeChild(link)
 }
+
+export const ThemeList = [
+  {
+    brightImage: 'url("/img/bg3.jpg")',
+    darkImage: 'url("/img/bg10.jpg")'
+  },
+  {
+    brightImage: 'url("/img/bg1.webp")',
+    darkImage: 'url("/img/bg2.webp")'
+  },
+  {
+    brightImage: 'url("/img/bg4.webp")',
+    darkImage: 'url("/img/bg3.webp")'
+  }
+]

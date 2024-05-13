@@ -493,15 +493,21 @@ let jump_location = (index: number) => {
   bus.$emit('jump_location', index)
 }
 </script>
-<style lang="less" scoped>
+<style>
+:root {
+  --bright-image: url('/img/bg13.webp');
+  --dark-image: url('/img/bg13.webp');
+}
 .bright {
-  background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover;
+  /* background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover; */
+  background: var(--bright-image) no-repeat 100% / cover;
 }
-
 .dark {
-  background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover;
+  /* background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover; */
+  background: var(--dark-image) no-repeat 100% / cover;
 }
-
+</style>
+<style lang="less" scoped>
 .common-enter-active {
   animation: bound-in 0.5s backwards;
 }

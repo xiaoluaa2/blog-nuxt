@@ -43,6 +43,17 @@ onMounted(() => {
     initTheme(theme)
   }
   loaded.value = true
+
+  if (localStorage.getItem('themeIndex')) {
+    let index = parseInt(localStorage.getItem('themeIndex') as string)
+    console.log(index)
+    document.documentElement.style.setProperty('--bright-image', ThemeList[index].brightImage)
+    document.documentElement.style.setProperty('--dark-image', ThemeList[index].darkImage)
+    console.log(ThemeList[index])
+  } else {
+    document.documentElement.style.setProperty('--bright-image', ThemeList[0].brightImage)
+    document.documentElement.style.setProperty('--dark-image', ThemeList[0].darkImage)
+  }
 })
 // import Header from '@/components/Header.vue';
 </script>

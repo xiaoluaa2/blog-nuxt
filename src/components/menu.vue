@@ -21,12 +21,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 let btnFlag = ref(false)
 let scrollTop = ref(0)
 const scrollToTop = () => {
-
   let aftertop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
 
   if (scrollTop.value > 60 && aftertop - scrollTop.value < 0) {
@@ -47,8 +46,10 @@ let backTop = () => {
   // }, 16)
   document.documentElement.scrollTop = 0
 }
+let ThemeIndex: number
 onMounted(() => {
   window.addEventListener('scroll', scrollToTop)
+  ThemeIndex = parseInt(localStorage.getItem('themeIndex') as string)
 })
 
 onBeforeUnmount(() => {
@@ -60,12 +61,17 @@ let theme: themeName = $store.theme
 //更改背景
 
 let changeTheme = () => {
-  theme = (theme == 'black' ? 'normal' : 'black')
-  bus.$emit('changeTheme', theme)
-  bus.$emit('changeMessageBg', theme)
-  $store.setTheme(theme)
-  setTheme(theme)
+  if (ThemeIndex + 1 >= ThemeList.length) {
+    ThemeIndex = 0
+  } else {
+    ThemeIndex++
+  }
+  console.log(ThemeIndex)
+  localStorage.setItem('themeIndex', ThemeIndex.toString())
+  document.documentElement.style.setProperty('--bright-image', ThemeList[ThemeIndex].brightImage)
+  document.documentElement.style.setProperty('--dark-image', ThemeList[ThemeIndex].darkImage)
 }
+
 let goGit = () => {
   window.open('https://github.com/xiaoluaa2')
 }
@@ -73,7 +79,6 @@ let router = useRouter()
 let goHome = () => {
   router.push('/')
 }
-
 </script>
 <style lang="less" scoped>
 @media screen and (max-width: 768px) {
@@ -81,7 +86,6 @@ let goHome = () => {
     display: none !important;
   }
 }
-
 
 .main {
   position: fixed;
@@ -117,7 +121,7 @@ let goHome = () => {
   background: white;
   border-radius: 90px 5px 5px 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .instagram {
@@ -134,13 +138,13 @@ let goHome = () => {
   background: white;
   border-radius: 5px 90px 5px 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .twitter {
   margin-top: 1.5em;
-  margin-left: -.9em;
-  fill: #03A9F4;
+  margin-left: -0.9em;
+  fill: #03a9f4;
 }
 
 .card3 {
@@ -151,11 +155,11 @@ let goHome = () => {
   background: white;
   border-radius: 5px 5px 5px 90px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .github {
-  margin-top: -.6em;
+  margin-top: -0.6em;
   margin-left: 1.2em;
 }
 
@@ -167,11 +171,11 @@ let goHome = () => {
   background: white;
   border-radius: 5px 5px 90px 5px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .discord {
-  margin-top: -.9em;
+  margin-top: -0.9em;
   margin-left: -1.2em;
   fill: #8c9eff;
 }
@@ -189,7 +193,7 @@ let goHome = () => {
 .card2:hover {
   cursor: pointer;
   scale: 1.1;
-  background-color: #03A9F4;
+  background-color: #03a9f4;
 }
 
 .card2:hover .twitter {

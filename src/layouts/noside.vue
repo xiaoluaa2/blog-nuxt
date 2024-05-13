@@ -79,10 +79,6 @@ let init = async () => {
   let numC = 3000 / CommentNum2 < 10 ? CommentNum2 / 300 + 1 : 1
   let timeL = 3000 / LeaveMessageNum2 < 10 ? 10 : 3000 / LeaveMessageNum2
   let numL = 3000 / LeaveMessageNum2 < 10 ? LeaveMessageNum2 / 300 + 1 : 1
-  console.log(numA)
-  console.log(numC)
-  console.log(numL)
-
   var NumInterval1 = window.setInterval(function () {
     ArticleNum.value += Math.trunc(numA)
     if (ArticleNum.value >= ArticleNum2) {
@@ -130,15 +126,17 @@ let getHotList = async () => {
 }
 getHotList()
 </script>
-<style lang="less" scoped>
+<style>
 .bright {
-  background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover;
+  /* background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover; */
+  background: var(--bright-image) no-repeat 100% / cover;
 }
-
 .dark {
-  background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover;
+  /* background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover; */
+  background: var(--dark-image) no-repeat 100% / cover;
 }
-
+</style>
+<style lang="less" scoped>
 .common-enter-active {
   animation: bound-in 0.5s backwards;
 }

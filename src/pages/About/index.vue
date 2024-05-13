@@ -237,7 +237,7 @@
         </div>
         <div class="author-content-item game-wolf pc">
           <div class="card-content">
-            <div class="author-content-item-tips">Astartes</div>
+            <ButtonExplore @click="$router.push('/other/40k')">更多</ButtonExplore>
             <!-- <span class="author-content-item-title">星际战士</span> -->
             <div class="card-box">
               <card-1>
@@ -311,6 +311,7 @@ useHead({
   title: '小鹿|关于'
 })
 import $http from '@/api/index.ts'
+import ButtonExplore from '@/components/ButtonExplore.vue'
 import { onMounted, ref } from 'vue'
 let mask = ref()
 // 乐趣来源
