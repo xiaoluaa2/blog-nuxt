@@ -1,6 +1,5 @@
 <template>
   <div :class="isDark ? 'dark' : 'bright'" class="common">
-    <div class="placeholder"></div>
     <transition name="common">
       <div class="main">
         <div class="slot_box">
@@ -51,6 +50,9 @@ let blogsSum = async () => {
 
 const $store = useStore.common()
 let isDark = ref($store.theme == 'black')
+let x = ref(0),
+  y = ref(0),
+  radius = ref('150%')
 bus.$on('changeTheme', (theme: any) => {
   // $store.setTheme(theme.type)
   const transition = document.startViewTransition(() => {
@@ -143,14 +145,26 @@ let getHotList = async () => {
 getHotList()
 </script>
 <style>
-.bright {
-  /* background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover; */
+/* .bright {
+ 
   background: var(--bright-image) no-repeat 100% / cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -3;
 }
 .dark {
-  /* background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover; */
+ 
   background: var(--dark-image) no-repeat 100% / cover;
-}
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -2;
+} */
 </style>
 <style lang="less" scoped>
 .common-enter-active {

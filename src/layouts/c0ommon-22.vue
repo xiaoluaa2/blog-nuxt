@@ -1,5 +1,7 @@
 <template>
-  <div :class="isDark ? 'dark' : 'bright'" class="common">
+  <div class="common">
+    <div class="common bright"></div>
+    <div :style="isDark ? { clipPath: `circle(150% at ${x} ${y})` } : { clipPath: `circle(0% at ${x} ${y})` }" class="common dark"></div>
     <div v-if="titleList" class="catalogue_button">
       <i @click="shiowCatalogue" class="iconfont icon-mulu"></i>
       <div v-show="showCatalogue" class="card-widget">
@@ -392,13 +394,19 @@ let props = defineProps<Props>()
 let loaded = ref(false)
 onMounted(() => {
   loaded.value = true
+  const newBg = document.querySelector('.dark') as HTMLElement
+  let clipPath = newBg.style.clipPath
+  console.log(clipPath)
+  // newBg.style.clipPath = 'circle(0% at 2022px 28px)'
+  // newBg.getBoundingClientRect() // 强制计算样式
+  // newBg.style.clipPath = clipPath // 还原初始状态
 })
 // 移动端目录
 let showCatalogue = ref(false)
 let shiowCatalogue = () => {
   showCatalogue.value = !showCatalogue.value
 }
-let blogsSum = async () => {
+const blogsSum = async () => {
   const { data } = await $http.blogs.blogsSum()
   if (data.status == 0) {
     ArticleNum.value = data.data.Blogs
@@ -416,36 +424,16 @@ let goTagPage = (tag: string) => {
     path: `/Tags/${tag}`
   })
 }
-let zIndex = ref(0)
 const $store = useStore.common()
 let isDark = ref($store.theme == 'black')
+let x = ref('0px'),
+  y = ref('0px'),
+  radius = ref('150%')
 bus.$on('changeTheme', (theme: any) => {
-  // $store.setTheme(theme.type)
-  const transition = document.startViewTransition(() => {
-    isDark.value = theme.type == 'black'
-    $store.setTheme(theme.type)
-    setTheme(theme.type)
-    theme.type == 'black' ? document.documentElement.classList.remove('dark') : document.documentElement.classList.add('dark')
-  })
-  const clipPath = [`circle(0% at ${theme.x} ${theme.y})`, `circle(${theme.radius} at ${theme.x} ${theme.y})`]
-  // 设置过渡的动画效果
-  transition.ready.then(() => {
-    console.log(isDark.value)
-    console.log(clipPath)
-
-    document.documentElement.animate(
-      {
-        clipPath: isDark.value ? clipPath : clipPath.reverse()
-      },
-      {
-        duration: 1000,
-        // pseudoElement
-        // 设置过渡效果的伪元素，这里设置为根元素的伪元素
-        // 这样过渡效果就会作用在根元素上
-        pseudoElement: isDark.value ? '::view-transition-new(root)' : '::view-transition-old(root)'
-      }
-    )
-  })
+  x.value = theme.x
+  y.value = theme.y
+  radius.value = theme.radius
+  isDark.value = theme.type == 'black'
 })
 
 let init = async () => {
@@ -520,18 +508,6 @@ let jump_location = (index: number) => {
 }
 </script>
 <style>
-::view-transition-new(root),
-::view-transition-old(root) {
-  animation: none;
-}
-/* .dark::view-transition-old(root) {
-  z-index: 500 !important;
-} */
-
-.dark::view-transition-old(root) {
-  z-index: 1 !important;
-}
-
 :root {
   --bright-image: url('/img/bg13.webp');
   --dark-image: url('/img/bg13.webp');
@@ -539,10 +515,28 @@ let jump_location = (index: number) => {
 .bright {
   /* background: url(@/assets/images/bg3.jpg) no-repeat 100% / cover; */
   background: var(--bright-image) no-repeat 100% / cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -3;
+  background-attachment: fixed;
+  /* transition: clip-path 1s; */
 }
 .dark {
   /* background: url(@/assets/images/bg10.jpg) no-repeat 100% / cover; */
   background: var(--dark-image) no-repeat 100% / cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -2;
+  transition: clip-path 1s;
+  transition-delay: 0.5s;
+  will-change: clip-path;
+  background-attachment: fixed;
 }
 </style>
 <style lang="less" scoped>

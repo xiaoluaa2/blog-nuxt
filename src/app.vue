@@ -55,6 +55,7 @@ onMounted(() => {
     document.documentElement.style.setProperty('--dark-image', ThemeList[0].darkImage)
   }
 })
+
 // import Header from '@/components/Header.vue';
 </script>
 <style lang="less" scoped>

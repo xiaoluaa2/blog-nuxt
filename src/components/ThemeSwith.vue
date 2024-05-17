@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <label class="theme-switch">
-    <input ref="theme" id="myCheckbox" @input="change" :checked="checken" type="checkbox" class="theme-switch__checkbox" />
+    <input ref="theme" id="myCheckbox" @click="handleClick" @input="change()" :checked="checken" type="checkbox" class="theme-switch__checkbox" />
     <div class="theme-switch__container">
       <div class="theme-switch__clouds"></div>
       <div class="theme-switch__stars-container">
@@ -27,22 +27,49 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 let theme = ref()
 console.log(theme)
 const $store = useStore.common()
 let checken = ref($store.theme == 'black' ? true : false)
+let mouse = reactive({
+  mouseX: 0,
+  mouseY: 0
+})
+let handleClick = (event: any) => {
+  mouse.mouseX = event.clientX
+  mouse.mouseY = event.clientY
+}
 let change = () => {
+  console.log(mouse)
+  const radius = Math.hypot(Math.max(mouse.mouseX, innerWidth - mouse.mouseX), Math.max(mouse.mouseY, innerHeight - mouse.mouseY))
+
+  let changeTheme = (type: 'black' | 'normal') => {
+    setTimeout(() => {
+      bus.$emit('changeTheme', {
+        type,
+        x: mouse.mouseX + 'px',
+        y: mouse.mouseY + 'px',
+        radius: radius + 'px'
+      })
+      bus.$emit('changeMessageBg', type)
+      // $store.setTheme(theme.type)
+      // setTheme(type)
+    }, 500)
+    // bus.$emit('changeTheme', {
+    //   type,
+    //   x: mouse.mouseX + 'px',
+    //   y: mouse.mouseY + 'px',
+    //   radius: radius + 'px'
+    // })
+    // bus.$emit('changeMessageBg', type)
+    // // $store.setTheme(theme.type)
+    // // setTheme(type)
+  }
   if (theme.value.checked) {
-    bus.$emit('changeTheme', 'black')
-    bus.$emit('changeMessageBg', 'black')
-    $store.setTheme('black')
-    setTheme('black')
+    changeTheme('black')
   } else {
-    bus.$emit('changeTheme', 'normal')
-    bus.$emit('changeMessageBg', 'normal')
-    $store.setTheme('normal')
-    setTheme('normal')
+    changeTheme('normal')
   }
 }
 </script>
